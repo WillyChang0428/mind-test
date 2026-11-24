@@ -167,7 +167,7 @@
 
   <!-- ==================== 頂部導覽列 ==================== -->
   <header class="w-full bg-[#261C15] text-[#E5E0D8] border-b border-[#4A382B] sticky top-0 z-30 shadow-sm no-print">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
+    <div class="max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-3">
       <button id="nav-home-btn" type="button" class="flex items-center gap-3 text-left focus:outline-none group">
         <div class="w-8 h-8 rounded-lg bg-[#E5E0D8] text-[#33251B] flex items-center justify-center font-serif font-black text-xs tracking-wider group-hover:bg-[#A6633C] group-hover:text-[#F7F3EC] transition">
           六合
@@ -186,7 +186,7 @@
   </header>
 
   <!-- ==================== 主要內容區 ==================== -->
-  <main class="flex-1 w-full max-w-4xl mx-auto px-3 sm:px-6 py-6 sm:py-9 space-y-6">
+  <main class="flex-1 w-full max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-9 lg:py-10 space-y-6">
 
     <!-- ==================== 1. 首頁（日系復古票券封面） ==================== -->
     <section id="view-home" class="animate-fade-in space-y-6">
@@ -201,13 +201,13 @@
         <div class="relative bg-[#E5E0D8] rounded-2xl overflow-hidden text-[#261C15]">
           <div class="flex flex-col md:flex-row">
             <!-- 左側主票面 -->
-            <div class="flex-1 p-6 sm:p-8 md:pr-9">
+            <div class="flex-1 p-6 sm:p-8 md:pr-9 lg:p-12">
               <div class="flex items-center justify-between gap-2 mb-3">
                 <span class="text-xs font-bold tracking-widest text-[#5C4738]">六大評量模組・一題多用心理檔案</span>
                 <span class="font-editorial italic font-semibold text-sm text-[#A6633C] md:hidden">NO.2026104</span>
               </div>
 
-              <h1 class="font-serif font-black text-2xl sm:text-4xl text-[#261C15] tracking-tight leading-snug mb-2">
+              <h1 class="font-serif font-black text-2xl sm:text-4xl lg:text-5xl text-[#261C15] tracking-tight leading-snug mb-2">
                 六合一綜合人格與<br class="hidden sm:inline" />職涯探索測驗
               </h1>
               <p class="font-serif font-bold text-sm sm:text-base text-[#5C4738] mb-6">
@@ -226,11 +226,11 @@
                 </div>
                 <div class="pr-3 sm:px-3 sm:border-r border-[#8C735B]/40">
                   <div class="text-[10px] font-bold tracking-widest text-[#A6633C] uppercase">EDITION</div>
-                  <div class="text-sm font-bold text-[#261C15] mt-0.5">v3 權威校訂版</div>
+                  <div class="text-sm font-bold text-[#261C15] mt-0.5">初版</div>
                 </div>
                 <div class="sm:pl-3">
                   <div class="text-[10px] font-bold tracking-widest text-[#A6633C] uppercase">PRIVACY</div>
-                  <div class="text-sm font-bold text-[#261C15] mt-0.5">全本機免註冊</div>
+                  <div class="text-sm font-bold text-[#261C15] mt-0.5">資料僅保留在瀏覽器</div>
                 </div>
               </div>
 
@@ -260,7 +260,7 @@
             </div>
 
             <!-- 右側存根（含虛線裁切線與半圓撕裂缺口） -->
-            <div class="relative md:w-52 bg-[#DFD8CE]/75 p-6 md:p-7 flex flex-col justify-between ticket-perforation-h md:border-t-0 md:ticket-perforation-v">
+            <div class="relative md:w-52 lg:w-72 bg-[#DFD8CE]/75 p-6 md:p-7 lg:p-9 flex flex-col justify-between ticket-perforation-h md:border-t-0 md:ticket-perforation-v">
               <!-- 桌機上下半圓缺口 -->
               <div class="hidden md:block absolute -top-3.5 -left-3.5 w-7 h-7 rounded-full bg-[#33251B]"></div>
               <div class="hidden md:block absolute -bottom-3.5 -left-3.5 w-7 h-7 rounded-full bg-[#33251B]"></div>
@@ -270,12 +270,12 @@
 
               <div class="space-y-1.5">
                 <div class="font-editorial italic font-bold text-base text-[#A6633C] tracking-wider">NO.2026104</div>
-                <div class="font-serif font-black text-xl text-[#261C15] leading-tight">6 MODELS</div>
+                <div class="font-serif font-black text-xl lg:text-3xl text-[#261C15] leading-tight">6 MODELS</div>
                 <div class="font-mono text-xs font-bold tracking-widest text-[#5C4738]">104 ITEMS</div>
               </div>
 
               <div class="mt-5 md:mt-0 pt-4 border-t border-[#8C735B]/40 text-xs text-[#5C4738] leading-relaxed">
-                雙極零偏差計分、親密依附可選跳過，並支援分享圖卡（PNG）、專屬連結與完整 A4 PDF 匯出。
+                雙極零偏差計分，並支援分享圖卡（PNG）、專屬連結與完整 A4 PDF 匯出。
               </div>
             </div>
           </div>
@@ -303,7 +303,7 @@
               <div>
                 <div class="font-serif font-bold text-sm sm:text-base text-[#261C15]">作答時間與流暢節奏</div>
                 <p class="text-xs sm:text-sm text-[#5C4738] mt-1 leading-relaxed">
-                  共 104 題，約需 10–12 分鐘。進度自動儲存在瀏覽器本機，隨時中斷都能從上次位置續填；電腦版支援鍵盤 <kbd class="px-1.5 py-0.5 rounded bg-[#F7F3EC] border border-[#CFC5B8] font-mono text-[11px] text-[#261C15]">1</kbd>–<kbd class="px-1.5 py-0.5 rounded bg-[#F7F3EC] border border-[#CFC5B8] font-mono text-[11px] text-[#261C15]">5</kbd> 快速選填並自動捲動至下一題。
+                  共 104 題，約需 10–12 分鐘。進度自動儲存在瀏覽器，隨時中斷都能從上次位置續填；電腦版支援鍵盤 <kbd class="px-1.5 py-0.5 rounded bg-[#F7F3EC] border border-[#CFC5B8] font-mono text-[11px] text-[#261C15]">1</kbd>–<kbd class="px-1.5 py-0.5 rounded bg-[#F7F3EC] border border-[#CFC5B8] font-mono text-[11px] text-[#261C15]">5</kbd> 快速選填並自動捲動至下一題。
                 </p>
               </div>
             </div>
@@ -313,7 +313,7 @@
               <div>
                 <div class="font-serif font-bold text-sm sm:text-base text-[#261C15]">保持輕鬆，憑直覺作答</div>
                 <p class="text-xs sm:text-sm text-[#5C4738] mt-1 leading-relaxed">
-                  這不是考試，沒有對錯或標準答案。請回想自己「過去半年約 70% 日常場景」最自然的狀態，填寫「現在真實的你」而非「理想的你」。
+                  這不是考試，沒有對錯或標準答案。請回想自己「過去半年約 70% 日常場景」最自然的狀態，填寫「現在真實的自己」而非「理想中的自己」。
                 </p>
               </div>
             </div>
@@ -323,7 +323,7 @@
               <div>
                 <div class="font-serif font-bold text-sm sm:text-base text-[#261C15]">親密關係題（Q75–Q86）怎麼填</div>
                 <p class="text-xs sm:text-sm text-[#5C4738] mt-1 leading-relaxed">
-                  此模組原為伴侶依附量表，請優先帶入現任伴侶或過去戀愛經驗；若無戀愛經驗，也可帶入生命中最親近的重要他人（如摯友或家人）。若目前不想填，進入第 3 階段時可<strong class="text-[#261C15]">一鍵跳過</strong>，不影響其餘 5 份報告。
+                  此題組原為伴侶依附量表，請優先帶入現任伴侶或過去戀愛經驗；若無戀愛經驗，也可帶入生命中親近的重要之人。
                 </p>
               </div>
             </div>
@@ -333,7 +333,7 @@
               <div>
                 <div class="font-serif font-bold text-sm sm:text-base text-[#261C15]">隱私保障與結果解讀</div>
                 <p class="text-xs sm:text-sm text-[#5C4738] mt-1 leading-relaxed">
-                  全站純前端本機運算，絕不收集或上傳任何作答資料。分數代表個人量表同意度光譜（非大眾常模比較），高分與低分各有優勢與盲點，請作為自我探索參考而非標籤框架。
+                  本網站絕不收集或上傳任何作答資料。分數代表個人量表同意度光譜，高分與低分各有優勢與盲點，請作為自我探索參考而非標籤框架。
                 </p>
               </div>
             </div>
@@ -394,16 +394,13 @@
           <div id="attach-skip-card" class="hidden rounded-2xl bg-[#F7F3EC] border-2 border-[#A6633C] p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div class="space-y-1">
               <div class="flex items-center gap-2">
-                <span class="px-2 py-0.5 rounded bg-[#A6633C] text-[#F7F3EC] font-mono text-[10px] font-bold">ECR-12 選填模組</span>
+                <span class="px-2 py-0.5 rounded bg-[#A6633C] text-[#F7F3EC] font-mono text-[10px] font-bold">提醒</span>
                 <span class="font-serif font-bold text-sm sm:text-base text-[#261C15]">親密關係依附作答提醒</span>
               </div>
               <p class="text-xs sm:text-sm text-[#5C4738] leading-relaxed">
-                請優先帶入現任伴侶或過去戀愛經驗；若無戀愛經驗，也可帶入生命中最親近的重要他人（如摯友或家人）。若目前不想作答，可點右側跳過，不影響其餘 5 份報告。
+                請優先帶入現任伴侶或過去戀愛經驗；若無戀愛經驗，也可帶入生命中最親近的重要他人（如摯友或家人）。
               </p>
             </div>
-            <button id="btn-skip-attachment" type="button" class="px-4 py-2.5 rounded-xl bg-[#33251B] hover:bg-[#261C15] text-[#F7F3EC] font-bold text-xs sm:text-sm transition shrink-0 shadow-sm">
-              暫不作答（跳過此 12 題）
-            </button>
           </div>
 
           <!-- 漏題提醒條 -->
@@ -415,7 +412,7 @@
           </div>
 
           <!-- 高對比暖紙白題目列表容器 -->
-          <div id="quiz-questions-container" class="space-y-4"></div>
+          <div id="quiz-questions-container" class="space-y-4 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-4"></div>
 
           <!-- 底部翻頁按鈕 -->
           <div class="flex items-center justify-between gap-3 pt-4 border-t border-[#8C735B]/40">
@@ -517,7 +514,7 @@
 
   <!-- ==================== 頁尾（開源聲明與授權說明） ==================== -->
   <footer class="w-full bg-[#261C15] text-[#CFC5B8] border-t border-[#4A382B] mt-auto no-print">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-6 text-xs space-y-2 leading-relaxed">
+    <div class="max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-xs space-y-2 leading-relaxed">
       <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#4A382B]">
         <span class="font-editorial italic text-base text-[#E5E0D8]">Persona Archive</span>
         <span class="font-mono text-[11px] tracking-widest uppercase text-[#A6633C]">NO.2026104 • V3 FINAL EDITION</span>
@@ -526,7 +523,7 @@
         • <strong class="text-[#F7F3EC]">大五人格 (Q01–Q50)</strong>：Goldberg IPIP-50（公有領域開源量表，台灣日常語境校訂）。<br />
         • <strong class="text-[#F7F3EC]">HEXACO 誠實與謙遜 (Q51–Q60)</strong>：Ashton &amp; Lee HEXACO-60 H 維度（僅供非商業／自我探索與學術研究使用）。<br />
         • <strong class="text-[#F7F3EC]">16 型人格傾向與 DISC 職場風格 (Q61–Q74)</strong>：整合榮格四維度雙極獨立平均法與正向特質補強題，統一大寫 DISC 標示。<br />
-        • <strong class="text-[#F7F3EC]">親密關係依附 (Q75–Q86)</strong>：Lafontaine et al. (2016) ECR-12 簡版量表（50% 雙軸切點，可自由選填或跳過）。<br />
+        • <strong class="text-[#F7F3EC]">親密關係依附 (Q75–Q86)</strong>：Lafontaine et al. (2016) ECR-12 簡版量表（50% 雙軸切點）。<br />
         • <strong class="text-[#F7F3EC]">霍蘭德職涯興趣 (Q87–Q104)</strong>：依 O*NET RIASEC 領域改編之精簡興趣快篩版。
       </p>
       <p class="text-[11px] text-[#8C735B]">
@@ -690,18 +687,18 @@
       { id: 74,  code: 'Q74', text: '計畫臨時變動很少困擾我，我反而蠻享受隨機應變的感覺。', m: { jung16: { P: 1.0 } } },
 
       // === 階段三：親密關係依附 ECR-12 (Q75–Q86，第 13–14 頁，每頁 6 題) ===
-      { id: 75,  code: 'Q75', text: '在親密關係中，我常會擔心伴侶（或親密對象）有一天會離開或拋下我。', m: { attach: { anxiety: 1.0 } } },
-      { id: 76,  code: 'Q76', text: '我會擔心伴侶（或親密對象）在乎我的程度，沒有我付出的那麼多。', m: { attach: { anxiety: 1.0 } } },
-      { id: 77,  code: 'Q77', text: '我需要伴侶（或親密對象）頻繁地給予保證或回應，才能安心確認自己是被愛的。', m: { attach: { anxiety: 1.0 } } },
-      { id: 78,  code: 'Q78', text: '如果覺得伴侶（或親密對象）對我冷淡或沒那麼上心，我很容易感到委屈、焦躁或生氣。', m: { attach: { anxiety: 1.0 } } },
-      { id: 79,  code: 'Q79', text: '我常覺得伴侶（或親密對象）想要的親密距離，比我期待的還要疏遠一些。', m: { attach: { anxiety: 1.0 } } },
-      { id: 80,  code: 'Q80', text: '當我需要陪伴或支持，而伴侶（或親密對象）剛好不在身邊時，我會感到很挫折。', m: { attach: { anxiety: 1.0 } } },
-      { id: 81,  code: 'Q81', text: '要向伴侶（或親密對象）完全敞開心扉、展露脆弱，對我來說不太自在。', m: { attach: { avoidance: 1.0 } } },
-      { id: 82,  code: 'Q82', text: '在親密關係中，我可以很放心地依賴伴侶（或親密對象），不會覺得彆扭。', m: { attach: { avoidance: -1.0 } } },
-      { id: 83,  code: 'Q83', text: '遇到煩惱或困難時，我通常會願意主動找伴侶（或親密對象）商量。', m: { attach: { avoidance: -1.0 } } },
-      { id: 84,  code: 'Q84', text: '生活中的大小事與內心想法，我幾乎都願意和伴侶（或親密對象）分享。', m: { attach: { avoidance: -1.0 } } },
-      { id: 85,  code: 'Q85', text: '當我需要安慰、建議或幫忙時，向伴侶（或親密對象）開口對我來說並不困難。', m: { attach: { avoidance: -1.0 } } },
-      { id: 86,  code: 'Q86', text: '當伴侶（或親密對象）在情感上靠得太近時，我反而會感到緊張。', m: { attach: { avoidance: 1.0 } } },
+      { id: 75,  code: 'Q75', text: '在親密關係中，我常會擔心伴侶（或親近之人）有一天會離開或拋下我。', m: { attach: { anxiety: 1.0 } } },
+      { id: 76,  code: 'Q76', text: '我會擔心伴侶（或親近之人）在乎我的程度，沒有我付出的那麼多。', m: { attach: { anxiety: 1.0 } } },
+      { id: 77,  code: 'Q77', text: '我需要伴侶（或親近之人）頻繁地給予保證或回應，才能安心確認自己是被愛的。', m: { attach: { anxiety: 1.0 } } },
+      { id: 78,  code: 'Q78', text: '如果覺得伴侶（或親近之人）對我冷淡或沒那麼上心，我很容易感到委屈、焦躁或生氣。', m: { attach: { anxiety: 1.0 } } },
+      { id: 79,  code: 'Q79', text: '我常覺得伴侶（或親近之人）想要的親密距離，比我期待的還要疏遠一些。', m: { attach: { anxiety: 1.0 } } },
+      { id: 80,  code: 'Q80', text: '當我需要陪伴或支持，而伴侶（或親近之人）剛好不在身邊時，我會感到很挫折。', m: { attach: { anxiety: 1.0 } } },
+      { id: 81,  code: 'Q81', text: '要向伴侶（或親近之人）完全敞開心扉、展露脆弱，對我來說不太自在。', m: { attach: { avoidance: 1.0 } } },
+      { id: 82,  code: 'Q82', text: '在親密關係中，我可以很放心地依賴伴侶（或親近之人），不會覺得彆扭。', m: { attach: { avoidance: -1.0 } } },
+      { id: 83,  code: 'Q83', text: '遇到煩惱或困難時，我通常會願意主動找伴侶（或親近之人）商量。', m: { attach: { avoidance: -1.0 } } },
+      { id: 84,  code: 'Q84', text: '生活中的大小事與內心想法，我幾乎都願意和伴侶（或親近之人）分享。', m: { attach: { avoidance: -1.0 } } },
+      { id: 85,  code: 'Q85', text: '當我需要安慰、建議或幫忙時，向伴侶（或親近之人）開口對我來說並不困難。', m: { attach: { avoidance: -1.0 } } },
+      { id: 86,  code: 'Q86', text: '當伴侶（或親近之人）在情感上靠得太近時，我反而會感到緊張。', m: { attach: { avoidance: 1.0 } } },
 
       // === 階段四：霍蘭德職涯興趣 RIASEC (Q87–Q104，第 15–17 頁，每頁 6 題) ===
       { id: 87,  code: 'Q87', text: '我對親手組裝設備、修理家電或操作機械工具很感興趣。', m: { riasec: { R: 1.0 } } },
@@ -752,7 +749,7 @@
     const STAGES_META = [
       { id: 1, code: '01', stamp: '01 核心底色', title: '核心大五人格與誠實謙遜', range: [1, 60], hint: '請依大多數時候（約 70% 以上生活場景）的自然狀態憑直覺作答，無對錯之分。' },
       { id: 2, code: '02', stamp: '02 職場風格', title: 'DISC 職場風格與正向特質補強', range: [61, 74], hint: '請想像自己在團隊協作、工作決策與面對變動時的自然應對方式。' },
-      { id: 3, code: '03', stamp: '03 關係依附', title: '親密關係依附（ECR-12）', range: [75, 86], hint: '請以目前的伴侶、過往戀愛經驗或最親近的情感對象為基準作答；亦可選擇跳過。' },
+      { id: 3, code: '03', stamp: '03 關係依附', title: '親密關係依附（ECR-12）', range: [75, 86], hint: '請以目前的伴侶、過往戀愛經驗或最親近的情感對象為基準作答。' },
       { id: 4, code: '04', stamp: '04 職涯興趣', title: '霍蘭德職涯興趣（RIASEC 快篩）', range: [87, 104], hint: '請暫時忽略薪資與目前技能限制，純粹依「喜不喜歡做這件事」直覺作答。' }
     ];
 
@@ -1094,7 +1091,6 @@
       quizProgressBar: document.getElementById('quiz-progress-bar'),
       quizStageHintText: document.getElementById('quiz-stage-hint-text'),
       attachSkipCard: document.getElementById('attach-skip-card'),
-      btnSkipAttachment: document.getElementById('btn-skip-attachment'),
       quizValidationBanner: document.getElementById('quiz-validation-banner'),
       quizValidationText: document.getElementById('quiz-validation-text'),
       quizQuestionsContainer: document.getElementById('quiz-questions-container'),
@@ -1263,7 +1259,7 @@
       const saved = loadProgressFromStorage();
       const count = saved ? Object.keys(saved.answers || {}).length : 0;
       if (count > 0) {
-        const targetTotal = saved.skipAttachment ? 92 : 104;
+        const targetTotal = 104;
         els.resumeBanner.classList.remove('hidden');
         els.resumeStatusText.textContent = `偵測到上次作答進度：已完成 ${count} / ${targetTotal} 題`;
         els.btnStartLabel.textContent = '重新開始測驗';
@@ -1573,16 +1569,6 @@
         renderQuizPage();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-    }
-
-    function handleSkipAttachment() {
-      state.skipAttachment = true;
-      for (let id = 75; id <= 86; id++) delete state.answers[id];
-      state.currentPage = 14; // 直接跳往第 15 頁（霍蘭德職涯）
-      saveProgressToStorage();
-      renderQuizPage();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      showToast('已略過親密依附模組，直接進入職涯興趣探索');
     }
 
     /**
@@ -2044,7 +2030,7 @@
                   ※ 判讀提醒：本報告百分比為「個人量表同意度光譜」（35% / 65% 為絕對光譜門檻），<strong>並非與大眾常模比較之百分等級（PR 值）</strong>，高分低分無優劣之分。
                 </p>
               </div>
-              <div class="md:w-48 bg-[#DFD8CE]/75 p-5 flex flex-col justify-between ticket-perforation-h md:border-t-0 md:ticket-perforation-v">
+              <div class="md:w-48 lg:w-64 bg-[#DFD8CE]/75 p-5 lg:p-7 flex flex-col justify-between ticket-perforation-h md:border-t-0 md:ticket-perforation-v">
                 <div class="space-y-2">
                   <div class="text-[10px] font-bold tracking-widest text-[#A6633C] uppercase">TOP SIGNATURE</div>
                   <div class="text-sm font-bold text-[#261C15]">職場：${r.disc.primary.key}-${r.disc.secondary.key}</div>
@@ -2279,9 +2265,10 @@
               <h3 class="font-serif font-black text-2xl text-[#261C15] mt-1">HEXACO 六大人格分析</h3>
               <p class="text-xs sm:text-sm text-[#5C4738] mt-1">在大五人格之外獨立納入第六維度「誠實與謙遜 (H)」，呈現更完整的價值底線。</p>
             </div>
+            <div class="lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-8 lg:items-center">
             <div class="my-2">${hexRadar}</div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5 lg:mt-0">
               ${HEX_ORDER.map((k) => {
                 const m = HEX_META[k];
                 const pct = r.hexaco[k];
@@ -2298,6 +2285,7 @@
                   </div>
                 `;
               }).join('')}
+            </div>
             </div>
           </div>
 
@@ -2469,10 +2457,11 @@
               </div>
             </div>
 
+            <div class="lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-8 lg:items-center space-y-5 lg:space-y-0">
             <div class="my-2">${riaRadar}</div>
 
             <!-- 前兩碼深度環境與職業建議 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
               ${top2Ria.map((item, idx) => `
                 <div class="avoid-break rounded-2xl bg-[#E5E0D8]/60 border border-[#CFC5B8] p-5 space-y-3">
                   <div class="flex items-center justify-between">
@@ -2491,6 +2480,7 @@
                   </div>
                 </div>
               `).join('')}
+            </div>
             </div>
           </div>
         </div>
@@ -2945,8 +2935,13 @@
         return;
       }
       state.answers = saved.answers || {};
-      state.skipAttachment = Boolean(saved.skipAttachment);
+      // 親密依附已改為必答：舊存檔若曾跳過，續填時一律需補答 Q75–Q86
+      state.skipAttachment = false;
       state.currentPage = Math.max(0, Math.min(TOTAL_PAGES - 1, Number(saved.currentPage || 0)));
+      if (saved.skipAttachment && state.currentPage > 11) {
+        const firstMissing = PAGE_RANGES.findIndex((p) => QUESTIONS.slice(p.start, p.end).some((q) => !state.answers[q.id]));
+        if (firstMissing !== -1) state.currentPage = firstMissing;
+      }
       state.supplementingAttach = false;
       state.mode = 'normal';
       state.completedStagesSeen = new Set();
@@ -2986,7 +2981,6 @@
 
     els.btnPrevPage.addEventListener('click', handlePrevPage);
     els.btnNextPage.addEventListener('click', handleNextPage);
-    els.btnSkipAttachment.addEventListener('click', handleSkipAttachment);
     els.btnCancelSupplement.addEventListener('click', () => {
       state.supplementingAttach = false;
       switchView('result');
