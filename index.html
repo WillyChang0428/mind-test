@@ -1,0 +1,3038 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>六合一綜合人格與職涯測驗｜Persona Archive (104 題 v3 定案版)</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Noto Serif TC, Noto Sans TC, Cormorant Garamond -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Noto Serif TC"', 'Georgia', 'serif'],
+            sans: ['"Noto Sans TC"', 'system-ui', '-apple-system', 'sans-serif'],
+            editorial: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+          },
+          colors: {
+            espresso: '#33251B',
+            espressoDark: '#261C15',
+            oatmeal: '#E5E0D8',
+            paper: '#F7F3EC',
+            ink: '#261C15',
+            inkMuted: '#5C4738',
+            terracotta: '#A6633C',
+            terracottaDark: '#8B4F2D',
+            earth: '#8C735B',
+            sage: '#4A6B5D',
+            warnRed: '#B54B3E',
+            hairline: '#CFC5B8',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background-color: #DFD8CE;
+      color: #261C15;
+      -webkit-tap-highlight-color: transparent;
+      background-image: radial-gradient(rgba(51, 37, 27, 0.055) 1px, transparent 0);
+      background-size: 20px 20px;
+    }
+
+    /* 動畫 */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeSlideUp 0.32s ease-out forwards;
+    }
+
+    @keyframes gentleShake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-5px); }
+      40% { transform: translateX(5px); }
+      60% { transform: translateX(-3px); }
+      80% { transform: translateX(3px); }
+    }
+    .animate-shake {
+      animation: gentleShake 0.38s ease-in-out;
+    }
+
+    @keyframes stampPop {
+      0% { transform: scale(1.35) rotate(-14deg); opacity: 0.3; }
+      65% { transform: scale(0.95) rotate(-4deg); opacity: 1; }
+      100% { transform: scale(1) rotate(-3deg); opacity: 1; }
+    }
+    .animate-stamp {
+      animation: stampPop 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* 隱藏橫向捲軸 */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* 日系復古票券虛線與點線導引 */
+    .ticket-perforation-v { border-left: 1.5px dashed #8C735B; }
+    .ticket-perforation-h { border-top: 1.5px dashed #8C735B; }
+    .dotted-leader {
+      background-image: radial-gradient(#8C735B 1px, transparent 1px);
+      background-position: bottom;
+      background-size: 6px 1px;
+      background-repeat: repeat-x;
+    }
+
+    /* 報告分頁：螢幕顯示切換，列印時自動全展開 */
+    .report-panel.is-hidden-tab {
+      display: none;
+    }
+
+    /* 專屬 @media print 手帳列印樣式 */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 14mm 12mm;
+      }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      body {
+        background: #FFFFFF !important;
+        background-image: none !important;
+        color: #261C15 !important;
+        font-size: 11pt;
+      }
+      header,
+      footer,
+      .no-print,
+      #view-home,
+      #view-quiz,
+      #toast-notification,
+      #confirm-modal,
+      #share-card-modal,
+      #report-tabs-wrapper,
+      #sample-mode-banner,
+      #shared-mode-banner {
+        display: none !important;
+      }
+      #view-result {
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .print-shell {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
+      .report-panel.is-hidden-tab {
+        display: block !important;
+      }
+      .report-panel {
+        display: block !important;
+        margin-bottom: 18pt !important;
+        page-break-before: always;
+        break-before: page;
+      }
+      .report-panel:first-child {
+        page-break-before: auto;
+        break-before: auto;
+      }
+      .print-section-header {
+        display: flex !important;
+      }
+      .avoid-break {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      svg {
+        max-width: 320px !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-[#A6633C]/25 selection:text-[#261C15]">
+
+  <!-- ==================== 頂部導覽列 ==================== -->
+  <header class="w-full bg-[#261C15] text-[#E5E0D8] border-b border-[#4A382B] sticky top-0 z-30 shadow-sm no-print">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
+      <button id="nav-home-btn" type="button" class="flex items-center gap-3 text-left focus:outline-none group">
+        <div class="w-8 h-8 rounded-lg bg-[#E5E0D8] text-[#33251B] flex items-center justify-center font-serif font-black text-xs tracking-wider group-hover:bg-[#A6633C] group-hover:text-[#F7F3EC] transition">
+          六合
+        </div>
+        <div>
+          <span class="font-editorial italic font-semibold text-base sm:text-lg tracking-wide text-[#F7F3EC] block leading-none">Persona Archive</span>
+          <span class="text-[10px] text-[#CFC5B8] tracking-widest block mt-0.5">六合一綜合人格與職涯測驗・v3 定案版</span>
+        </div>
+      </button>
+
+      <div id="header-progress-pill" class="hidden items-center gap-2 bg-[#33251B] border border-[#A6633C]/60 px-3 py-1 rounded-full text-xs font-medium text-[#F7F3EC]">
+        <span class="w-2 h-2 rounded-full bg-[#A6633C]"></span>
+        <span id="header-progress-text" class="tracking-wider font-mono">0 / 104</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== 主要內容區 ==================== -->
+  <main class="flex-1 w-full max-w-4xl mx-auto px-3 sm:px-6 py-6 sm:py-9 space-y-6">
+
+    <!-- ==================== 1. 首頁（日系復古票券封面） ==================== -->
+    <section id="view-home" class="animate-fade-in space-y-6">
+
+      <!-- 主票券外框（深焙咖啡棕） -->
+      <div class="bg-[#33251B] rounded-[28px] p-4 sm:p-7 shadow-lg border border-[#261C15]">
+        <div class="text-center mb-4">
+          <span class="font-editorial italic font-semibold text-2xl sm:text-[26px] text-[#E5E0D8] tracking-wider">Persona Archive</span>
+        </div>
+
+        <!-- 內層燕麥暖米色橫式票券卡 -->
+        <div class="relative bg-[#E5E0D8] rounded-2xl overflow-hidden text-[#261C15]">
+          <div class="flex flex-col md:flex-row">
+            <!-- 左側主票面 -->
+            <div class="flex-1 p-6 sm:p-8 md:pr-9">
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="text-xs font-bold tracking-widest text-[#5C4738]">六大評量模組・一題多用心理檔案</span>
+                <span class="font-editorial italic font-semibold text-sm text-[#A6633C] md:hidden">NO.2026104</span>
+              </div>
+
+              <h1 class="font-serif font-black text-2xl sm:text-4xl text-[#261C15] tracking-tight leading-snug mb-2">
+                六合一綜合人格與<br class="hidden sm:inline" />職涯探索測驗
+              </h1>
+              <p class="font-serif font-bold text-sm sm:text-base text-[#5C4738] mb-6">
+                性格底色・榮格傾向・誠實底線・職場風格・親密依附・職涯三碼
+              </p>
+
+              <!-- 細線元資料格線 -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 border-t border-b border-[#8C735B]/50 py-3 gap-y-3 mb-6">
+                <div class="pr-3 sm:border-r border-[#8C735B]/40">
+                  <div class="text-[10px] font-bold tracking-widest text-[#A6633C] uppercase">ITEMS</div>
+                  <div class="text-sm font-bold text-[#261C15] mt-0.5">104 題（4 階段）</div>
+                </div>
+                <div class="sm:px-3 sm:border-r border-[#8C735B]/40">
+                  <div class="text-[10px] font-bold tracking-widest text-[#A6633C] uppercase">TIME</div>
+                  <div class="text-sm font-bold text-[#261C15] mt-0.5">約 10–12 分鐘</div>
+                </div>
+                <div class="pr-3 sm:px-3 sm:border-r border-[#8C735B]/40">
+                  <div class="text-[10px] font-bold tracking-widest text-[#A6633C] uppercase">EDITION</div>
+                  <div class="text-sm font-bold text-[#261C15] mt-0.5">v3 權威校訂版</div>
+                </div>
+                <div class="sm:pl-3">
+                  <div class="text-[10px] font-bold tracking-widest text-[#A6633C] uppercase">PRIVACY</div>
+                  <div class="text-sm font-bold text-[#261C15] mt-0.5">全本機免註冊</div>
+                </div>
+              </div>
+
+              <!-- 偵測到未完成進度橫幅 -->
+              <div id="resume-banner" class="hidden rounded-xl bg-[#F7F3EC] border border-[#A6633C] p-3.5 mb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="text-xs sm:text-sm text-[#261C15]">
+                  <span class="inline-block px-2 py-0.5 rounded bg-[#A6633C] text-[#F7F3EC] text-[10px] font-bold mr-1.5">自動存檔</span>
+                  <span id="resume-status-text" class="font-medium">已完成 0 / 104 題</span>
+                </div>
+                <button id="btn-resume-quiz" type="button" class="px-4 py-2 rounded-lg bg-[#A6633C] hover:bg-[#8B4F2D] text-[#F7F3EC] font-bold text-xs sm:text-sm transition shrink-0">
+                  繼續上次作答
+                </button>
+              </div>
+
+              <!-- 主操作按鈕列 -->
+              <div class="flex flex-col sm:flex-row gap-3">
+                <button id="btn-start-quiz" type="button" class="flex-1 py-3.5 px-6 rounded-xl bg-[#A6633C] hover:bg-[#8B4F2D] active:scale-[0.99] text-[#F7F3EC] font-bold text-sm sm:text-base shadow-sm transition flex items-center justify-center gap-2">
+                  <span id="btn-start-label">開始測驗（104 題）</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </button>
+                <button id="btn-preview-sample" type="button" class="py-3.5 px-5 rounded-xl bg-[#F7F3EC] hover:bg-[#FFFFFF] active:scale-[0.99] text-[#261C15] border border-[#33251B]/35 font-bold text-sm transition flex items-center justify-center gap-2">
+                  <span>預覽範例報告</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 右側存根（含虛線裁切線與半圓撕裂缺口） -->
+            <div class="relative md:w-52 bg-[#DFD8CE]/75 p-6 md:p-7 flex flex-col justify-between ticket-perforation-h md:border-t-0 md:ticket-perforation-v">
+              <!-- 桌機上下半圓缺口 -->
+              <div class="hidden md:block absolute -top-3.5 -left-3.5 w-7 h-7 rounded-full bg-[#33251B]"></div>
+              <div class="hidden md:block absolute -bottom-3.5 -left-3.5 w-7 h-7 rounded-full bg-[#33251B]"></div>
+              <!-- 手機左右半圓缺口 -->
+              <div class="md:hidden absolute -top-3.5 -left-3.5 w-7 h-7 rounded-full bg-[#33251B]"></div>
+              <div class="md:hidden absolute -top-3.5 -right-3.5 w-7 h-7 rounded-full bg-[#33251B]"></div>
+
+              <div class="space-y-1.5">
+                <div class="font-editorial italic font-bold text-base text-[#A6633C] tracking-wider">NO.2026104</div>
+                <div class="font-serif font-black text-xl text-[#261C15] leading-tight">6 MODELS</div>
+                <div class="font-mono text-xs font-bold tracking-widest text-[#5C4738]">104 ITEMS</div>
+              </div>
+
+              <div class="mt-5 md:mt-0 pt-4 border-t border-[#8C735B]/40 text-xs text-[#5C4738] leading-relaxed">
+                雙極零偏差計分、親密依附可選跳過，並支援分享圖卡（PNG）、專屬連結與完整 A4 PDF 匯出。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-3.5">
+          <span class="font-editorial italic text-xs tracking-[0.22em] text-[#CFC5B8] uppercase">Vintage Stationery Psychometric Edition</span>
+        </div>
+      </div>
+
+      <!-- 下方全寬：作答前須知 BEFORE YOU BEGIN（2×2 格狀排版） -->
+      <div class="bg-[#33251B] rounded-[24px] p-3.5 sm:p-4 shadow-md">
+        <div class="bg-[#F7F3EC] rounded-2xl p-5 sm:p-7">
+          <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-[#CFC5B8] pb-3.5 mb-5">
+            <div>
+              <h2 class="font-serif font-black text-xl sm:text-2xl text-[#261C15]">作答前須知</h2>
+              <span class="font-editorial italic font-semibold text-xs tracking-[0.18em] text-[#A6633C] uppercase">BEFORE YOU BEGIN</span>
+            </div>
+            <span class="text-xs font-medium text-[#5C4738]">輕鬆作答・完整保障隱私</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            <div class="flex items-start gap-3.5 bg-[#E5E0D8]/65 rounded-xl p-4 border border-[#CFC5B8]">
+              <span class="w-7 h-7 rounded-full bg-[#A6633C] text-[#F7F3EC] font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">01</span>
+              <div>
+                <div class="font-serif font-bold text-sm sm:text-base text-[#261C15]">作答時間與流暢節奏</div>
+                <p class="text-xs sm:text-sm text-[#5C4738] mt-1 leading-relaxed">
+                  共 104 題，約需 10–12 分鐘。進度自動儲存在瀏覽器本機，隨時中斷都能從上次位置續填；電腦版支援鍵盤 <kbd class="px-1.5 py-0.5 rounded bg-[#F7F3EC] border border-[#CFC5B8] font-mono text-[11px] text-[#261C15]">1</kbd>–<kbd class="px-1.5 py-0.5 rounded bg-[#F7F3EC] border border-[#CFC5B8] font-mono text-[11px] text-[#261C15]">5</kbd> 快速選填並自動捲動至下一題。
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5 bg-[#E5E0D8]/65 rounded-xl p-4 border border-[#CFC5B8]">
+              <span class="w-7 h-7 rounded-full bg-[#A6633C] text-[#F7F3EC] font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">02</span>
+              <div>
+                <div class="font-serif font-bold text-sm sm:text-base text-[#261C15]">保持輕鬆，憑直覺作答</div>
+                <p class="text-xs sm:text-sm text-[#5C4738] mt-1 leading-relaxed">
+                  這不是考試，沒有對錯或標準答案。請回想自己「過去半年約 70% 日常場景」最自然的狀態，填寫「現在真實的你」而非「理想的你」。
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5 bg-[#E5E0D8]/65 rounded-xl p-4 border border-[#CFC5B8]">
+              <span class="w-7 h-7 rounded-full bg-[#A6633C] text-[#F7F3EC] font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">03</span>
+              <div>
+                <div class="font-serif font-bold text-sm sm:text-base text-[#261C15]">親密關係題（Q75–Q86）怎麼填</div>
+                <p class="text-xs sm:text-sm text-[#5C4738] mt-1 leading-relaxed">
+                  此模組原為伴侶依附量表，請優先帶入現任伴侶或過去戀愛經驗；若無戀愛經驗，也可帶入生命中最親近的重要他人（如摯友或家人）。若目前不想填，進入第 3 階段時可<strong class="text-[#261C15]">一鍵跳過</strong>，不影響其餘 5 份報告。
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5 bg-[#E5E0D8]/65 rounded-xl p-4 border border-[#CFC5B8]">
+              <span class="w-7 h-7 rounded-full bg-[#A6633C] text-[#F7F3EC] font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">04</span>
+              <div>
+                <div class="font-serif font-bold text-sm sm:text-base text-[#261C15]">隱私保障與結果解讀</div>
+                <p class="text-xs sm:text-sm text-[#5C4738] mt-1 leading-relaxed">
+                  全站純前端本機運算，絕不收集或上傳任何作答資料。分數代表個人量表同意度光譜（非大眾常模比較），高分與低分各有優勢與盲點，請作為自我探索參考而非標籤框架。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 2. 測驗作答頁（17 頁・4 階段） ==================== -->
+    <section id="view-quiz" class="hidden animate-fade-in">
+      <div class="bg-[#33251B] rounded-[28px] p-3.5 sm:p-6 shadow-lg border border-[#261C15]">
+        <div class="bg-[#E5E0D8] rounded-2xl p-4 sm:p-6 space-y-5">
+
+          <!-- 補測模式提示條（僅從報告補測依附時顯示） -->
+          <div id="supplement-mode-banner" class="hidden rounded-xl bg-[#4A6B5D] text-[#F7F3EC] px-4 py-3 text-xs sm:text-sm flex flex-wrap items-center justify-between gap-2">
+            <span><strong>補測親密依附模式：</strong>填完第 13–14 頁共 12 題後，將直接返回更新後的完整報告。</span>
+            <button id="btn-cancel-supplement" type="button" class="px-3 py-1 rounded-lg bg-[#F7F3EC] text-[#261C15] font-bold text-xs hover:bg-[#E5E0D8] transition">
+              先回報告
+            </button>
+          </div>
+
+          <!-- 4 枚復古赤陶色「階段印章」 -->
+          <div id="stage-stamps-bar" class="grid grid-cols-2 sm:grid-cols-4 gap-2"></div>
+
+          <!-- 階段與進度條頭部 -->
+          <div class="bg-[#F7F3EC] rounded-2xl border border-[#CFC5B8] p-4 sm:p-5 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2.5">
+                <span id="quiz-stage-badge" class="px-2.5 py-1 rounded-lg bg-[#33251B] text-[#F7F3EC] font-mono text-[11px] font-bold tracking-wider">STAGE 01</span>
+                <span id="quiz-stage-title" class="font-serif font-bold text-base sm:text-lg text-[#261C15]">核心大五人格與誠實謙遜</span>
+              </div>
+              <div class="text-xs sm:text-sm font-medium text-[#5C4738]">
+                <span id="quiz-page-indicator" class="font-bold text-[#261C15]">第 1 / 17 頁</span>
+                <span class="mx-1.5 text-[#8C735B]">|</span>
+                <span id="quiz-answered-indicator">已完成 0 / 104 題</span>
+              </div>
+            </div>
+
+            <!-- 進度條 -->
+            <div class="w-full h-2.5 bg-[#E5E0D8] rounded-full overflow-hidden">
+              <div id="quiz-progress-bar" class="h-full bg-[#A6633C] rounded-full transition-all duration-300 ease-out" style="width: 0%;"></div>
+            </div>
+
+            <!-- 提示與鍵盤快鍵引導 -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1 text-xs text-[#5C4738]">
+              <div class="flex items-start gap-2">
+                <span class="w-4 h-4 rounded-full bg-[#A6633C] text-[#F7F3EC] text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">i</span>
+                <span id="quiz-stage-hint-text">請依大多數時候（約 70% 以上生活場景）的自然狀態憑直覺作答。</span>
+              </div>
+              <span class="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#E5E0D8] text-[#261C15] font-medium shrink-0">
+                <kbd class="px-1.5 py-0.5 rounded bg-[#F7F3EC] border border-[#CFC5B8] font-mono text-[10px]">1</kbd>–<kbd class="px-1.5 py-0.5 rounded bg-[#F7F3EC] border border-[#CFC5B8] font-mono text-[10px]">5</kbd>
+                <span>鍵盤快速作答</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- 階段三（第 13 頁）親密關係依附專屬溫和提示與一鍵跳過卡 -->
+          <div id="attach-skip-card" class="hidden rounded-2xl bg-[#F7F3EC] border-2 border-[#A6633C] p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded bg-[#A6633C] text-[#F7F3EC] font-mono text-[10px] font-bold">ECR-12 選填模組</span>
+                <span class="font-serif font-bold text-sm sm:text-base text-[#261C15]">親密關係依附作答提醒</span>
+              </div>
+              <p class="text-xs sm:text-sm text-[#5C4738] leading-relaxed">
+                請優先帶入現任伴侶或過去戀愛經驗；若無戀愛經驗，也可帶入生命中最親近的重要他人（如摯友或家人）。若目前不想作答，可點右側跳過，不影響其餘 5 份報告。
+              </p>
+            </div>
+            <button id="btn-skip-attachment" type="button" class="px-4 py-2.5 rounded-xl bg-[#33251B] hover:bg-[#261C15] text-[#F7F3EC] font-bold text-xs sm:text-sm transition shrink-0 shadow-sm">
+              暫不作答（跳過此 12 題）
+            </button>
+          </div>
+
+          <!-- 漏題提醒條 -->
+          <div id="quiz-validation-banner" class="hidden rounded-xl bg-[#F9EAE7] border border-[#B54B3E] text-[#7D261C] px-4 py-3 text-sm font-medium flex items-center gap-2.5">
+            <svg class="w-5 h-5 shrink-0 text-[#B54B3E]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <span id="quiz-validation-text">這頁還有題目尚未作答，請完成紅框標示的題目後再繼續。</span>
+          </div>
+
+          <!-- 高對比暖紙白題目列表容器 -->
+          <div id="quiz-questions-container" class="space-y-4"></div>
+
+          <!-- 底部翻頁按鈕 -->
+          <div class="flex items-center justify-between gap-3 pt-4 border-t border-[#8C735B]/40">
+            <button id="btn-prev-page" type="button" class="px-5 py-3 rounded-xl bg-[#F7F3EC] hover:bg-[#FFFFFF] border border-[#33251B]/35 text-[#261C15] font-bold text-sm sm:text-base transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+              <span>上一頁</span>
+            </button>
+
+            <button id="btn-next-page" type="button" class="flex-1 sm:flex-none sm:min-w-[210px] px-6 py-3 rounded-xl bg-[#A6633C] hover:bg-[#8B4F2D] active:scale-[0.99] text-[#F7F3EC] font-bold text-sm sm:text-base shadow-sm transition flex items-center justify-center gap-1.5">
+              <span id="btn-next-text">下一頁</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 3. 7 分頁互動報告儀表板 ==================== -->
+    <section id="view-result" class="hidden animate-fade-in space-y-5">
+
+      <!-- 範例預覽提示條 -->
+      <div id="sample-mode-banner" class="hidden bg-[#33251B] rounded-2xl p-3 shadow-md no-print">
+        <div class="bg-[#F7F3EC] rounded-xl px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5 text-xs sm:text-sm text-[#261C15]">
+            <span class="px-2 py-0.5 rounded bg-[#A6633C] text-[#F7F3EC] text-[10px] font-bold shrink-0">範例報告</span>
+            <span>目前顯示為模擬作答數據，歡迎切換下方 7 個分頁預覽完整分析、分享圖卡與 PDF 手冊。</span>
+          </div>
+          <button id="btn-start-from-sample" type="button" class="px-4 py-2 rounded-lg bg-[#A6633C] hover:bg-[#8B4F2D] text-[#F7F3EC] text-xs font-bold transition shrink-0">
+            開始我的 104 題測驗
+          </button>
+        </div>
+      </div>
+
+      <!-- 分享連結檢視提示條 -->
+      <div id="shared-mode-banner" class="hidden bg-[#33251B] rounded-2xl p-3 shadow-md no-print">
+        <div class="bg-[#F7F3EC] rounded-xl px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5 text-xs sm:text-sm text-[#261C15]">
+            <span class="px-2 py-0.5 rounded bg-[#4A6B5D] text-[#F7F3EC] text-[10px] font-bold shrink-0">分享檔案</span>
+            <span>你正在檢視一份透過專屬連結分享的個人測驗報告。</span>
+          </div>
+          <button id="btn-start-from-shared" type="button" class="px-4 py-2 rounded-lg bg-[#A6633C] hover:bg-[#8B4F2D] text-[#F7F3EC] text-xs font-bold transition shrink-0">
+            我也來測測看
+          </button>
+        </div>
+      </div>
+
+      <!-- 報告頂部工具列 -->
+      <div class="bg-[#33251B] rounded-2xl p-3 shadow-md no-print">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex flex-wrap items-center gap-2">
+            <button id="btn-open-share-card" type="button" class="px-3.5 py-2 rounded-xl bg-[#A6633C] hover:bg-[#8B4F2D] text-[#F7F3EC] font-bold text-xs sm:text-sm transition flex items-center gap-1.5 shadow-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span>下載分享圖卡 (PNG)</span>
+            </button>
+            <button id="btn-print-pdf" type="button" class="px-3.5 py-2 rounded-xl bg-[#4A6B5D] hover:bg-[#3C584C] text-[#F7F3EC] font-bold text-xs sm:text-sm transition flex items-center gap-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+              </svg>
+              <span>匯出完整報告 (PDF)</span>
+            </button>
+            <button id="btn-copy-link" type="button" class="px-3.5 py-2 rounded-xl bg-[#F7F3EC] hover:bg-[#E5E0D8] text-[#261C15] font-bold text-xs sm:text-sm transition flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-[#A6633C]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+              <span>複製專屬報告網址</span>
+            </button>
+            <button id="btn-copy-summary" type="button" class="px-3.5 py-2 rounded-xl bg-[#F7F3EC] hover:bg-[#E5E0D8] text-[#261C15] font-bold text-xs sm:text-sm transition flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-[#A6633C]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              <span>複製文字摘要</span>
+            </button>
+          </div>
+          <button id="btn-retake-toolbar" type="button" class="px-3.5 py-2 rounded-xl bg-transparent hover:bg-[#4A382B] text-[#E5E0D8] border border-[#8C735B]/60 font-bold text-xs sm:text-sm transition">
+            重新測驗
+          </button>
+        </div>
+      </div>
+
+      <!-- 7 分頁橫向滑動膠囊導覽列（右側附漸層淡出提示） -->
+      <div id="report-tabs-wrapper" class="relative bg-[#33251B] rounded-2xl p-2 shadow-md sticky top-16 z-20 border border-[#4A382B] no-print">
+        <div id="report-tabs-nav" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pr-8" role="tablist"></div>
+        <div class="pointer-events-none absolute right-2 top-2 bottom-2 w-10 rounded-r-xl bg-gradient-to-l from-[#33251B] via-[#33251B]/80 to-transparent md:hidden"></div>
+      </div>
+
+      <!-- 7 分頁報告內容主容器（螢幕單頁顯示、列印自動 7 頁依序展開） -->
+      <div class="print-shell bg-[#33251B] rounded-[28px] p-3.5 sm:p-6 shadow-lg border border-[#261C15]">
+        <div id="report-panels-container" class="space-y-5"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== 頁尾（開源聲明與授權說明） ==================== -->
+  <footer class="w-full bg-[#261C15] text-[#CFC5B8] border-t border-[#4A382B] mt-auto no-print">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-6 text-xs space-y-2 leading-relaxed">
+      <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#4A382B]">
+        <span class="font-editorial italic text-base text-[#E5E0D8]">Persona Archive</span>
+        <span class="font-mono text-[11px] tracking-widest uppercase text-[#A6633C]">NO.2026104 • V3 FINAL EDITION</span>
+      </div>
+      <p class="pt-1">
+        • <strong class="text-[#F7F3EC]">大五人格 (Q01–Q50)</strong>：Goldberg IPIP-50（公有領域開源量表，台灣日常語境校訂）。<br />
+        • <strong class="text-[#F7F3EC]">HEXACO 誠實與謙遜 (Q51–Q60)</strong>：Ashton &amp; Lee HEXACO-60 H 維度（僅供非商業／自我探索與學術研究使用）。<br />
+        • <strong class="text-[#F7F3EC]">16 型人格傾向與 DISC 職場風格 (Q61–Q74)</strong>：整合榮格四維度雙極獨立平均法與正向特質補強題，統一大寫 DISC 標示。<br />
+        • <strong class="text-[#F7F3EC]">親密關係依附 (Q75–Q86)</strong>：Lafontaine et al. (2016) ECR-12 簡版量表（50% 雙軸切點，可自由選填或跳過）。<br />
+        • <strong class="text-[#F7F3EC]">霍蘭德職涯興趣 (Q87–Q104)</strong>：依 O*NET RIASEC 領域改編之精簡興趣快篩版。
+      </p>
+      <p class="text-[11px] text-[#8C735B]">
+        ※ 本網站所有分數皆為個人同意度光譜，並非大眾常模百分等級（PR 值），亦不構成臨床心理診斷。
+      </p>
+    </div>
+  </footer>
+
+  <!-- 浮動 Toast 訊息盒（取代 alert） -->
+  <div id="toast-notification" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-300 no-print">
+    <div class="bg-[#261C15] text-[#F7F3EC] border border-[#A6633C] px-5 py-2.5 rounded-full shadow-xl text-sm font-medium flex items-center gap-2">
+      <svg class="w-4 h-4 text-[#A6633C] shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+      <span id="toast-message">已完成！</span>
+    </div>
+  </div>
+
+  <!-- 重新測驗自訂確認盒（取代 confirm） -->
+  <div id="confirm-modal" class="hidden fixed inset-0 z-50 bg-[#261C15]/70 backdrop-blur-xs flex items-center justify-center p-4 no-print">
+    <div class="bg-[#33251B] rounded-3xl p-3 shadow-2xl max-w-sm w-full animate-fade-in">
+      <div class="bg-[#F7F3EC] rounded-2xl p-6 text-[#261C15]">
+        <h3 class="font-serif font-bold text-lg mb-2">確定要重新開始測驗嗎？</h3>
+        <p class="text-sm text-[#5C4738] leading-relaxed mb-6">這會清除目前保存在本機的作答進度，並從第 1 頁重新開始填寫 104 題。</p>
+        <div class="flex items-center justify-end gap-2.5">
+          <button id="btn-cancel-retake" type="button" class="px-4 py-2 rounded-xl bg-[#E5E0D8] hover:bg-[#CFC5B8] text-[#261C15] font-bold text-sm transition">
+            取消
+          </button>
+          <button id="btn-confirm-retake" type="button" class="px-4 py-2 rounded-xl bg-[#A6633C] hover:bg-[#8B4F2D] text-[#F7F3EC] font-bold text-sm transition">
+            確定重測
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 分享摘要圖卡預覽 Modal（高解析度 PNG） -->
+  <div id="share-card-modal" class="hidden fixed inset-0 z-50 bg-[#261C15]/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5 no-print">
+    <div class="bg-[#33251B] rounded-[24px] p-3 sm:p-4 shadow-2xl max-w-lg w-full max-h-[92vh] flex flex-col animate-fade-in">
+      <div class="bg-[#F7F3EC] rounded-2xl p-4 sm:p-5 flex flex-col max-h-full overflow-hidden">
+        <div class="flex items-center justify-between gap-2 pb-3 border-b border-[#CFC5B8] shrink-0">
+          <div>
+            <h3 class="font-serif font-black text-lg text-[#261C15]">分享摘要圖卡（1080 × 1480）</h3>
+            <p class="text-xs text-[#5C4738] mt-0.5">含六大測驗完整百分比，手機可直接長按圖片儲存</p>
+          </div>
+          <button id="btn-close-card-modal" type="button" class="w-8 h-8 rounded-full bg-[#E5E0D8] hover:bg-[#CFC5B8] text-[#261C15] flex items-center justify-center font-bold transition shrink-0" aria-label="關閉預覽">
+            ✕
+          </button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto my-3.5 flex items-center justify-center bg-[#DFD8CE]/70 rounded-xl p-2.5 border border-[#CFC5B8]">
+          <img id="share-card-preview-img" src="" alt="六合一綜合人格與職涯摘要圖卡" class="w-full max-w-[390px] h-auto rounded-xl shadow-md block" />
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-2.5 pt-2 border-t border-[#CFC5B8] shrink-0">
+          <span class="text-[11px] text-[#5C4738]">※ 手機用戶也可長按圖片直接存入相簿</span>
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <button id="btn-download-card-png" type="button" class="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-[#A6633C] hover:bg-[#8B4F2D] text-[#F7F3EC] font-bold text-sm transition flex items-center justify-center gap-1.5 shadow-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              <span>下載 PNG 圖卡</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 核心邏輯腳本 ==================== -->
+  <script>
+    /**
+     * =========================================================================
+     * 1. 完整 104 題 v3 定案版題庫與精確跨量表映射（100% 完整收錄）
+     * 格式：big5, jung16, hexaco, disc, attach, riasec
+     * 注意：所有計分直接使用原始作答 (1-5) 與此處帶正負號權重，絕不二次反轉！
+     * =========================================================================
+     */
+    const QUESTIONS = [
+      // === 階段一：核心大五人格與誠實謙遜 (Q01–Q60，第 1–10 頁，每頁 6 題) ===
+      { id: 1,   code: 'Q01', text: '在聚會場合中，我常是帶動氣氛的人。', m: { big5: { E: 1.0 }, jung16: { E: 1.0 }, hexaco: { X: 1.0 }, disc: { I: 0.8 } } },
+      { id: 2,   code: 'Q02', text: '平時在群體裡，我的話不算多。', m: { big5: { E: -1.0 }, jung16: { I: 1.0 }, hexaco: { X: -1.0 }, disc: { I: -0.6 } } },
+      { id: 3,   code: 'Q03', text: '和大家相處時，我覺得很自在、不緊繃。', m: { big5: { E: 1.0 }, jung16: { E: 1.0 }, hexaco: { X: 1.0 }, disc: { I: 0.6 } } },
+      { id: 4,   code: 'Q04', text: '在團體中，我習慣待在比較低調的位置。', m: { big5: { E: -1.0 }, jung16: { I: 1.0 }, hexaco: { X: -1.0 }, disc: { D: -0.6 } } },
+      { id: 5,   code: 'Q05', text: '遇到不太熟的人時，我會主動開啟話題。', m: { big5: { E: 1.0 }, jung16: { E: 1.0 }, hexaco: { X: 1.0 }, disc: { I: 0.8 } } },
+      { id: 6,   code: 'Q06', text: '和人互動時，我通常沒什麼話想主動說。', m: { big5: { E: -1.0 }, jung16: { I: 1.0 }, hexaco: { X: -1.0 }, disc: { I: -0.6 } } },
+      { id: 7,   code: 'Q07', text: '參加聚會時，我喜歡和許多不同的人交流。', m: { big5: { E: 1.0 }, jung16: { E: 1.0 }, hexaco: { X: 1.0 }, disc: { I: 0.8 } } },
+      { id: 8,   code: 'Q08', text: '我不太喜歡成為眾人注目的焦點。', m: { big5: { E: -1.0 }, jung16: { I: 1.0 }, hexaco: { X: -1.0 }, disc: { I: -0.6 } } },
+      { id: 9,   code: 'Q09', text: '成為大家的焦點對我來說沒什麼壓力。', m: { big5: { E: 1.0 }, jung16: { E: 1.0 }, hexaco: { X: 1.0 }, disc: { I: 0.7 } } },
+      { id: 10,  code: 'Q10', text: '和不熟的人待在一起時，我通常會比較安靜。', m: { big5: { E: -1.0 }, jung16: { I: 1.0 }, hexaco: { X: -1.0 }, disc: { I: -0.7 } } },
+
+      { id: 11,  code: 'Q11', text: '我對別人的處境通常沒什麼特別的感覺。', m: { big5: { A: -1.0 }, jung16: { T: 0.8 }, hexaco: { A: -0.8 }, disc: { S: -0.6 } } },
+      { id: 12,  code: 'Q12', text: '我對認識不同人的故事與想法很有興趣。', m: { big5: { A: 1.0 }, jung16: { F: 0.8 }, hexaco: { A: 0.8 }, disc: { I: 0.5 } } },
+      { id: 13,  code: 'Q13', text: '我會用尖銳或刻薄的話刺傷別人。', m: { big5: { A: -1.0 }, jung16: { T: 0.7 }, hexaco: { A: -1.0 }, disc: { D: 0.5 } } },
+      { id: 14,  code: 'Q14', text: '看到別人難過或受委屈，我很容易產生同理心。', m: { big5: { A: 1.0 }, jung16: { F: 1.0 }, hexaco: { E_hex: 0.7 }, disc: { S: 0.7 } } },
+      { id: 15,  code: 'Q15', text: '我對別人的煩惱通常不感興趣，也不太想過問。', m: { big5: { A: -1.0 }, jung16: { T: 0.8 }, hexaco: { A: -0.7 }, disc: { S: -0.6 } } },
+      { id: 16,  code: 'Q16', text: '我的心腸比較軟，很容易對人心生憐憫或體諒。', m: { big5: { A: 1.0 }, jung16: { F: 1.0 }, hexaco: { A: 0.8 }, disc: { S: 0.8 } } },
+      { id: 17,  code: 'Q17', text: '我其實不太花心思去了解身邊的人。', m: { big5: { A: -1.0 }, jung16: { T: 0.7 }, hexaco: { A: -0.7 }, disc: { S: -0.5 } } },
+      { id: 18,  code: 'Q18', text: '只要能力所及，我願意撥出時間幫忙身邊的人。', m: { big5: { A: 1.0 }, jung16: { F: 0.9 }, hexaco: { A: 0.9 }, disc: { S: 0.8 } } },
+      { id: 19,  code: 'Q19', text: '我很容易察覺並感受到周遭人的情緒變化。', m: { big5: { A: 1.0 }, jung16: { F: 1.0 }, hexaco: { E_hex: 0.8 }, disc: { S: 0.6 } } },
+      { id: 20,  code: 'Q20', text: '和我相處時，別人通常會覺得很放鬆、沒壓力。', m: { big5: { A: 1.0 }, jung16: { F: 0.8 }, hexaco: { A: 0.9 }, disc: { S: 0.8 } } },
+
+      { id: 21,  code: 'Q21', text: '面對重要事項前，我習慣提前做好準備。', m: { big5: { C: 1.0 }, jung16: { J: 1.0 }, hexaco: { C: 1.0 }, disc: { C: 0.8 } } },
+      { id: 22,  code: 'Q22', text: '我的隨身物品常隨手亂放，不太會馬上收好。', m: { big5: { C: -1.0 }, jung16: { P: 0.9 }, hexaco: { C: -1.0 }, disc: { C: -0.7 } } },
+      { id: 23,  code: 'Q23', text: '處理事情時，我很在意細節有沒有做到位。', m: { big5: { C: 1.0 }, jung16: { J: 0.8 }, hexaco: { C: 1.0 }, disc: { C: 1.0 } } },
+      { id: 24,  code: 'Q24', text: '我常不小心把事情搞砸或弄得一團糟。', m: { big5: { C: -1.0 }, jung16: { P: 0.9 }, hexaco: { C: -1.0 }, disc: { C: -0.8 } } },
+      { id: 25,  code: 'Q25', text: '日常瑣事或待辦事項，我習慣盡快處理完畢。', m: { big5: { C: 1.0 }, jung16: { J: 1.0 }, hexaco: { C: 1.0 }, disc: { C: 0.7 } } },
+      { id: 26,  code: 'Q26', text: '用完東西後，我常常忘記放回原本的位置。', m: { big5: { C: -1.0 }, jung16: { P: 0.9 }, hexaco: { C: -1.0 }, disc: { C: -0.7 } } },
+      { id: 27,  code: 'Q27', text: '我喜歡生活與工作環境保持井然有序。', m: { big5: { C: 1.0 }, jung16: { J: 1.0 }, hexaco: { C: 1.0 }, disc: { C: 0.9 } } },
+      { id: 28,  code: 'Q28', text: '遇到該負責的任務或工作時，我常會設法推託或逃避。', m: { big5: { C: -1.0 }, jung16: { P: 0.8 }, hexaco: { C: -1.0 }, disc: { C: -0.7 } } },
+      { id: 29,  code: 'Q29', text: '我習慣按照事先排好的時間表或計畫行事。', m: { big5: { C: 1.0 }, jung16: { J: 1.0 }, hexaco: { C: 1.0 }, disc: { C: 0.8 } } },
+      { id: 30,  code: 'Q30', text: '對於自己經手的任務，我有很高的品質要求。', m: { big5: { C: 1.0 }, jung16: { J: 0.8 }, hexaco: { C: 1.0 }, disc: { C: 1.0 } } },
+
+      { id: 31,  code: 'Q31', text: '面對變動或任務時，我很容易感到壓力大。', m: { big5: { N: 1.0 }, jung16: { T_turbulent: 0.9 }, hexaco: { E_hex: 1.0 } } },
+      { id: 32,  code: 'Q32', text: '大多數時候，我的心態都保持得蠻放鬆的。', m: { big5: { N: -1.0 }, jung16: { A_assertive: 0.9 }, hexaco: { E_hex: -1.0 }, disc: { S: 0.5 } } },
+      { id: 33,  code: 'Q33', text: '我常常會忍不住擔心還沒發生的事情。', m: { big5: { N: 1.0 }, jung16: { T_turbulent: 1.0 }, hexaco: { E_hex: 1.0 } } },
+      { id: 34,  code: 'Q34', text: '我很少感到情緒低落或沮喪。', m: { big5: { N: -1.0 }, jung16: { A_assertive: 0.8 }, hexaco: { E_hex: -0.8 } } },
+      { id: 35,  code: 'Q35', text: '生活中的突發狀況，很容易打亂我的情緒平靜。', m: { big5: { N: 1.0 }, jung16: { T_turbulent: 0.8 }, hexaco: { E_hex: 0.9 } } },
+      { id: 36,  code: 'Q36', text: '遇到不如意的事情，我很快就會覺得心煩意亂。', m: { big5: { N: 1.0 }, jung16: { T_turbulent: 0.8 }, hexaco: { E_hex: 0.9 } } },
+      { id: 37,  code: 'Q37', text: '我的心情起伏比較大，有時容易突然轉變。', m: { big5: { N: 1.0 }, jung16: { T_turbulent: 0.9 }, hexaco: { E_hex: 0.8 } } },
+      { id: 38,  code: 'Q38', text: '我經常會感受到情緒像雲霄飛車一樣波動。', m: { big5: { N: 1.0 }, jung16: { T_turbulent: 0.9 }, hexaco: { E_hex: 0.8 } } },
+      { id: 39,  code: 'Q39', text: '生活中一些小細節不順眼，就容易讓我煩躁。', m: { big5: { N: 1.0 }, jung16: { T_turbulent: 0.7 }, hexaco: { A: -0.6 } } },
+      { id: 40,  code: 'Q40', text: '我常常會覺得心情悶悶的、提不起勁。', m: { big5: { N: 1.0 }, jung16: { T_turbulent: 0.9 }, hexaco: { E_hex: 0.8 } } },
+
+      { id: 41,  code: 'Q41', text: '我平常能用比較豐富、精準的詞彙表達想法。', m: { big5: { O: 1.0 }, jung16: { N: 0.7 }, hexaco: { O: 1.0 } } },
+      { id: 42,  code: 'Q42', text: '太抽象或偏理論的概念，對我來說比較難消化。', m: { big5: { O: -1.0 }, jung16: { S: 1.0 }, hexaco: { O: -1.0 } } },
+      { id: 43,  code: 'Q43', text: '我的腦海裡經常浮現各種生動的想像畫面。', m: { big5: { O: 1.0 }, jung16: { N: 1.0 }, hexaco: { O: 1.0 } } },
+      { id: 44,  code: 'Q44', text: '我比較務實，對抽象的哲學或理論沒什麼興趣。', m: { big5: { O: -1.0 }, jung16: { S: 1.0 }, hexaco: { O: -1.0 } } },
+      { id: 45,  code: 'Q45', text: '討論問題時，我常能想出很有創意的點子。', m: { big5: { O: 1.0 }, jung16: { N: 0.9 }, hexaco: { O: 1.0 } } },
+      { id: 46,  code: 'Q46', text: '我覺得自己不太屬於天馬行空、愛幻想的類型。', m: { big5: { O: -1.0 }, jung16: { S: 1.0 }, hexaco: { O: -1.0 } } },
+      { id: 47,  code: 'Q47', text: '面對新資訊或新概念，我通常很快就能抓到重點。', m: { big5: { O: 1.0 }, jung16: { N: 0.7 }, hexaco: { O: 0.8 } } },
+      { id: 48,  code: 'Q48', text: '溝通或寫作時，我常會使用較深入或專業的詞彙。', m: { big5: { O: 1.0 }, jung16: { N: 0.6 }, hexaco: { O: 0.8 } } },
+      { id: 49,  code: 'Q49', text: '我平常喜歡花時間反思自己的想法與經歷。', m: { big5: { O: 1.0 }, jung16: { N: 0.9 }, hexaco: { O: 1.0 } } },
+      { id: 50,  code: 'Q50', text: '我的腦袋裡總是裝滿了各種新的靈感與念頭。', m: { big5: { O: 1.0 }, jung16: { N: 1.0 }, hexaco: { O: 1.0 } } },
+
+      { id: 51,  code: 'Q51', text: '即使知道拍馬屁能幫我加薪或升遷，我也不會這麼做。', m: { hexaco: { H: 1.0 } } },
+      { id: 52,  code: 'Q52', text: '如果確定絕對不會被抓到，我願意偷走一筆鉅款。', m: { hexaco: { H: -1.0 } } },
+      { id: 53,  code: 'Q53', text: '擁有非常多的金錢或財富，對我來說並不是特別重要的事。', m: { hexaco: { H: 1.0 } } },
+      { id: 54,  code: 'Q54', text: '我覺得自己理應獲得比一般人更多的尊重與禮遇。', m: { hexaco: { H: -1.0 } } },
+      { id: 55,  code: 'Q55', text: '為了請別人幫忙，就算對方講的笑話很冷，我也會刻意捧場大笑。', m: { hexaco: { H: -1.0 } } },
+      { id: 56,  code: 'Q56', text: '不管金額有多大，我都絕對不會接受賄賂或不當利益。', m: { hexaco: { H: 1.0 } } },
+      { id: 57,  code: 'Q57', text: '擁有昂貴的名牌或奢侈品，會讓我感到非常享受與開心。', m: { hexaco: { H: -1.0 } } },
+      { id: 58,  code: 'Q58', text: '我希望別人能看出我是一個有地位、有份量的人。', m: { hexaco: { H: -1.0 }, disc: { D: 0.4 } } },
+      { id: 59,  code: 'Q59', text: '我不會為了利用某個人，而刻意假裝自己很喜歡他。', m: { hexaco: { H: 1.0 } } },
+      { id: 60,  code: 'Q60', text: '如果確定不會被發現，我會動念想要使用假鈔。', m: { hexaco: { H: -1.0 } } },
+
+      // === 階段二：DISC 職場風格與正向特質補強 (Q61–Q74，第 11–12 頁，每頁 7 題) ===
+      { id: 61,  code: 'Q61', text: '在團隊合作中，我通常會主動掌舵，推動大家快速做出決定。', m: { jung16: { J: 0.4 }, disc: { D: 1.0 } } },
+      { id: 62,  code: 'Q62', text: '我喜歡有競爭性的環境，並且熱衷於挑戰高難度的目標。', m: { disc: { D: 1.0 } } },
+      { id: 63,  code: 'Q63', text: '在工作上，我擅長用熱情與感染力來說服大家支持我的想法。', m: { jung16: { E: 0.4 }, disc: { I: 1.0 } } },
+      { id: 64,  code: 'Q64', text: '比起一個人安靜埋頭苦幹，我更喜歡在熱鬧的團隊裡腦力激盪。', m: { jung16: { E: 0.5 }, disc: { I: 1.0 } } },
+      { id: 65,  code: 'Q65', text: '我重視穩定、可預期的工作步調，以及和諧不衝突的團隊氣氛。', m: { disc: { S: 1.0 } } },
+      { id: 66,  code: 'Q66', text: '職場上出現意見衝突時，我傾向扮演協調者，讓大家冷靜達成共識。', m: { jung16: { F: 0.4 }, disc: { S: 1.0 } } },
+      { id: 67,  code: 'Q67', text: '在工作上做決定前，我一定要先看到完整的數據與嚴謹的分析。', m: { jung16: { T: 0.5 }, disc: { C: 1.0 } } },
+      { id: 68,  code: 'Q68', text: '我習慣嚴格遵守既定流程，並反覆檢查自己的工作成果以確保零失誤。', m: { jung16: { J: 0.5 }, disc: { C: 1.0 } } },
+      { id: 69,  code: 'Q69', text: '當團隊進度受阻時，我會果斷站出來排除障礙，推動事情達成目標。', m: { jung16: { J: 0.4 }, disc: { D: 1.0 } } },
+      { id: 70,  code: 'Q70', text: '面對棘手決策時，我傾向直接扛下責任做出判斷，而不是等所有人慢慢達成共識。', m: { jung16: { T: 0.4 }, disc: { D: 1.0 } } },
+      { id: 71,  code: 'Q71', text: '做重要決定時，我優先考量客觀邏輯與公平原則，而非個人情緒。', m: { jung16: { T: 1.0 }, disc: { C: 0.4 } } },
+      { id: 72,  code: 'Q72', text: '討論爭議話題時，比起顧及場面和諧，我更在意找出最合理、客觀的真相。', m: { jung16: { T: 1.0 } } },
+      { id: 73,  code: 'Q73', text: '我喜歡為生活保留彈性，隨當下的新靈感或機會即興調整安排。', m: { jung16: { P: 1.0 } } },
+      { id: 74,  code: 'Q74', text: '計畫臨時變動很少困擾我，我反而蠻享受隨機應變的感覺。', m: { jung16: { P: 1.0 } } },
+
+      // === 階段三：親密關係依附 ECR-12 (Q75–Q86，第 13–14 頁，每頁 6 題) ===
+      { id: 75,  code: 'Q75', text: '在親密關係中，我常會擔心伴侶（或親密對象）有一天會離開或拋下我。', m: { attach: { anxiety: 1.0 } } },
+      { id: 76,  code: 'Q76', text: '我會擔心伴侶（或親密對象）在乎我的程度，沒有我付出的那麼多。', m: { attach: { anxiety: 1.0 } } },
+      { id: 77,  code: 'Q77', text: '我需要伴侶（或親密對象）頻繁地給予保證或回應，才能安心確認自己是被愛的。', m: { attach: { anxiety: 1.0 } } },
+      { id: 78,  code: 'Q78', text: '如果覺得伴侶（或親密對象）對我冷淡或沒那麼上心，我很容易感到委屈、焦躁或生氣。', m: { attach: { anxiety: 1.0 } } },
+      { id: 79,  code: 'Q79', text: '我常覺得伴侶（或親密對象）想要的親密距離，比我期待的還要疏遠一些。', m: { attach: { anxiety: 1.0 } } },
+      { id: 80,  code: 'Q80', text: '當我需要陪伴或支持，而伴侶（或親密對象）剛好不在身邊時，我會感到很挫折。', m: { attach: { anxiety: 1.0 } } },
+      { id: 81,  code: 'Q81', text: '要向伴侶（或親密對象）完全敞開心扉、展露脆弱，對我來說不太自在。', m: { attach: { avoidance: 1.0 } } },
+      { id: 82,  code: 'Q82', text: '在親密關係中，我可以很放心地依賴伴侶（或親密對象），不會覺得彆扭。', m: { attach: { avoidance: -1.0 } } },
+      { id: 83,  code: 'Q83', text: '遇到煩惱或困難時，我通常會願意主動找伴侶（或親密對象）商量。', m: { attach: { avoidance: -1.0 } } },
+      { id: 84,  code: 'Q84', text: '生活中的大小事與內心想法，我幾乎都願意和伴侶（或親密對象）分享。', m: { attach: { avoidance: -1.0 } } },
+      { id: 85,  code: 'Q85', text: '當我需要安慰、建議或幫忙時，向伴侶（或親密對象）開口對我來說並不困難。', m: { attach: { avoidance: -1.0 } } },
+      { id: 86,  code: 'Q86', text: '當伴侶（或親密對象）在情感上靠得太近時，我反而會感到緊張。', m: { attach: { avoidance: 1.0 } } },
+
+      // === 階段四：霍蘭德職涯興趣 RIASEC (Q87–Q104，第 15–17 頁，每頁 6 題) ===
+      { id: 87,  code: 'Q87', text: '我對親手組裝設備、修理家電或操作機械工具很感興趣。', m: { riasec: { R: 1.0 } } },
+      { id: 88,  code: 'Q88', text: '我喜歡實際動手檢測零件品質，或檢查建築、機械等實體結構。', m: { riasec: { R: 1.0 } } },
+      { id: 89,  code: 'Q89', text: '我喜歡使用動手操作的工具、機器，或在戶外環境中工作。', m: { riasec: { R: 1.0 } } },
+      { id: 90,  code: 'Q90', text: '我對探索事物背後的原理、做實驗或研究複雜的系統很有熱情。', m: { riasec: { I: 1.0 } } },
+      { id: 91,  code: 'Q91', text: '我喜歡透過資料分析、邏輯推理來解決棘手的技術或專業問題。', m: { riasec: { I: 1.0 } } },
+      { id: 92,  code: 'Q92', text: '我享受深入查資料、驗證假設，找出某個現象背後真正原因的過程。', m: { riasec: { I: 1.0 } } },
+      { id: 93,  code: 'Q93', text: '我對寫作、插畫、平面設計或攝影等文字與視覺創作很感興趣。', m: { riasec: { A: 1.0 } } },
+      { id: 94,  code: 'Q94', text: '我喜歡創作音樂、演奏樂器、戲劇表演或參與舞台影音製作。', m: { riasec: { A: 1.0 } } },
+      { id: 95,  code: 'Q95', text: '在工作上能發揮個人美感、說故事能力或獨創風格，會讓我很有動力。', m: { riasec: { A: 1.0 } } },
+      { id: 96,  code: 'Q96', text: '我喜歡教學、分享知識，或一步步引導別人學會一項新技能。', m: { riasec: { S: 1.0 } } },
+      { id: 97,  code: 'Q97', text: '傾聽別人的困擾、提供陪伴或協助他人改善生活，會讓我很有成就感。', m: { riasec: { S: 1.0 } } },
+      { id: 98,  code: 'Q98', text: '我對社區服務、諮商輔導，或以「人」為核心的教育工作感興趣。', m: { riasec: { S: 1.0 } } },
+      { id: 99,  code: 'Q99', text: '我對帶領團隊、商業談判、拓展業務或經營自己的事業很有興趣。', m: { riasec: { E: 1.0 } } },
+      { id: 100, code: 'Q100', text: '我喜歡提案簡報、推廣產品或說服客戶與合作夥伴達成目標。', m: { riasec: { E: 1.0 } } },
+      { id: 101, code: 'Q101', text: '我享受制定策略、協調資源並承擔決策責任，藉此創造商業成果。', m: { riasec: { E: 1.0 } } },
+      { id: 102, code: 'Q102', text: '我喜歡整理報表、核對帳務資料，或把雜亂的資訊系統化歸檔。', m: { riasec: { C: 1.0 } } },
+      { id: 103, code: 'Q103', text: '我對建立標準作業流程（SOP）、維護資料庫或核對行政細節這類工作很感興趣。', m: { riasec: { C: 1.0 } } },
+      { id: 104, code: 'Q104', text: '我喜歡規則明確、結構清楚、講求精確度與效率的行政或數據作業。', m: { riasec: { C: 1.0 } } }
+    ];
+
+    // 精確 17 頁邊界定義（4 階段絕不混題）
+    const PAGE_RANGES = [
+      // Stage 1: Pages 1-10 (Q01-Q60, 6/page)
+      { stage: 1, start: 0,  end: 6  },
+      { stage: 1, start: 6,  end: 12 },
+      { stage: 1, start: 12, end: 18 },
+      { stage: 1, start: 18, end: 24 },
+      { stage: 1, start: 24, end: 30 },
+      { stage: 1, start: 30, end: 36 },
+      { stage: 1, start: 36, end: 42 },
+      { stage: 1, start: 42, end: 48 },
+      { stage: 1, start: 48, end: 54 },
+      { stage: 1, start: 54, end: 60 },
+      // Stage 2: Pages 11-12 (Q61-Q74, 7/page)
+      { stage: 2, start: 60, end: 67 },
+      { stage: 2, start: 67, end: 74 },
+      // Stage 3: Pages 13-14 (Q75-Q86, 6/page)
+      { stage: 3, start: 74, end: 80 },
+      { stage: 3, start: 80, end: 86 },
+      // Stage 4: Pages 15-17 (Q87-Q104, 6/page)
+      { stage: 4, start: 86, end: 92 },
+      { stage: 4, start: 92, end: 98 },
+      { stage: 4, start: 98, end: 104 }
+    ];
+
+    const STAGES_META = [
+      { id: 1, code: '01', stamp: '01 核心底色', title: '核心大五人格與誠實謙遜', range: [1, 60], hint: '請依大多數時候（約 70% 以上生活場景）的自然狀態憑直覺作答，無對錯之分。' },
+      { id: 2, code: '02', stamp: '02 職場風格', title: 'DISC 職場風格與正向特質補強', range: [61, 74], hint: '請想像自己在團隊協作、工作決策與面對變動時的自然應對方式。' },
+      { id: 3, code: '03', stamp: '03 關係依附', title: '親密關係依附（ECR-12）', range: [75, 86], hint: '請以目前的伴侶、過往戀愛經驗或最親近的情感對象為基準作答；亦可選擇跳過。' },
+      { id: 4, code: '04', stamp: '04 職涯興趣', title: '霍蘭德職涯興趣（RIASEC 快篩）', range: [87, 104], hint: '請暫時忽略薪資與目前技能限制，純粹依「喜不喜歡做這件事」直覺作答。' }
+    ];
+
+    const LIKERT_OPTIONS = [
+      { value: 1, label: '非常不符合',     shortLabel: '非常不符' },
+      { value: 2, label: '不太符合',       shortLabel: '不太符合' },
+      { value: 3, label: '普通 / 一半一半', shortLabel: '一半一半' },
+      { value: 4, label: '蠻符合',         shortLabel: '蠻符合' },
+      { value: 5, label: '非常符合',       shortLabel: '非常符合' }
+    ];
+
+    /**
+     * =========================================================================
+     * 2. 各模組深度解析文案（100% 原創、商標合規、大地色系）
+     * =========================================================================
+     */
+    const B5_ORDER = ['O', 'C', 'E', 'A', 'N'];
+    const B5_META = {
+      O: {
+        code: 'O', name: '經驗開放性', en: 'Openness', color: '#33251B',
+        left: '務實穩定', right: '好奇創新',
+        summary: '衡量你對抽象思考、新觀念、想像力與多元體驗的探索傾向。',
+        levels: {
+          low: {
+            badge: '低落點・務實導向',
+            trait: '你重視具體事實、實際經驗與可落地的做法，偏好熟悉且經過驗證的流程，不容易被空泛的概念動搖。',
+            strength: '腳踏實地、專注當下與執行成效，在講求穩定運作與明確標準的環境中非常可靠。',
+            reminder: '遇到產業變動或跨領域合作時，不妨偶爾給自己一點試錯空間，嘗試跳脫既有習慣。'
+          },
+          mid: {
+            badge: '中間光譜・務實與創意兼具',
+            trait: '你能在「創新發想」與「現實可行性」之間取得良好平衡，既欣賞新點子，也會務實評估落地步驟。',
+            strength: '能扮演創意與執行之間的絕佳橋樑，既聽得懂抽象願景，也能將其轉化為具體行動。',
+            reminder: '可視情境彈性切換：發想階段先放寬限制，收斂決策時再啟動務實判斷。'
+          },
+          high: {
+            badge: '高落點・好奇與想像力豐富',
+            trait: '你擁有旺盛的求知慾與抽象思考能力，喜歡反思事物背後的意義，對原創點子與美感十分敏銳。',
+            strength: '思維靈活、擅長跨界連結與看見新可能性，在需要創新探索的領域特別有發揮空間。',
+            reminder: '靈感多元時容易分散精力，搭配簡單的優先級清單能協助你把好想法順利落地。'
+          }
+        }
+      },
+      C: {
+        code: 'C', name: '盡責性', en: 'Conscientiousness', color: '#4A6B5D',
+        left: '隨性彈性', right: '自律條理',
+        summary: '衡量你在計畫規劃、細節把關、自律執行與目標推進上的習慣。',
+        levels: {
+          low: {
+            badge: '低落點・隨性與高彈性',
+            trait: '你偏好保有空間與臨場應變，不喜歡被過度僵化的時間表綁死，面對臨時變動時通常能順勢調整。',
+            strength: '適應力強、不易因計畫被打亂而緊繃，在自由度高或節奏快速變化的環境中特別自在。',
+            reminder: '面對重要截止日或長期目標時，可善用外部提醒與「拆小步驟」策略，減輕臨時趕工壓力。'
+          },
+          mid: {
+            badge: '中間光譜・條理與彈性平衡',
+            trait: '在重要任務上你能維持應有的規劃與責任感，日常生活中則保留適度的輕鬆與留白。',
+            strength: '能在「按部就班」與「隨機應變」間自然切換，既可靠又不會過度自我苛責。',
+            reminder: '釐清哪些事需要高標準把關、哪些事可以輕鬆以對，能讓你的精力分配更有效率。'
+          },
+          high: {
+            badge: '高落點・自律與目標導向',
+            trait: '你做事有條理、重視承諾與細節，習慣提前做好準備並照計畫推進，對品質有明確要求。',
+            strength: '執行力強且值得信賴，擅長將複雜專案拆解並穩定完成長期目標。',
+            reminder: '有時可能因標準過高而讓自己太緊繃，偶爾練習「先完成再求完美」，允許生活留一點彈性。'
+          }
+        }
+      },
+      E: {
+        code: 'E', name: '外向性', en: 'Extraversion', color: '#A6633C',
+        left: '內斂獨處', right: '熱情社交',
+        summary: '衡量你從社交互動中獲取能量的程度，以及在群體中的主動性。',
+        levels: {
+          low: {
+            badge: '低落點・內斂與獨處充電',
+            trait: '你偏好安靜的獨處時光或少數深度的對談，過度頻繁或吵雜的社交場合容易消耗你的能量。',
+            strength: '具備深度專注力與細膩的觀察力，擅長傾聽與獨立思考，互動真誠而穩重。',
+            reminder: '無須強迫自己成為聚會焦點，只要在行程中預留足夠的「獨處回血時間」，就能維持最佳狀態。'
+          },
+          mid: {
+            badge: '中間光譜・動靜皆宜',
+            trait: '你既能享受與人交流的活力，也同樣需要安靜獨處來沉澱思緒，會依對象與場合調整互動節奏。',
+            strength: '社交彈性極佳，無論是團隊熱烈協作或獨立深度作業都能自然適應。',
+            reminder: '留意自己的能量水位：連續社交後主動安排休息，獨處太久時則可約熟識的朋友聊聊。'
+          },
+          high: {
+            badge: '高落點・熱情與社交驅動',
+            trait: '你容易從團隊互動與熱鬧氛圍中獲得活力，通常樂於主動開啟話題、認識新朋友並帶動氣氛。',
+            strength: '感染力強、善於破冰與凝聚人心，在需要跨部門溝通或公開表達的場合很有優勢。',
+            reminder: '在熱烈分享之餘，多留一點停頓空間傾聽較安靜夥伴的想法，也偶爾給自己慢下來的空白。'
+          }
+        }
+      },
+      A: {
+        code: 'A', name: '親和性', en: 'Agreeableness', color: '#8C735B',
+        left: '直率客觀', right: '溫和同理',
+        summary: '衡量你在人際互動中的同理心、體貼程度、合作意願與界線風格。',
+        levels: {
+          low: {
+            badge: '低落點・直率與客觀立場',
+            trait: '你在溝通中傾向以事實、邏輯與自我立場為先，不容易為了維持表面和氣而隱藏真實看法。',
+            strength: '表達直接有效率、敢於提出異議與守住談判底線，在需要客觀決策的情境中極具價值。',
+            reminder: '傳達真實意見時，若能稍微顧及對方感受並加上緩衝語氣，能讓你的好觀點更容易被接納。'
+          },
+          mid: {
+            badge: '中間光譜・友善而有原則',
+            trait: '你樂於理解與協助他人，同時保有清楚的個人原則，會依情境在「合作配合」與「堅持立場」間拿捏。',
+            strength: '能維持良性人際關係，又不容易陷入過度委屈，相處起來真誠且有分寸。',
+            reminder: '繼續維持這份健康的彈性，在照顧他人感受的同時也尊重自己的界線與需求。'
+          },
+          high: {
+            badge: '高落點・高度同理與體貼',
+            trait: '你對他人的情緒與處境非常敏銳，心腸柔軟，樂於伸出援手並營造讓大家感到放鬆的相處氣氛。',
+            strength: '極具親和力與合作精神，容易贏得信任，是團隊與朋友圈中溫暖的支持力量。',
+            reminder: '體貼是珍貴的特質，但也請練習溫柔地設立界線，在不勉強自己的前提下適時說「不」。'
+          }
+        }
+      },
+      N: {
+        code: 'N', name: '情緒敏感度（神經質）', en: 'Neuroticism', color: '#5C4738',
+        left: '平穩淡定', right: '敏銳細膩',
+        summary: '衡量你面對壓力、變動與外界刺激時的情緒警覺與反應強度。',
+        levels: {
+          low: {
+            badge: '低落點・情緒平穩抗壓',
+            trait: '你大多數時候心態放鬆，面對突發狀況或挫折時能維持相對冷靜，情緒不易被外界輕易干擾。',
+            strength: '心理韌性佳、情緒復原快，在緊繃或混亂的情境中往往能成為身邊人的定心丸。',
+            reminder: '因自身較不易焦慮，有時可能較晚察覺他人的細微不安或潛在風險，多留意細節會更周全。'
+          },
+          mid: {
+            badge: '中間光譜・適度警覺與調節',
+            trait: '面對壓力時會有正常的情緒起伏與擔憂，但多數時候能透過休息、整理思緒或傾訴逐步恢復平靜。',
+            strength: '對環境保持健康警覺，既能提前防範風險，又不至於長期陷入過度緊繃。',
+            reminder: '培養幾個固定的日常舒壓儀式（如散步、運動或書寫），在壓力高峰期會特別有效。'
+          },
+          high: {
+            badge: '高落點・情緒敏銳與高警覺',
+            trait: '你的內在感知雷達非常靈敏，對壓力、環境氛圍與未來不確定性感受深刻，情緒容易隨外界波動。',
+            strength: '具備高度風險意識與深刻共情力，往往能比別人更早察覺隱患，也常擁有細膩豐富的感受力。',
+            reminder: '思緒反覆擔憂時，試著區分「可控與不可控的事」，減少過度自責，並透過規律作息安頓身心。'
+          }
+        }
+      }
+    };
+
+    // 16 型原創典雅稱號（完全不使用 16Personalities 版權暱稱或 MBTI® 商標）
+    const JUNG16_TYPES = {
+      INTJ: { title: '靜謐佈局者', desc: '擅長長遠系統規劃與獨立思辨，重視底層邏輯與高效率達成深遠目標。' },
+      INTP: { title: '深度思辨者', desc: '好奇心旺盛且熱愛拆解原理，喜歡透過客觀驗證與概念重構探索世界。' },
+      ENTJ: { title: '策略領航者', desc: '目標清晰且具結構視野，擅長統籌資源、果斷決策並帶領團隊攻克難關。' },
+      ENTP: { title: '靈感破局者', desc: '思維敏捷且善於多角度提問，熱愛挑戰既定框架、激發意想不到的新方案。' },
+      INFJ: { title: '溫潤洞察者', desc: '內斂而富遠見，兼具深度共情與價值堅持，擅長看見人與事背後的長遠意義。' },
+      INFP: { title: '內省理想者', desc: '忠於內在真誠與獨特美感，富有細膩同理與想像力，追求有溫度的生活連結。' },
+      ENFJ: { title: '暖心引路者', desc: '真誠且具感染力的協調者，善於發掘他人潛能並凝聚眾人朝共同願景前進。' },
+      ENFP: { title: '探索共鳴者', desc: '熱情開放且點子豐沛，樂於連結不同領域與人脈，常為團隊帶來靈感與活力。' },
+      ISTJ: { title: '秩序建構者', desc: '務實沉穩、重視承諾與細節精準，擅長透過嚴謹制度穩定交付高品質成果。' },
+      ISFJ: { title: '沉穩守護者', desc: '細心體貼且具高度責任感，默默留意周遭需求，是關係與團隊中可靠的後盾。' },
+      ESTJ: { title: '務實統籌者', desc: '條理分明、行動俐落，擅長建立清楚規範與標準流程，高效率推動團隊運轉。' },
+      ESFJ: { title: '和諧凝聚者', desc: '熱心合作、重視群體氣氛與彼此照應，擅長打造友善且具歸屬感的互動空間。' },
+      ISTP: { title: '實務解構者', desc: '冷靜務實的現場解決專家，擅長在實際操作中靈活應變、直擊問題核心。' },
+      ISFP: { title: '感知創作者', desc: '溫和敏銳且重視當下體驗，偏好保留生活彈性，以獨特審美與真誠回應世界。' },
+      ESTP: { title: '果敢實踐者', desc: '反應敏捷、勇於迎接現場挑戰，擅長在動態局勢中迅速判斷並帶動執行節奏。' },
+      ESFP: { title: '當下點燈者', desc: '親切自然、熱愛分享生活樂趣，善於拉近人際距離並為環境注入輕鬆能量。' }
+    };
+
+    const HEX_ORDER = ['H', 'E_hex', 'X', 'A', 'C', 'O'];
+    const HEX_META = {
+      H:     { code: 'H', name: '誠實與謙遜', en: 'Honesty-Humility', color: '#A6633C', desc: '反映真誠度、公平原則、不貪求特權與對物質名利的看淡程度。' },
+      E_hex: { code: 'E', name: '情緒性',     en: 'Emotionality',     color: '#5C4738', desc: '反映對壓力與風險的警覺度、情感依賴以及對他人處境的感同身受。' },
+      X:     { code: 'X', name: '外向性',     en: 'eXtraversion',     color: '#B8744B', desc: '反映社交自信、群體活躍度與從互動中感受到的正向活力。' },
+      A:     { code: 'A', name: '親和性',     en: 'Agreeableness',    color: '#8C735B', desc: '反映寬容度、耐心、溫和溝通以及在摩擦中保持彈性與妥協的傾向。' },
+      C:     { code: 'C', name: '盡責性',     en: 'Conscientiousness',color: '#4A6B5D', desc: '反映組織條理、勤奮程度、細節要求與審慎決策的習慣。' },
+      O:     { code: 'O', name: '經驗開放性', en: 'Openness',         color: '#33251B', desc: '反映美感欣賞、好奇心、原創創意與對非傳統觀點的接受度。' }
+    };
+
+    const HEX_H_DEEP = {
+      low: {
+        title: '策略務實與企圖心（低落點，0–35%）',
+        values: '你在面對資源、地位與利益分配時相對務實且具企圖心，重視實質回報、可見成就與社會認可。',
+        integrity: '在職場上擅長向上管理、商業談判與爭取應得籌碼，不排斥運用人際策略達成目標；需留意在追求結果時守住長期信任底線。',
+        boundaries: '界線與目標明確、較不易吃虧，建議在合作關係中多展現互惠共贏，能讓你的影響力走得更長遠。'
+      },
+      mid: {
+        title: '原則與彈性兼顧（中間光譜，36–64%）',
+        values: '你重視基本的公平與誠信原則，同時也務實理解現實社會中的人情世故與合理回報。',
+        integrity: '在職場中能在「堅守原則」與「圓融溝通」間取得平衡，既不會過度討好，也不至於因過於僵硬錯失合理機會。',
+        boundaries: '懂得看場合拿捏分寸，對於合理的利益爭取不覺愧疚，也能對越線行為保持清楚警覺。'
+      },
+      high: {
+        title: '高度真誠與原則導向（高落點，65–100%）',
+        values: '你高度重視內在誠信、公平與真誠互動，對虛偽奉承、走後門或炫耀式物質名利普遍缺乏興趣。',
+        integrity: '在職場上是極具公信力的夥伴，不易受不當利益誘惑，偏好憑實力與透明規則贏得肯定，適合承擔高度信任職責。',
+        boundaries: '不擅長也不喜歡耍心機，但正因如此，在面對過度功利或刻意操弄的對象時，記得適時保護自己應得的權益與功勞。'
+      }
+    };
+
+    const DISC_ORDER = ['D', 'I', 'S', 'C'];
+    const DISC_META = {
+      D: {
+        code: 'D', name: '支配型', short: '果斷推動', color: '#A6633C',
+        comm: '偏好直接切入重點、結論先行，不喜歡冗長鋪陳或含糊其辭的討論。',
+        decision: '決策節奏明快，面對阻礙敢於扛責拍板，重視結果推進與高難度目標突破。',
+        stress: '壓力大時容易顯得急躁、語氣強硬或想直接接管主導權；此時放慢半拍、多聽一個角度會更有力量。'
+      },
+      I: {
+        code: 'I', name: '影響型', short: '熱情凝聚', color: '#B8744B',
+        comm: '表達生動具感染力，喜歡互動討論與腦力激盪，擅長營造開放熱絡的合作氣氛。',
+        decision: '容易受願景、直覺與團隊共鳴驅動，擅長快速發想並號召夥伴一起行動。',
+        stress: '壓力大時可能分心、過度樂觀承諾或急於尋求肯定；將關鍵待辦寫成具體清單有助穩住節奏。'
+      },
+      S: {
+        code: 'S', name: '穩健型', short: '協調支持', color: '#8C735B',
+        comm: '語氣溫和有耐心，善於傾聽與換位思考，常在意見分歧時扮演潤滑劑與協調者。',
+        decision: '傾向收集共識、評估對團隊的影響後再穩健推進，偏好可預期且有節奏的變動。',
+        stress: '壓力大時容易選擇隱忍退讓或過度配合而累積委屈；練習提早清楚說出自己的界線與需求非常重要。'
+      },
+      C: {
+        code: 'C', name: '謹慎型', short: '嚴謹分析', color: '#4A6B5D',
+        comm: '溝通講求邏輯、事實與完整脈絡，偏好有數據或具體依據的理性對話。',
+        decision: '重視風險評估與品質把關，習慣充分驗證資訊後再拍板，力求精準不出錯。',
+        stress: '壓力大時可能陷入過度分析或對細節過度挑剔；為自己設定「決策截止線」能幫助果斷推進。'
+      }
+    };
+
+    const ATT_TYPES = {
+      secure: {
+        name: '安全型依附', badge: '低焦慮 × 低逃避', color: '#4A6B5D',
+        summary: '你在親密關係中通常能自在表達需求，也願意信任與依賴伴侶；既能享受親近，也能保有健康的個人空間。',
+        comm: '面對意見不合時，你較能就事論事並直接說出內心感受，不容易陷入冷戰或過度猜測。',
+        practice: '持續維持這份開放透明的溝通習慣；當伴侶呈現焦慮或退縮時，你穩定的回應往往能成為關係中最安定的力量。'
+      },
+      anxious: {
+        name: '焦慮型依附', badge: '高焦慮 × 低逃避', color: '#A6633C',
+        summary: '你非常重視親密連結與情感回應，對伴侶的態度變化十分敏銳，有時會因擔心被忽略或失去關係而感到不安。',
+        comm: '感到冷落時容易反覆確認或以情緒測試對方；試著直接溫和說出「我需要一點陪伴或確認」，比猜測更有效。',
+        practice: '練習「情緒暫停 10 分鐘」：先區分「對方的客觀忙碌」與「內心的害怕」，同時經營關係之外的生活重心與自我安撫。'
+      },
+      avoidant: {
+        name: '逃避型依附', badge: '低焦慮 × 高逃避', color: '#5C4738',
+        summary: '你高度重視獨立自主與情緒自我管理，習慣自己消化困難，當關係過於緊密或需要展露脆弱時容易感到壓力。',
+        comm: '遇到衝突或情緒張力時，第一反應可能是拉開距離；試著先預告「我需要一點時間冷靜，晚點再聊」，能避免對方誤解。',
+        practice: '以「小步開放」練習信任：從分享一件生活小煩惱開始，讓自己體驗「適度依賴並不會失去自主權」。'
+      },
+      fearful: {
+        name: '恐懼逃避型（矛盾型）', badge: '高焦慮 × 高逃避', color: '#B54B3E',
+        summary: '你內心既渴望深度的親密與被愛，同時又害怕太過靠近會帶來傷害或失控，常在「想靠近」與「想退開」之間拉扯。',
+        comm: '這份拉扯源自對安全的高度渴望，試著在平靜時向信任的對象坦白自己的節奏，讓對方知道退縮不是不在乎。',
+        practice: '建立穩定且可預期的溝通節奏，練習辨識觸發警鈴的當下感受，一步步累積「親密也可以很安全」的新經驗。'
+      }
+    };
+
+    const RIA_ORDER = ['R', 'I', 'A', 'S', 'E', 'C'];
+    const RIA_META = {
+      R: {
+        code: 'R', name: '實作型', en: 'Realistic', color: '#5C4738',
+        env: '偏好具象、有明確產出、能動手操作工具／設備或走進現場與戶外的工作環境，重視實務技能勝過空談。',
+        careers: ['硬體／機構／電子工程師', '工業設計與模型製作', '建築與土木工程管理', '自動化設備與品質檢測', '場域實務與戶外生態工作']
+      },
+      I: {
+        code: 'I', name: '研究型', en: 'Investigative', color: '#33251B',
+        env: '偏好重視獨立思考、資料分析、邏輯推演與持續學習的環境，享受深入拆解複雜問題並驗證假設。',
+        careers: ['資料科學家／商業數據分析', '軟體研發／演算法工程師', '市場調查與使用者研究', '生醫／科學實驗研發', '系統架構與技術顧問']
+      },
+      A: {
+        code: 'A', name: '藝術型', en: 'Artistic', color: '#A6633C',
+        env: '偏好自由度高、鼓勵原創表達、美感設計與說故事能力的環境，較不喜歡過度制式化的重複流程。',
+        careers: ['UI/UX 產品與互動設計', '品牌視覺／插畫與影音創作', '文字編輯／內容策展', '音樂製作與舞台表演藝術', '獨立創作者與創意指導']
+      },
+      S: {
+        code: 'S', name: '社會型', en: 'Social', color: '#4A6B5D',
+        env: '偏好以「人」為核心、重視團隊互助、溝通陪伴、教育引導或能直接改善他人生活的溫暖環境。',
+        careers: ['心理諮商／社工與助人專業', '企業內訓講師／課程設計', '人資夥伴（HRBP）／人才發展', '醫護照護與健康管理', '社區營造與教育專案']
+      },
+      E: {
+        code: 'E', name: '企業型', en: 'Enterprising', color: '#B8744B',
+        env: '偏好節奏明快、目標導向、充滿資源整合、說服提案與商業挑戰的舞台，享受承擔決策並看見成果。',
+        careers: ['產品經理（PM）／商業開發', '專案營運管理／團隊主管', '行銷策略／品牌公關', '業務拓展與商業談判顧問', '創業家與新事業孵化']
+      },
+      C: {
+        code: 'C', name: '常規型', en: 'Conventional', color: '#8C735B',
+        env: '偏好規則清楚、資訊條理分明、重視精確度、SOP 建立與系統化管理的穩定高效環境。',
+        careers: ['財務會計／審計與風險控管', '營運流程優化／品質管理', '資料庫管理與資訊維護', '法務合規／合約與專利管理', '專案排程控管與行政企劃']
+      }
+    };
+
+    const REPORT_TABS = [
+      { id: 'overview', label: '01 綜合總覽' },
+      { id: 'big5',     label: '02 大五人格' },
+      { id: 'jung16',   label: '03 16型傾向' },
+      { id: 'hexaco',   label: '04 HEXACO六大' },
+      { id: 'disc',     label: '05 DISC職場' },
+      { id: 'attach',   label: '06 親密依附' },
+      { id: 'riasec',   label: '07 霍蘭德職涯' }
+    ];
+
+    /**
+     * =========================================================================
+     * 3. 應用程式狀態、本機存檔與 URL Hash 編解碼（免後端分享）
+     * =========================================================================
+     */
+    const STORAGE_KEY = 'persona_archive_v3_104';
+    const TOTAL_PAGES = PAGE_RANGES.length; // 17 頁
+
+    const state = {
+      currentView: 'home',       // 'home' | 'quiz' | 'result'
+      currentPage: 0,            // 0..16
+      focusedQid: null,          // 目前焦點題目 ID (支援鍵盤 1-5)
+      answers: {},               // { [id]: 1..5 }
+      skipAttachment: false,     // 是否跳過 Q75-Q86
+      supplementingAttach: false,// 是否正在從報告跳回補測依附 12 題
+      mode: 'normal',            // 'normal' | 'sample' | 'shared'
+      activeTab: 'overview',
+      completedStagesSeen: new Set(),
+      report: null
+    };
+
+    const els = {
+      viewHome: document.getElementById('view-home'),
+      viewQuiz: document.getElementById('view-quiz'),
+      viewResult: document.getElementById('view-result'),
+      navHomeBtn: document.getElementById('nav-home-btn'),
+      headerProgressPill: document.getElementById('header-progress-pill'),
+      headerProgressText: document.getElementById('header-progress-text'),
+
+      resumeBanner: document.getElementById('resume-banner'),
+      resumeStatusText: document.getElementById('resume-status-text'),
+      btnResumeQuiz: document.getElementById('btn-resume-quiz'),
+      btnStartQuiz: document.getElementById('btn-start-quiz'),
+      btnStartLabel: document.getElementById('btn-start-label'),
+      btnPreviewSample: document.getElementById('btn-preview-sample'),
+
+      supplementModeBanner: document.getElementById('supplement-mode-banner'),
+      btnCancelSupplement: document.getElementById('btn-cancel-supplement'),
+      stageStampsBar: document.getElementById('stage-stamps-bar'),
+      quizStageBadge: document.getElementById('quiz-stage-badge'),
+      quizStageTitle: document.getElementById('quiz-stage-title'),
+      quizPageIndicator: document.getElementById('quiz-page-indicator'),
+      quizAnsweredIndicator: document.getElementById('quiz-answered-indicator'),
+      quizProgressBar: document.getElementById('quiz-progress-bar'),
+      quizStageHintText: document.getElementById('quiz-stage-hint-text'),
+      attachSkipCard: document.getElementById('attach-skip-card'),
+      btnSkipAttachment: document.getElementById('btn-skip-attachment'),
+      quizValidationBanner: document.getElementById('quiz-validation-banner'),
+      quizValidationText: document.getElementById('quiz-validation-text'),
+      quizQuestionsContainer: document.getElementById('quiz-questions-container'),
+      btnPrevPage: document.getElementById('btn-prev-page'),
+      btnNextPage: document.getElementById('btn-next-page'),
+      btnNextText: document.getElementById('btn-next-text'),
+
+      sampleModeBanner: document.getElementById('sample-mode-banner'),
+      btnStartFromSample: document.getElementById('btn-start-from-sample'),
+      sharedModeBanner: document.getElementById('shared-mode-banner'),
+      btnStartFromShared: document.getElementById('btn-start-from-shared'),
+      btnOpenShareCard: document.getElementById('btn-open-share-card'),
+      btnCopyLink: document.getElementById('btn-copy-link'),
+      btnCopySummary: document.getElementById('btn-copy-summary'),
+      btnPrintPdf: document.getElementById('btn-print-pdf'),
+      btnRetakeToolbar: document.getElementById('btn-retake-toolbar'),
+      reportTabsNav: document.getElementById('report-tabs-nav'),
+      reportPanelsContainer: document.getElementById('report-panels-container'),
+
+      shareCardModal: document.getElementById('share-card-modal'),
+      shareCardPreviewImg: document.getElementById('share-card-preview-img'),
+      btnCloseCardModal: document.getElementById('btn-close-card-modal'),
+      btnDownloadCardPng: document.getElementById('btn-download-card-png'),
+
+      toast: document.getElementById('toast-notification'),
+      toastMessage: document.getElementById('toast-message'),
+      confirmModal: document.getElementById('confirm-modal'),
+      btnCancelRetake: document.getElementById('btn-cancel-retake'),
+      btnConfirmRetake: document.getElementById('btn-confirm-retake')
+    };
+
+    function getLevelKey(pct) {
+      if (pct <= 35) return 'low';
+      if (pct <= 64) return 'mid';
+      return 'high';
+    }
+
+    let toastTimer = null;
+    function showToast(message) {
+      els.toastMessage.textContent = message;
+      els.toast.classList.remove('opacity-0', 'translate-y-3');
+      els.toast.classList.add('opacity-100', 'translate-y-0');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        els.toast.classList.add('opacity-0', 'translate-y-3');
+        els.toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2600);
+    }
+
+    function copyTextFallback(text, successMsg) {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-9999px';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, text.length);
+        const ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast(ok ? successMsg : '複製失敗，請手動選取文字');
+      } catch (e) {
+        showToast('無法存取剪貼簿');
+      }
+    }
+
+    function saveProgressToStorage() {
+      if (state.mode !== 'normal') return;
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          answers: state.answers,
+          currentPage: state.currentPage,
+          skipAttachment: state.skipAttachment,
+          savedAt: Date.now()
+        }));
+      } catch (e) {}
+    }
+
+    function loadProgressFromStorage() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed.answers === 'object') return parsed;
+      } catch (e) {}
+      return null;
+    }
+
+    function clearStorage() {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    }
+
+    // 將 104 題作答 + skipAttachment 壓縮成 48 字元 Base64URL
+    function encodeAnswersToHash(answersMap, skipAttach) {
+      const bytes = new Uint8Array(36);
+      bytes[0] = skipAttach ? 1 : 0;
+      for (let i = 0; i < 35; i++) {
+        const v0 = Number(answersMap[i * 3 + 1] || 0);
+        const v1 = Number(answersMap[i * 3 + 2] || 0);
+        const v2 = (i * 3 + 3 <= 104) ? Number(answersMap[i * 3 + 3] || 0) : 0;
+        bytes[i + 1] = v0 * 36 + v1 * 6 + v2;
+      }
+      let bin = '';
+      for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+      return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    }
+
+    function decodeHashToAnswers(hashStr) {
+      try {
+        let b64 = hashStr.replace(/-/g, '+').replace(/_/g, '/');
+        while (b64.length % 4) b64 += '=';
+        const bin = atob(b64);
+        if (bin.length !== 36) return null;
+        const skipAttach = bin.charCodeAt(0) === 1;
+        const answersMap = {};
+        let answeredCount = 0;
+        for (let i = 0; i < 35; i++) {
+          let code = bin.charCodeAt(i + 1);
+          const v0 = Math.floor(code / 36);
+          code %= 36;
+          const v1 = Math.floor(code / 6);
+          const v2 = code % 6;
+          const vals = [v0, v1, v2];
+          for (let j = 0; j < 3; j++) {
+            const qid = i * 3 + 1 + j;
+            if (qid <= 104 && vals[j] >= 1 && vals[j] <= 5) {
+              answersMap[qid] = vals[j];
+              answeredCount++;
+            }
+          }
+        }
+        if (answeredCount < 60) return null;
+        return { answers: answersMap, skipAttachment: skipAttach };
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function getShareUrl() {
+      const encoded = encodeAnswersToHash(state.answers, state.skipAttachment);
+      const base = window.location.href.split('#')[0];
+      return `${base}#r=${encoded}`;
+    }
+
+    function switchView(viewName) {
+      state.currentView = viewName;
+      els.viewHome.classList.toggle('hidden', viewName !== 'home');
+      els.viewQuiz.classList.toggle('hidden', viewName !== 'quiz');
+      els.viewResult.classList.toggle('hidden', viewName !== 'result');
+
+      if (viewName === 'quiz') {
+        els.headerProgressPill.classList.remove('hidden');
+        els.headerProgressPill.classList.add('flex');
+      } else {
+        els.headerProgressPill.classList.add('hidden');
+        els.headerProgressPill.classList.remove('flex');
+      }
+
+      if (viewName === 'home') refreshHomeResumeUI();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function refreshHomeResumeUI() {
+      const saved = loadProgressFromStorage();
+      const count = saved ? Object.keys(saved.answers || {}).length : 0;
+      if (count > 0) {
+        const targetTotal = saved.skipAttachment ? 92 : 104;
+        els.resumeBanner.classList.remove('hidden');
+        els.resumeStatusText.textContent = `偵測到上次作答進度：已完成 ${count} / ${targetTotal} 題`;
+        els.btnStartLabel.textContent = '重新開始測驗';
+      } else {
+        els.resumeBanner.classList.add('hidden');
+        els.btnStartLabel.textContent = '開始測驗（104 題）';
+      }
+    }
+
+    /**
+     * =========================================================================
+     * 4. 測驗作答介面渲染、階段印章、鍵盤快捷作答與跳過機制
+     * =========================================================================
+     */
+    function isStageCompleted(stageId) {
+      const meta = STAGES_META.find((s) => s.id === stageId);
+      if (!meta) return false;
+      if (stageId === 3 && state.skipAttachment) return true;
+      for (let id = meta.range[0]; id <= meta.range[1]; id++) {
+        if (!state.answers[id]) return false;
+      }
+      return true;
+    }
+
+    function renderStageStamps() {
+      const activeStage = PAGE_RANGES[state.currentPage].stage;
+      els.stageStampsBar.innerHTML = STAGES_META.map((st) => {
+        const done = isStageCompleted(st.id);
+        const skipped = st.id === 3 && state.skipAttachment;
+        const isCurrent = st.id === activeStage;
+        let newlyDone = false;
+        if (done && !state.completedStagesSeen.has(st.id)) {
+          state.completedStagesSeen.add(st.id);
+          newlyDone = true;
+        }
+        const badgeStyle = done
+          ? 'bg-[#A6633C] text-[#F7F3EC] border-[#A6633C]'
+          : isCurrent
+            ? 'bg-[#33251B] text-[#F7F3EC] border-[#33251B]'
+            : 'bg-[#F7F3EC] text-[#5C4738] border-[#CFC5B8]';
+        const statusLabel = skipped ? '已略過' : done ? '已完印' : isCurrent ? '作答中' : '待完成';
+        return `
+          <div class="rounded-xl border px-3 py-2 flex items-center justify-between gap-2 transition ${badgeStyle} ${newlyDone ? 'animate-stamp' : ''}">
+            <span class="font-serif font-bold text-xs truncate">${st.stamp}</span>
+            <span class="font-mono text-[10px] px-1.5 py-0.5 rounded ${done ? 'bg-[#F7F3EC]/20 text-[#F7F3EC]' : isCurrent ? 'bg-[#A6633C] text-[#F7F3EC]' : 'bg-[#E5E0D8] text-[#5C4738]'} shrink-0">${statusLabel}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function updateQuizProgress() {
+      const answeredCount = Object.keys(state.answers).filter((k) => {
+        const id = Number(k);
+        if (state.skipAttachment && id >= 75 && id <= 86) return false;
+        return state.answers[k] >= 1 && state.answers[k] <= 5;
+      }).length;
+      const effectiveTotal = state.skipAttachment ? 92 : 104;
+      const pct = Math.min(100, Math.round((answeredCount / effectiveTotal) * 100));
+
+      const pageInfo = PAGE_RANGES[state.currentPage];
+      const stageMeta = STAGES_META.find((s) => s.id === pageInfo.stage);
+
+      els.quizStageBadge.textContent = `STAGE ${stageMeta.code}`;
+      els.quizStageTitle.textContent = stageMeta.title;
+      els.quizStageHintText.textContent = stageMeta.hint;
+
+      if (state.supplementingAttach) {
+        els.quizPageIndicator.textContent = `補測第 ${state.currentPage - 11} / 2 頁`;
+        els.btnNextText.textContent = state.currentPage === 13 ? '完成補測並更新報告' : '下一頁';
+        els.btnPrevPage.disabled = state.currentPage <= 12;
+      } else {
+        els.quizPageIndicator.textContent = `第 ${state.currentPage + 1} / ${TOTAL_PAGES} 頁`;
+        els.btnNextText.textContent = state.currentPage === TOTAL_PAGES - 1 ? '生成六合一完整報告' : '下一頁';
+        els.btnPrevPage.disabled = state.currentPage === 0;
+      }
+
+      els.quizAnsweredIndicator.textContent = `已完成 ${answeredCount} / ${effectiveTotal} 題`;
+      els.headerProgressText.textContent = `${answeredCount} / ${effectiveTotal}`;
+      els.quizProgressBar.style.width = `${pct}%`;
+
+      els.supplementModeBanner.classList.toggle('hidden', !state.supplementingAttach);
+      els.attachSkipCard.classList.toggle('hidden', state.currentPage !== 12 || state.supplementingAttach);
+
+      renderStageStamps();
+    }
+
+    function renderQuizPage() {
+      els.quizValidationBanner.classList.add('hidden');
+      const { start, end } = PAGE_RANGES[state.currentPage];
+      const pageQuestions = QUESTIONS.slice(start, end);
+
+      // 設定焦點為本頁第一題未作答題，或第一題
+      const firstUnanswered = pageQuestions.find((q) => !state.answers[q.id]);
+      state.focusedQid = firstUnanswered ? firstUnanswered.id : pageQuestions[0].id;
+
+      els.quizQuestionsContainer.innerHTML = '';
+
+      pageQuestions.forEach((q) => {
+        const selectedVal = state.answers[q.id];
+        const isFocused = state.focusedQid === q.id;
+        const card = document.createElement('div');
+        card.id = `question-card-${q.id}`;
+        card.dataset.qid = String(q.id);
+        card.className = `question-card bg-[#F7F3EC] rounded-2xl border p-4 sm:p-6 transition-all duration-200 ${
+          isFocused ? 'border-[#A6633C] ring-2 ring-[#A6633C]/20 shadow-sm' : 'border-[#CFC5B8]'
+        }`;
+
+        card.innerHTML = `
+          <div class="flex items-start gap-3 mb-4">
+            <span class="inline-flex items-center justify-center px-2 h-7 rounded-lg bg-[#33251B] text-[#F7F3EC] font-mono font-bold text-xs shrink-0 mt-0.5">
+              ${q.code}
+            </span>
+            <p class="text-base sm:text-[17px] font-medium text-[#261C15] leading-relaxed pt-0.5">
+              ${q.text}
+            </p>
+          </div>
+          <div class="grid grid-cols-5 gap-1.5 sm:gap-2.5" role="radiogroup" aria-label="${q.code} 選項">
+            ${LIKERT_OPTIONS.map((opt) => {
+              const isSelected = selectedVal === opt.value;
+              const btnCls = isSelected
+                ? 'bg-[#A6633C] border-[#A6633C] text-[#F7F3EC] shadow-sm ring-2 ring-[#A6633C]/25'
+                : 'bg-[#E5E0D8]/70 hover:bg-[#DFD8CE] border-[#CFC5B8] text-[#261C15]';
+              const subCls = isSelected ? 'text-[#F7F3EC]/95' : 'text-[#5C4738]';
+              return `
+                <button
+                  type="button"
+                  data-qid="${q.id}"
+                  data-val="${opt.value}"
+                  aria-checked="${isSelected ? 'true' : 'false'}"
+                  role="radio"
+                  class="likert-btn flex flex-col items-center justify-center py-2.5 px-1 sm:py-3 sm:px-2 rounded-xl border transition-all duration-150 active:scale-95 focus:outline-none ${btnCls}"
+                >
+                  <span class="text-sm sm:text-base font-bold font-mono leading-none mb-1.5">${opt.value}</span>
+                  <span class="text-[10px] sm:text-xs font-medium leading-tight text-center ${subCls}">
+                    <span class="sm:hidden">${opt.shortLabel}</span>
+                    <span class="hidden sm:inline">${opt.label}</span>
+                  </span>
+                </button>
+              `;
+            }).join('')}
+          </div>
+        `;
+
+        card.addEventListener('click', () => setFocusedQuestion(q.id));
+        els.quizQuestionsContainer.appendChild(card);
+      });
+
+      els.quizQuestionsContainer.querySelectorAll('.likert-btn').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const qid = Number(btn.dataset.qid);
+          const val = Number(btn.dataset.val);
+          selectAnswer(qid, val, false);
+        });
+      });
+
+      updateQuizProgress();
+    }
+
+    function setFocusedQuestion(qid) {
+      state.focusedQid = qid;
+      els.quizQuestionsContainer.querySelectorAll('.question-card').forEach((c) => {
+        const cid = Number(c.dataset.qid);
+        if (cid === qid) {
+          c.classList.remove('border-[#CFC5B8]');
+          c.classList.add('border-[#A6633C]', 'ring-2', 'ring-[#A6633C]/20', 'shadow-sm');
+        } else {
+          c.classList.remove('border-[#A6633C]', 'ring-2', 'ring-[#A6633C]/20', 'shadow-sm');
+          if (!c.classList.contains('border-[#B54B3E]')) {
+            c.classList.add('border-[#CFC5B8]');
+          }
+        }
+      });
+    }
+
+    function selectAnswer(qid, val, autoAdvance) {
+      state.answers[qid] = val;
+      if (qid >= 75 && qid <= 86) state.skipAttachment = false;
+      saveProgressToStorage();
+
+      const card = document.getElementById(`question-card-${qid}`);
+      if (card) {
+        card.classList.remove('border-[#B54B3E]', 'ring-[#B54B3E]/30', 'animate-shake');
+        card.querySelectorAll('.likert-btn').forEach((b) => {
+          const isSel = Number(b.dataset.val) === val;
+          b.setAttribute('aria-checked', isSel ? 'true' : 'false');
+          const subSpan = b.querySelectorAll('span')[1];
+          if (isSel) {
+            b.className = 'likert-btn flex flex-col items-center justify-center py-2.5 px-1 sm:py-3 sm:px-2 rounded-xl border transition-all duration-150 active:scale-95 focus:outline-none bg-[#A6633C] border-[#A6633C] text-[#F7F3EC] shadow-sm ring-2 ring-[#A6633C]/25';
+            if (subSpan) { subSpan.className = 'text-[10px] sm:text-xs font-medium leading-tight text-center text-[#F7F3EC]/95'; }
+          } else {
+            b.className = 'likert-btn flex flex-col items-center justify-center py-2.5 px-1 sm:py-3 sm:px-2 rounded-xl border transition-all duration-150 active:scale-95 focus:outline-none bg-[#E5E0D8]/70 hover:bg-[#DFD8CE] border-[#CFC5B8] text-[#261C15]';
+            if (subSpan) { subSpan.className = 'text-[10px] sm:text-xs font-medium leading-tight text-center text-[#5C4738]'; }
+          }
+        });
+      }
+
+      const { start, end } = PAGE_RANGES[state.currentPage];
+      const pageQs = QUESTIONS.slice(start, end);
+      if (pageQs.every((item) => state.answers[item.id] !== undefined)) {
+        els.quizValidationBanner.classList.add('hidden');
+      }
+
+      updateQuizProgress();
+
+      // 移動焦點到本頁下一題並輕柔捲動
+      const idxOnPage = pageQs.findIndex((item) => item.id === qid);
+      if (idxOnPage >= 0 && idxOnPage < pageQs.length - 1) {
+        const nextQ = pageQs[idxOnPage + 1];
+        setFocusedQuestion(nextQ.id);
+        if (autoAdvance) {
+          const nextCard = document.getElementById(`question-card-${nextQ.id}`);
+          if (nextCard) nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }
+
+    // 鍵盤 1–5 快速作答（僅在測驗頁且未開啟 Modal 時生效）
+    document.addEventListener('keydown', (e) => {
+      if (state.currentView !== 'quiz') return;
+      if (!els.confirmModal.classList.contains('hidden')) return;
+      if (!els.shareCardModal.classList.contains('hidden')) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+      if (['1', '2', '3', '4', '5'].includes(e.key)) {
+        e.preventDefault();
+        if (state.focusedQid) {
+          selectAnswer(state.focusedQid, Number(e.key), true);
+        }
+      } else if (e.key === 'Enter') {
+        const { start, end } = PAGE_RANGES[state.currentPage];
+        const allDone = QUESTIONS.slice(start, end).every((q) => state.answers[q.id] !== undefined);
+        if (allDone) {
+          e.preventDefault();
+          handleNextPage();
+        }
+      }
+    });
+
+    function handleNextPage() {
+      const { start, end } = PAGE_RANGES[state.currentPage];
+      const pageQs = QUESTIONS.slice(start, end);
+      const missing = pageQs.filter((q) => !state.answers[q.id]);
+
+      if (missing.length > 0) {
+        els.quizValidationText.textContent = `這頁還有 ${missing.length} 題尚未作答，請完成紅框標示的題目後再繼續。`;
+        els.quizValidationBanner.classList.remove('hidden');
+        missing.forEach((q) => {
+          const card = document.getElementById(`question-card-${q.id}`);
+          if (card) {
+            card.classList.remove('border-[#CFC5B8]', 'border-[#A6633C]', 'animate-shake');
+            void card.offsetWidth;
+            card.classList.add('border-[#B54B3E]', 'ring-2', 'ring-[#B54B3E]/30', 'animate-shake');
+          }
+        });
+        const firstCard = document.getElementById(`question-card-${missing[0].id}`);
+        if (firstCard) firstCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setFocusedQuestion(missing[0].id);
+        return;
+      }
+
+      // 若在補測依附模式
+      if (state.supplementingAttach) {
+        if (state.currentPage === 12) {
+          state.currentPage = 13;
+          renderQuizPage();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          state.supplementingAttach = false;
+          state.skipAttachment = false;
+          saveProgressToStorage();
+          finishAndShowReport('attach');
+          showToast('已完成親密依附補測，報告已更新！');
+        }
+        return;
+      }
+
+      if (state.currentPage < TOTAL_PAGES - 1) {
+        state.currentPage += 1;
+        // 若使用者先前已選擇跳過依附模組，從第 12 頁直接跳到第 15 頁
+        if (state.skipAttachment && (state.currentPage === 12 || state.currentPage === 13)) {
+          state.currentPage = 14;
+        }
+        saveProgressToStorage();
+        renderQuizPage();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        finishAndShowReport('overview');
+      }
+    }
+
+    function handlePrevPage() {
+      if (state.supplementingAttach) {
+        if (state.currentPage > 12) {
+          state.currentPage = 12;
+          renderQuizPage();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        return;
+      }
+      if (state.currentPage > 0) {
+        state.currentPage -= 1;
+        if (state.skipAttachment && (state.currentPage === 13 || state.currentPage === 12)) {
+          state.currentPage = 11;
+        }
+        saveProgressToStorage();
+        renderQuizPage();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function handleSkipAttachment() {
+      state.skipAttachment = true;
+      for (let id = 75; id <= 86; id++) delete state.answers[id];
+      state.currentPage = 14; // 直接跳往第 15 頁（霍蘭德職涯）
+      saveProgressToStorage();
+      renderQuizPage();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showToast('已略過親密依附模組，直接進入職涯興趣探索');
+    }
+
+    /**
+     * =========================================================================
+     * 5. v3 精確計分引擎（單次加權、雙極獨立平均、平手偵測、品質偵測）
+     * =========================================================================
+     */
+    function calcWeightedPercent(answersMap, modelKey, dimKey) {
+      let earned = 0;
+      let maxEarned = 0;
+      QUESTIONS.forEach((q) => {
+        const w = q.m[modelKey] && q.m[modelKey][dimKey];
+        if (w === undefined) return;
+        const raw = answersMap[q.id];
+        if (!raw) return;
+        const absW = Math.abs(w);
+        earned += (w > 0 ? (raw - 1) : (5 - raw)) * absW;
+        maxEarned += 4 * absW;
+      });
+      if (maxEarned === 0) return 50;
+      return Math.round((earned / maxEarned) * 100);
+    }
+
+    function calcBipolarIndependent(answersMap, leftKey, rightKey) {
+      let sumL = 0, wL = 0;
+      let sumR = 0, wR = 0;
+      QUESTIONS.forEach((q) => {
+        const jm = q.m.jung16;
+        if (!jm) return;
+        const raw = answersMap[q.id];
+        if (!raw) return;
+        const s = (raw - 1) / 4; // 0..1
+        if (jm[leftKey] !== undefined) {
+          sumL += s * jm[leftKey];
+          wL += jm[leftKey];
+        }
+        if (jm[rightKey] !== undefined) {
+          sumR += s * jm[rightKey];
+          wR += jm[rightKey];
+        }
+      });
+      const avgL = wL > 0 ? sumL / wL : 0.5;
+      const avgR = wR > 0 ? sumR / wR : 0.5;
+      const leftPct = Math.round(((avgL + (1 - avgR)) / 2) * 100);
+      const rightPct = 100 - leftPct;
+      return {
+        leftPct,
+        rightPct,
+        winner: leftPct >= 50 ? leftKey : rightKey,
+        isFlexible: leftPct >= 45 && leftPct <= 55
+      };
+    }
+
+    function calculateFullReport(answersMap, skipAttach) {
+      // 1. 作答品質偵測 (Straight-lining Detection)
+      const vals = Object.values(answersMap).filter((v) => v >= 1 && v <= 5);
+      const n = vals.length || 1;
+      const mean = vals.reduce((a, b) => a + b, 0) / n;
+      const variance = vals.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / n;
+      const sd = Math.sqrt(variance);
+      const freq = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+      vals.forEach((v) => { freq[v] = (freq[v] || 0) + 1; });
+      const maxFreqRatio = Math.max(...Object.values(freq)) / n;
+      const qualityWarning = sd < 0.45 || maxFreqRatio >= 0.85;
+
+      // 2. 大五人格
+      const big5 = {};
+      B5_ORDER.forEach((k) => { big5[k] = calcWeightedPercent(answersMap, 'big5', k); });
+
+      // 3. 16 型人格傾向（雙極獨立平均法）
+      const axes = {
+        EI: calcBipolarIndependent(answersMap, 'E', 'I'),
+        NS: calcBipolarIndependent(answersMap, 'N', 'S'),
+        FT: calcBipolarIndependent(answersMap, 'F', 'T'),
+        JP: calcBipolarIndependent(answersMap, 'J', 'P'),
+        AT: calcBipolarIndependent(answersMap, 'A_assertive', 'T_turbulent')
+      };
+      const code4 = (axes.EI.leftPct >= 50 ? 'E' : 'I')
+                  + (axes.NS.leftPct >= 50 ? 'N' : 'S')
+                  + (axes.FT.leftPct >= 50 ? 'F' : 'T')
+                  + (axes.JP.leftPct >= 50 ? 'J' : 'P');
+      const atLetter = axes.AT.leftPct >= 50 ? 'A' : 'T';
+      const jung16 = {
+        code4,
+        atLetter,
+        fullCode: `${code4}-${atLetter}`,
+        info: JUNG16_TYPES[code4],
+        axes
+      };
+
+      // 4. HEXACO 六大人格
+      const hexaco = {};
+      HEX_ORDER.forEach((k) => { hexaco[k] = calcWeightedPercent(answersMap, 'hexaco', k); });
+
+      // 5. DISC 職場風格
+      const discRaw = {};
+      DISC_ORDER.forEach((k) => { discRaw[k] = calcWeightedPercent(answersMap, 'disc', k); });
+      const discSorted = DISC_ORDER.map((k) => ({ key: k, score: discRaw[k], meta: DISC_META[k] }))
+        .sort((a, b) => b.score - a.score);
+      const disc = {
+        raw: discRaw,
+        sorted: discSorted,
+        primary: discSorted[0],
+        secondary: discSorted[1],
+        comboLabel: `${discSorted[0].meta.name}為主・${discSorted[1].meta.name}為輔`
+      };
+
+      // 6. 親密關係依附 (ECR-12)
+      let attAnswered = 0;
+      for (let id = 75; id <= 86; id++) if (answersMap[id]) attAnswered++;
+      const isAttSkipped = skipAttach || attAnswered < 6;
+      let attach;
+      if (isAttSkipped) {
+        attach = { skipped: true };
+      } else {
+        const anx = calcWeightedPercent(answersMap, 'attach', 'anxiety');
+        const avo = calcWeightedPercent(answersMap, 'attach', 'avoidance');
+        const highAnx = anx >= 50;
+        const highAvo = avo >= 50;
+        const typeKey = !highAnx && !highAvo ? 'secure'
+          : highAnx && !highAvo ? 'anxious'
+          : !highAnx && highAvo ? 'avoidant' : 'fearful';
+        attach = {
+          skipped: false,
+          anx,
+          avo,
+          typeKey,
+          info: ATT_TYPES[typeKey],
+          anxBorder: anx >= 45 && anx <= 55,
+          avoBorder: avo >= 45 && avo <= 55
+        };
+      }
+
+      // 7. 霍蘭德職涯興趣 (RIASEC + 平手並列偵測)
+      const riaRaw = {};
+      RIA_ORDER.forEach((k) => { riaRaw[k] = calcWeightedPercent(answersMap, 'riasec', k); });
+      const riaSorted = RIA_ORDER.map((k) => ({ key: k, score: riaRaw[k], meta: RIA_META[k] }))
+        .sort((a, b) => b.score - a.score);
+      const thirdScore = riaSorted[2].score;
+      const tiedExtras = riaSorted.slice(3).filter((item) => item.score === thirdScore).map((item) => item.key);
+      const top3Pure = `${riaSorted[0].key}-${riaSorted[1].key}-${riaSorted[2].key}`;
+      const top3Display = tiedExtras.length > 0 ? `${top3Pure}（與 ${tiedExtras.join('、')} 並列）` : top3Pure;
+      const riasec = {
+        raw: riaRaw,
+        sorted: riaSorted,
+        top3Pure,
+        top3Display,
+        tiedExtras
+      };
+
+      return {
+        quality: { sd: Number(sd.toFixed(2)), maxFreqRatio: Math.round(maxFreqRatio * 100), warning: qualityWarning },
+        big5,
+        jung16,
+        hexaco,
+        disc,
+        attach,
+        riasec
+      };
+    }
+
+    /**
+     * =========================================================================
+     * 6. 動態文案引擎：一句話立體畫像 ＋ 4 組保底分層交叉洞見
+     * =========================================================================
+     */
+    function generateOneLinePersona(r) {
+      const eDesc = r.big5.E >= 65 ? '樂於互動、充滿社交活力' : r.big5.E <= 35 ? '內斂沉靜、重視獨處沉澱' : '動靜皆宜、能隨場合調節節奏';
+      const oDesc = r.big5.O >= 65 ? '富想像力與好奇心' : r.big5.O <= 35 ? '腳踏實地、重視實務落地' : '兼具創意與務實眼光';
+      const attPart = r.attach.skipped ? '' : `在親密關係中偏向「${r.attach.info.name}」，`;
+      return `你是一位${eDesc}、${oDesc}的「${r.jung16.info.title}（${r.jung16.fullCode}）」；職場上展現「${r.disc.primary.meta.name}（${r.disc.primary.key}）× ${r.disc.secondary.meta.name}（${r.disc.secondary.key}）」的協作風格，${attPart}職涯熱忱最指向「${r.riasec.sorted[0].meta.name}（${r.riasec.sorted[0].key}）」與「${r.riasec.sorted[1].meta.name}（${r.riasec.sorted[1].key}）」領域。`;
+    }
+
+    function generateCrossInsights(r) {
+      const insights = [];
+
+      // 洞見 1：社交底色 × 職場影響力
+      if (r.big5.E <= 45 && r.disc.raw.I >= 55) {
+        insights.push({
+          tag: '性格與職場反差',
+          title: '內斂底色，卻具備目的性職場影響力',
+          body: `你的大五外向性偏低（${r.big5.E}%），代表日常偏愛安靜獨處回血；但 DISC 影響型達 ${r.disc.raw.I}%，顯示你在有明確目標或熟悉專案中，仍能展現良好的說服力與團隊感染力。`
+        });
+      } else if (r.big5.E >= 60 && r.disc.raw.C >= 60) {
+        insights.push({
+          tag: '動靜互補優勢',
+          title: '熱情互動之外，依然守住嚴謹品質',
+          body: `你的大五外向性高達 ${r.big5.E}%，同時 DISC 謹慎型也達 ${r.disc.raw.C}%。這代表你既能炒熱團隊氣氛、推動討論，在收斂落地時也能回頭把關細節與數據。`
+        });
+      } else {
+        insights.push({
+          tag: '能量與協作節奏',
+          title: `日常能量（外向 ${r.big5.E}%）與職場風格（${r.disc.primary.key}-${r.disc.secondary.key}）高度一致`,
+          body: `你在私下與職場的能量模式相當連貫，不需要花費額外心力「扮演另一個角色」，只要找到符合「${r.disc.primary.meta.short}」節奏的團隊就能自然發揮。`
+        });
+      }
+
+      // 洞見 2：親和性 × HEXACO 誠實謙遜 H
+      if (r.big5.A >= 60 && r.hexaco.H >= 65) {
+        insights.push({
+          tag: '信任與原則光譜',
+          title: '高親和 × 高誠實謙遜：值得託付的長期夥伴',
+          body: `你的親和性（${r.big5.A}%）與誠實謙遜（${r.hexaco.H}%）雙雙偏高，代表你的友善並非表面應酬，而是出於真誠與公平原則；同時也提醒自己面對功利對象時要適度維護權益。`
+        });
+      } else if (r.big5.A >= 60 && r.hexaco.H <= 40) {
+        insights.push({
+          tag: '人際策略視角',
+          title: '溫和親和，同時具備務實的資源企圖心',
+          body: `你的親和性達 ${r.big5.A}%，讓周遭人感到好相處，但誠實謙遜 H 落在 ${r.hexaco.H}%，反映你在人際圓融之餘，仍保有清楚的勝負心與向上爭取資源的策略眼光。`
+        });
+      } else if (r.big5.A <= 40 && r.hexaco.H >= 65) {
+        insights.push({
+          tag: '直率與真誠組合',
+          title: '說話直率，但內心極度看重公平與真誠',
+          body: `你的大五親和性偏低（${r.big5.A}%），但誠實謙遜 H 高達 ${r.hexaco.H}%。這代表你只是不愛說客套話、傾向直指問題核心，本質上卻是非常講求誠信、不搞小動作的人。`
+        });
+      } else {
+        insights.push({
+          tag: '價值觀與人際拿捏',
+          title: `親和（${r.big5.A}%）與誠實謙遜（${r.hexaco.H}%）呈現彈性平衡`,
+          body: `你在「顧及他人感受」與「務實維護自我立場」之間取得不錯的平衡，既懂得人情世故，也能在關鍵原則上保持清醒判斷。`
+        });
+      }
+
+      // 洞見 3：情緒敏感度 × 親密關係依附（或 16 型彈性）
+      if (!r.attach.skipped) {
+        if (r.big5.N >= 60 && r.attach.typeKey === 'secure') {
+          insights.push({
+            tag: '情緒與關係對照',
+            title: '日常易感壓力，但在親密關係裡相當安穩',
+            body: `雖然你的大五神經質偏高（${r.big5.N}%），但依附落在「安全型」（焦慮 ${r.attach.anx}% / 逃避 ${r.attach.avo}%），代表你的壓力多來自生活與任務本身，而親密關係反而是你的安心避風港。`
+          });
+        } else if (r.big5.N <= 45 && (r.attach.anx >= 55 || r.attach.avo >= 55)) {
+          insights.push({
+            tag: '情緒與關係對照',
+            title: '平常冷靜抗壓，但親密關係是較敏感的領域',
+            body: `你在日常生活相對放鬆（神經質 ${r.big5.N}%），但親密依附呈現「${r.attach.info.name}」傾向。這顯示你在工作或一般社交中游刃有餘，唯獨面對最在意的人時會啟動較深的安全防線。`
+          });
+        } else {
+          insights.push({
+            tag: '情緒與安全感模式',
+            title: `神經質（${r.big5.N}%）與親密依附（${r.attach.info.name}）相互呼應`,
+            body: `你面對日常壓力的警覺度，與親密關係中的互動模式（焦慮 ${r.attach.anx}% / 逃避 ${r.attach.avo}%）脈絡一致；建立穩定的自我安撫與透明溝通習慣，能同時提升生活與感情品質。`
+          });
+        }
+      } else {
+        const flexAxes = Object.entries(r.jung16.axes).filter(([, v]) => v.isFlexible).map(([k]) => k);
+        insights.push({
+          tag: '性格彈性光譜',
+          title: flexAxes.length > 0 ? `共有 ${flexAxes.length} 組維度處於「高度彈性雙棲」區間` : '五大維度傾向清晰明確',
+          body: flexAxes.length > 0
+            ? `你在 ${flexAxes.join('、')} 軸的分數落在 45%–55% 之間，代表你並不被單一性格標籤綁死，能依任務需求在兩種模式間靈活切換。`
+            : `你在多數光譜上都有鮮明的個人偏好，清楚知道自己在什麼樣的節奏與環境下最能穩定發揮。`
+        });
+      }
+
+      // 洞見 4：盡責性 × 霍蘭德職涯落地路徑
+      const topRia = r.riasec.sorted[0];
+      const secRia = r.riasec.sorted[1];
+      if (r.big5.C >= 60) {
+        insights.push({
+          tag: '職涯落地建議',
+          title: `高自律執行力（${r.big5.C}%）加持「${topRia.meta.name} × ${secRia.meta.name}」優勢`,
+          body: `你的職涯興趣集中在 ${r.riasec.top3Pure}，加上偏高的盡責性（${r.big5.C}%），代表你不只對「${topRia.meta.name}」有熱情，更有能力將興趣轉化為長期深耕的專業成果與可信賴的職涯護城河。`
+        });
+      } else if (r.big5.C <= 40) {
+        insights.push({
+          tag: '職涯環境配適',
+          title: `高彈性節奏（盡責 ${r.big5.C}%）適合自由度高的「${topRia.meta.name}」舞台`,
+          body: `你對「${topRia.meta.name}（${topRia.score}%）」與「${secRia.meta.name}（${secRia.score}%）」最有動力，建議優先挑選節奏彈性、允許臨場發揮的工作環境，並透過外部排程工具輔助瑣碎行政細節。`
+        });
+      } else {
+        insights.push({
+          tag: '職涯環境配適',
+          title: `以「${topRia.meta.name}（${topRia.key}）」為核心，結合「${r.disc.primary.meta.name}」職場優勢`,
+          body: `你的興趣主軸指向「${topRia.meta.name} × ${secRia.meta.name}」，搭配「${r.disc.primary.meta.short}」的行為風格與適中的自律彈性（盡責 ${r.big5.C}%），很適合能同時發揮興趣與實務影響力的角色。`
+        });
+      }
+
+      return insights;
+    }
+
+    /**
+     * =========================================================================
+     * 7. 大地色系 SVG 視覺化圖表（放大 viewBox 留白防裁切）
+     * =========================================================================
+     */
+    function buildRadarSVG(itemsList, ariaLabel) {
+      const size = 440;
+      const cx = 220;
+      const cy = 220;
+      const maxR = 128;
+      const count = itemsList.length;
+      const levels = [25, 50, 75, 100];
+
+      const pt = (i, r) => {
+        const angle = (-Math.PI / 2) + (i * 2 * Math.PI) / count;
+        return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
+      };
+
+      const grids = levels.map((lvl) => {
+        const r = (lvl / 100) * maxR;
+        const pts = itemsList.map((_, i) => {
+          const p = pt(i, r);
+          return `${p.x.toFixed(1)},${p.y.toFixed(1)}`;
+        }).join(' ');
+        return `<polygon points="${pts}" fill="${lvl === 100 ? '#F7F3EC' : 'none'}" stroke="#CFC5B8" stroke-width="${lvl === 100 ? '1.5' : '1'}" stroke-dasharray="${lvl === 100 ? '' : '3,3'}" />`;
+      }).join('');
+
+      const axes = itemsList.map((_, i) => {
+        const p = pt(i, maxR);
+        return `<line x1="${cx}" y1="${cy}" x2="${p.x.toFixed(1)}" y2="${p.y.toFixed(1)}" stroke="#CFC5B8" stroke-width="1" />`;
+      }).join('');
+
+      const dataPts = itemsList.map((it, i) => pt(i, (Math.max(it.score, 6) / 100) * maxR));
+      const polyStr = dataPts.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+
+      const dots = itemsList.map((it, i) => {
+        const p = dataPts[i];
+        return `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="5.5" fill="${it.color || '#A6633C'}" stroke="#F7F3EC" stroke-width="2" />`;
+      }).join('');
+
+      const labels = itemsList.map((it, i) => {
+        const angle = (-Math.PI / 2) + (i * 2 * Math.PI) / count;
+        const cosA = Math.cos(angle);
+        const sinA = Math.sin(angle);
+        const lx = cx + (maxR + 28) * cosA;
+        const ly = cy + (maxR + 24) * sinA;
+        let anchor = 'middle';
+        if (cosA > 0.25) anchor = 'start';
+        else if (cosA < -0.25) anchor = 'end';
+        const yOffset = sinA < -0.6 ? -6 : sinA > 0.6 ? 10 : 0;
+
+        return `
+          <g>
+            <text x="${lx.toFixed(1)}" y="${(ly + yOffset).toFixed(1)}" text-anchor="${anchor}" fill="#261C15" font-size="13" font-weight="700" font-family="Noto Sans TC, sans-serif">${it.label}</text>
+            <text x="${lx.toFixed(1)}" y="${(ly + yOffset + 17).toFixed(1)}" text-anchor="${anchor}" fill="#A6633C" font-size="13" font-weight="700" font-family="monospace">${it.score}%</text>
+          </g>
+        `;
+      }).join('');
+
+      return `
+        <svg viewBox="0 0 ${size} ${size}" class="w-full h-auto max-w-[390px] mx-auto" role="img" aria-label="${ariaLabel}">
+          ${grids}
+          ${axes}
+          <text x="${cx + 5}" y="${cy - maxR * 0.5 + 4}" fill="#8C735B" font-size="10" font-family="monospace">50%</text>
+          <text x="${cx + 5}" y="${cy - maxR + 12}" fill="#8C735B" font-size="10" font-family="monospace">100%</text>
+          <polygon points="${polyStr}" fill="rgba(166, 99, 60, 0.22)" stroke="#33251B" stroke-width="2.2" stroke-linejoin="round" />
+          ${dots}
+          ${labels}
+        </svg>
+      `;
+    }
+
+    function buildAttachmentScatterSVG(anx, avo) {
+      const W = 400, H = 360;
+      const padL = 56, padR = 30, padT = 32, padB = 52;
+      const plotW = W - padL - padR;
+      const plotH = H - padT - padB;
+      const midX = padL + plotW / 2;
+      const midY = padT + plotH / 2;
+      const dotX = padL + (anx / 100) * plotW;
+      const dotY = padT + ((100 - avo) / 100) * plotH;
+
+      return `
+        <svg viewBox="0 0 ${W} ${H}" class="w-full h-auto max-w-[380px] mx-auto" role="img" aria-label="親密關係依附四象限散點圖">
+          <!-- 四象限淡底 -->
+          <rect x="${padL}" y="${padT}" width="${plotW / 2}" height="${plotH / 2}" fill="#E5E0D8" opacity="0.55" />
+          <rect x="${midX}" y="${padT}" width="${plotW / 2}" height="${plotH / 2}" fill="#F4DFDC" opacity="0.55" />
+          <rect x="${padL}" y="${midY}" width="${plotW / 2}" height="${plotH / 2}" fill="#E3EDE8" opacity="0.65" />
+          <rect x="${midX}" y="${midY}" width="${plotW / 2}" height="${plotH / 2}" fill="#F6E9DC" opacity="0.65" />
+
+          <!-- 外框與 50% 十字虛線 -->
+          <rect x="${padL}" y="${padT}" width="${plotW}" height="${plotH}" fill="none" stroke="#8C735B" stroke-width="1.5" />
+          <line x1="${midX}" y1="${padT}" x2="${midX}" y2="${padT + plotH}" stroke="#8C735B" stroke-width="1.2" stroke-dasharray="5,4" />
+          <line x1="${padL}" y1="${midY}" x2="${padL + plotW}" y2="${midY}" stroke="#8C735B" stroke-width="1.2" stroke-dasharray="5,4" />
+
+          <!-- 象限標籤 -->
+          <text x="${padL + 10}" y="${padT + 20}" fill="#5C4738" font-size="12" font-weight="700">逃避型</text>
+          <text x="${padL + plotW - 10}" y="${padT + 20}" text-anchor="end" fill="#B54B3E" font-size="12" font-weight="700">恐懼逃避型</text>
+          <text x="${padL + 10}" y="${padT + plotH - 12}" fill="#4A6B5D" font-size="12" font-weight="700">安全型</text>
+          <text x="${padL + plotW - 10}" y="${padT + plotH - 12}" text-anchor="end" fill="#A6633C" font-size="12" font-weight="700">焦慮型</text>
+
+          <!-- 軸線標題與刻度 -->
+          <text x="${midX}" y="${H - 12}" text-anchor="middle" fill="#261C15" font-size="12" font-weight="700">焦慮依附程度 (${anx}%) →</text>
+          <text x="18" y="${midY}" text-anchor="middle" fill="#261C15" font-size="12" font-weight="700" transform="rotate(-90 18 ${midY})">逃避依附程度 (${avo}%) →</text>
+          <text x="${padL}" y="${padT + plotH + 16}" fill="#8C735B" font-size="10" font-family="monospace">0%</text>
+          <text x="${midX}" y="${padT + plotH + 16}" text-anchor="middle" fill="#8C735B" font-size="10" font-family="monospace">50%</text>
+          <text x="${padL + plotW}" y="${padT + plotH + 16}" text-anchor="end" fill="#8C735B" font-size="10" font-family="monospace">100%</text>
+
+          <!-- 使用者落點與輔助引線 -->
+          <line x1="${dotX.toFixed(1)}" y1="${padT + plotH}" x2="${dotX.toFixed(1)}" y2="${dotY.toFixed(1)}" stroke="#A6633C" stroke-width="1" stroke-dasharray="2,2" />
+          <line x1="${padL}" y1="${dotY.toFixed(1)}" x2="${dotX.toFixed(1)}" y2="${dotY.toFixed(1)}" stroke="#A6633C" stroke-width="1" stroke-dasharray="2,2" />
+          <circle cx="${dotX.toFixed(1)}" cy="${dotY.toFixed(1)}" r="12" fill="rgba(166, 99, 60, 0.22)" />
+          <circle cx="${dotX.toFixed(1)}" cy="${dotY.toFixed(1)}" r="6.5" fill="#A6633C" stroke="#F7F3EC" stroke-width="2.2" />
+        </svg>
+      `;
+    }
+
+    /**
+     * =========================================================================
+     * 8. 7 分頁報告渲染引擎（支援螢幕切換 ＋ 列印自動全展開）
+     * =========================================================================
+     */
+    function setActiveReportTab(tabId) {
+      state.activeTab = tabId;
+      els.reportTabsNav.querySelectorAll('.tab-btn').forEach((btn) => {
+        const isAct = btn.dataset.tab === tabId;
+        btn.setAttribute('aria-selected', isAct ? 'true' : 'false');
+        btn.className = `tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition shrink-0 ${
+          isAct ? 'bg-[#A6633C] text-[#F7F3EC] shadow-sm' : 'text-[#E5E0D8] hover:bg-[#4A382B]'
+        }`;
+      });
+      els.reportPanelsContainer.querySelectorAll('.report-panel').forEach((panel) => {
+        panel.classList.toggle('is-hidden-tab', panel.dataset.panel !== tabId);
+      });
+    }
+
+    function renderResultDashboard(r) {
+      state.report = r;
+      els.sampleModeBanner.classList.toggle('hidden', state.mode !== 'sample');
+      els.sharedModeBanner.classList.toggle('hidden', state.mode !== 'shared');
+
+      // 渲染 7 個分頁按鈕
+      els.reportTabsNav.innerHTML = REPORT_TABS.map((t) => `
+        <button type="button" role="tab" data-tab="${t.id}" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition shrink-0">
+          ${t.label}
+        </button>
+      `).join('');
+
+      els.reportTabsNav.querySelectorAll('.tab-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          setActiveReportTab(btn.dataset.tab);
+          window.scrollTo({ top: 140, behavior: 'smooth' });
+        });
+      });
+
+      const portrait = generateOneLinePersona(r);
+      const insights = generateCrossInsights(r);
+
+      // --- Panel 1: 綜合總覽 ---
+      const panelOverview = `
+        <div class="report-panel space-y-5" data-panel="overview">
+          <!-- 復古票券總覽封面卡 -->
+          <div class="bg-[#E5E0D8] rounded-2xl overflow-hidden text-[#261C15]">
+            <div class="flex flex-col md:flex-row">
+              <div class="flex-1 p-5 sm:p-7">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <span class="font-editorial italic font-bold text-sm text-[#A6633C] tracking-wider">PERSONAL ARCHIVE SUMMARY</span>
+                  <span class="text-[11px] font-mono font-bold text-[#5C4738]">NO.2026104</span>
+                </div>
+                <h2 class="font-serif font-black text-2xl sm:text-3xl text-[#261C15] leading-snug mb-3">
+                  ${r.jung16.fullCode}・${r.jung16.info.title}
+                </h2>
+                <p class="text-sm sm:text-base text-[#261C15] leading-relaxed bg-[#F7F3EC] rounded-xl p-4 border border-[#CFC5B8]">
+                  ${portrait}
+                </p>
+                <p class="mt-3 text-[11px] text-[#5C4738]">
+                  ※ 判讀提醒：本報告百分比為「個人量表同意度光譜」（35% / 65% 為絕對光譜門檻），<strong>並非與大眾常模比較之百分等級（PR 值）</strong>，高分低分無優劣之分。
+                </p>
+              </div>
+              <div class="md:w-48 bg-[#DFD8CE]/75 p-5 flex flex-col justify-between ticket-perforation-h md:border-t-0 md:ticket-perforation-v">
+                <div class="space-y-2">
+                  <div class="text-[10px] font-bold tracking-widest text-[#A6633C] uppercase">TOP SIGNATURE</div>
+                  <div class="text-sm font-bold text-[#261C15]">職場：${r.disc.primary.key}-${r.disc.secondary.key}</div>
+                  <div class="text-sm font-bold text-[#261C15]">職涯：${r.riasec.top3Pure}</div>
+                  <div class="text-sm font-bold text-[#261C15]">誠實 H：${r.hexaco.H}%</div>
+                  <div class="text-sm font-bold text-[#261C15]">依附：${r.attach.skipped ? '未施測' : r.attach.info.name.replace('依附', '')}</div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-[#8C735B]/40 text-[11px] text-[#5C4738]">
+                  點選下方任一卡片即可跳轉檢視該量表圖表與完整解析。
+                </div>
+              </div>
+            </div>
+          </div>
+
+          ${r.quality.warning ? `
+            <div class="rounded-2xl bg-[#F9EAE7] border border-[#B54B3E] p-4 text-xs sm:text-sm text-[#7D261C] flex items-start gap-2.5">
+              <span class="font-bold shrink-0">作答品質提醒：</span>
+              <span>系統偵測到你的作答集中於單一選項（標準差 SD = ${r.quality.sd}，單一選項佔比 ${r.quality.maxFreqRatio}%），可能使各維度區辨度偏低；建議有空時以更貼近真實差異的直覺重新作答。</span>
+            </div>
+          ` : ''}
+
+          <!-- 6 張核心摘要卡（可點擊跳轉分頁） -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+            <button type="button" data-jump="big5" class="jump-card text-left bg-[#F7F3EC] hover:bg-[#FFFFFF] rounded-2xl p-4 border border-[#CFC5B8] transition shadow-xs">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-[#A6633C]">01 大五人格</span>
+                <span class="text-[11px] text-[#5C4738]">查看雷達圖 →</span>
+              </div>
+              <div class="font-serif font-bold text-base text-[#261C15] mb-2">O${r.big5.O}・C${r.big5.C}・E${r.big5.E}・A${r.big5.A}・N${r.big5.N}</div>
+              <p class="text-xs text-[#5C4738]">最顯著特質：${B5_META[B5_ORDER.slice().sort((a,b)=>r.big5[b]-r.big5[a])[0]].name} (${Math.max(...B5_ORDER.map(k=>r.big5[k]))}%)</p>
+            </button>
+
+            <button type="button" data-jump="jung16" class="jump-card text-left bg-[#F7F3EC] hover:bg-[#FFFFFF] rounded-2xl p-4 border border-[#CFC5B8] transition shadow-xs">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-[#A6633C]">02 16 型人格傾向</span>
+                <span class="text-[11px] text-[#5C4738]">查看五軸光譜 →</span>
+              </div>
+              <div class="font-serif font-bold text-base text-[#261C15] mb-2">${r.jung16.fullCode}（${r.jung16.info.title}）</div>
+              <p class="text-xs text-[#5C4738] line-clamp-2">${r.jung16.info.desc}</p>
+            </button>
+
+            <button type="button" data-jump="hexaco" class="jump-card text-left bg-[#F7F3EC] hover:bg-[#FFFFFF] rounded-2xl p-4 border border-[#CFC5B8] transition shadow-xs">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-[#A6633C]">03 HEXACO 六大人格</span>
+                <span class="text-[11px] text-[#5C4738]">誠實謙遜專區 →</span>
+              </div>
+              <div class="font-serif font-bold text-base text-[#261C15] mb-2">誠實與謙遜 H：${r.hexaco.H}%</div>
+              <p class="text-xs text-[#5C4738]">${HEX_H_DEEP[getLevelKey(r.hexaco.H)].title}</p>
+            </button>
+
+            <button type="button" data-jump="disc" class="jump-card text-left bg-[#F7F3EC] hover:bg-[#FFFFFF] rounded-2xl p-4 border border-[#CFC5B8] transition shadow-xs">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-[#A6633C]">04 DISC 職場風格</span>
+                <span class="text-[11px] text-[#5C4738]">溝通與壓力 →</span>
+              </div>
+              <div class="font-serif font-bold text-base text-[#261C15] mb-2">${r.disc.primary.key}-${r.disc.secondary.key} 型</div>
+              <p class="text-xs text-[#5C4738]">${r.disc.comboLabel}</p>
+            </button>
+
+            <button type="button" data-jump="attach" class="jump-card text-left bg-[#F7F3EC] hover:bg-[#FFFFFF] rounded-2xl p-4 border border-[#CFC5B8] transition shadow-xs">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-[#A6633C]">05 親密關係依附</span>
+                <span class="text-[11px] text-[#5C4738]">${r.attach.skipped ? '可隨時補測 →' : '四象限散點 →'}</span>
+              </div>
+              <div class="font-serif font-bold text-base text-[#261C15] mb-2">${r.attach.skipped ? '本次未作答' : r.attach.info.name}</div>
+              <p class="text-xs text-[#5C4738]">${r.attach.skipped ? '點此進入可隨時補填 12 題' : `焦慮 ${r.attach.anx}% × 逃避 ${r.attach.avo}%`}</p>
+            </button>
+
+            <button type="button" data-jump="riasec" class="jump-card text-left bg-[#F7F3EC] hover:bg-[#FFFFFF] rounded-2xl p-4 border border-[#CFC5B8] transition shadow-xs">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-[#A6633C]">06 霍蘭德職涯興趣</span>
+                <span class="text-[11px] text-[#5C4738]">職涯方向 →</span>
+              </div>
+              <div class="font-serif font-bold text-base text-[#261C15] mb-2">專屬三碼：${r.riasec.top3Pure}</div>
+              <p class="text-xs text-[#5C4738]">${r.riasec.sorted[0].meta.name} (${r.riasec.sorted[0].score}%) × ${r.riasec.sorted[1].meta.name} (${r.riasec.sorted[1].score}%)</p>
+            </button>
+          </div>
+
+          <!-- 4 組跨量表交叉洞見 -->
+          <div class="bg-[#F7F3EC] rounded-2xl p-5 sm:p-6 border border-[#CFC5B8]">
+            <div class="flex items-baseline justify-between gap-2 pb-3 mb-4 border-b border-[#CFC5B8]">
+              <h3 class="font-serif font-black text-lg sm:text-xl text-[#261C15]">跨量表交叉亮點與深度洞見</h3>
+              <span class="font-editorial italic text-xs text-[#A6633C] tracking-wider uppercase">CROSS-MODEL INSIGHTS</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+              ${insights.map((ins, i) => `
+                <div class="avoid-break rounded-xl bg-[#E5E0D8]/60 border border-[#CFC5B8] p-4 space-y-1.5">
+                  <div class="flex items-center gap-2">
+                    <span class="w-5 h-5 rounded-full bg-[#33251B] text-[#F7F3EC] font-mono text-[10px] font-bold flex items-center justify-center">0${i + 1}</span>
+                    <span class="text-[11px] font-bold text-[#A6633C]">${ins.tag}</span>
+                  </div>
+                  <div class="font-serif font-bold text-sm sm:text-base text-[#261C15]">${ins.title}</div>
+                  <p class="text-xs sm:text-sm text-[#5C4738] leading-relaxed">${ins.body}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+
+      // --- Panel 2: 大五人格 ---
+      const b5Radar = buildRadarSVG(
+        B5_ORDER.map((k) => ({ label: k === 'N' ? '情緒敏感 N' : `${B5_META[k].name} ${k}`, score: r.big5[k], color: B5_META[k].color })),
+        '大五人格五邊形雷達圖'
+      );
+      const panelBig5 = `
+        <div class="report-panel space-y-5" data-panel="big5">
+          <div class="bg-[#F7F3EC] rounded-2xl p-5 sm:p-7 border border-[#CFC5B8]">
+            <div class="text-center mb-4">
+              <span class="font-editorial italic text-xs font-bold tracking-widest text-[#A6633C] uppercase">MODULE 01 • IPIP-50</span>
+              <h3 class="font-serif font-black text-2xl text-[#261C15] mt-1">大五人格光譜（Big Five）</h3>
+              <p class="text-xs sm:text-sm text-[#5C4738] mt-1">現代心理學信效度最高之人格架構；分數為個人同意度光譜，非大眾常模。</p>
+            </div>
+            <div class="my-2">${b5Radar}</div>
+          </div>
+
+          <div class="space-y-4">
+            ${B5_ORDER.map((k) => {
+              const meta = B5_META[k];
+              const pct = r.big5[k];
+              const lv = meta.levels[getLevelKey(pct)];
+              return `
+                <article class="avoid-break bg-[#F7F3EC] rounded-2xl p-5 sm:p-6 border border-[#CFC5B8] space-y-4">
+                  <div class="flex flex-wrap items-start justify-between gap-2">
+                    <div>
+                      <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-lg text-[#F7F3EC] font-mono text-xs font-bold flex items-center justify-center" style="background:${meta.color};">${meta.code}</span>
+                        <h4 class="font-serif font-bold text-lg text-[#261C15]">${meta.name}</h4>
+                        <span class="text-xs text-[#8C735B] font-editorial italic">${meta.en}</span>
+                      </div>
+                      <p class="text-xs text-[#5C4738] mt-1">${meta.summary}</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="px-2.5 py-1 rounded-full bg-[#E5E0D8] text-[#261C15] text-xs font-bold">${lv.badge}</span>
+                      <span class="font-mono font-bold text-2xl text-[#A6633C]">${pct}%</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="w-full h-2.5 bg-[#E5E0D8] rounded-full overflow-hidden">
+                      <div class="h-full rounded-full" style="width:${pct}%; background:${meta.color};"></div>
+                    </div>
+                    <div class="flex justify-between text-[11px] font-medium text-[#5C4738] mt-1.5">
+                      <span>← ${meta.left} (0%)</span>
+                      <span>${meta.right} (100%) →</span>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm leading-relaxed">
+                    <div class="rounded-xl bg-[#E5E0D8]/55 p-3.5 border border-[#CFC5B8]/80">
+                      <div class="font-bold text-[#261C15] mb-1">特質表現</div>
+                      <p class="text-[#5C4738]">${lv.trait}</p>
+                    </div>
+                    <div class="rounded-xl bg-[#E5E0D8]/55 p-3.5 border border-[#CFC5B8]/80">
+                      <div class="font-bold text-[#4A6B5D] mb-1">潛在優勢</div>
+                      <p class="text-[#5C4738]">${lv.strength}</p>
+                    </div>
+                    <div class="rounded-xl bg-[#E5E0D8]/55 p-3.5 border border-[#CFC5B8]/80">
+                      <div class="font-bold text-[#A6633C] mb-1">日常提醒</div>
+                      <p class="text-[#5C4738]">${lv.reminder}</p>
+                    </div>
+                  </div>
+                </article>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+
+      // --- Panel 3: 16 型人格傾向 ---
+      const jungAxesRows = [
+        { key: 'EI', left: '外向 (E)', right: '內向 (I)', data: r.jung16.axes.EI, desc: '能量來源與社交互動偏好' },
+        { key: 'NS', left: '直覺 (N)', right: '實感 (S)', data: r.jung16.axes.NS, desc: '接收資訊偏重抽象靈感或具體經驗' },
+        { key: 'FT', left: '情感 (F)', right: '思考 (T)', data: r.jung16.axes.FT, desc: '決策考量偏重同理價值或客觀邏輯' },
+        { key: 'JP', left: '判斷 (J)', right: '感知 (P)', data: r.jung16.axes.JP, desc: '生活步調偏重計畫條理或彈性即興' },
+        { key: 'AT', left: '平穩自信 (A)', right: '敏銳警覺 (T)', data: r.jung16.axes.AT, desc: '面對壓力與不確定性時的情緒反應' }
+      ];
+      const panelJung16 = `
+        <div class="report-panel space-y-5" data-panel="jung16">
+          <div class="bg-[#F7F3EC] rounded-2xl p-5 sm:p-7 border border-[#CFC5B8]">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#CFC5B8]">
+              <div>
+                <span class="font-editorial italic text-xs font-bold tracking-widest text-[#A6633C] uppercase">MODULE 02 • JUNGIAN 16-TYPE SPECTRUM</span>
+                <h3 class="font-serif font-black text-2xl sm:text-3xl text-[#261C15] mt-1">${r.jung16.fullCode}・${r.jung16.info.title}</h3>
+                <p class="text-sm text-[#5C4738] mt-1.5 leading-relaxed">${r.jung16.info.desc}</p>
+              </div>
+              <div class="px-5 py-3 rounded-2xl bg-[#33251B] text-[#F7F3EC] text-center shrink-0">
+                <div class="font-mono font-bold text-2xl tracking-wider">${r.jung16.fullCode}</div>
+                <div class="text-[11px] text-[#CFC5B8] mt-0.5">雙極獨立平均演算</div>
+              </div>
+            </div>
+
+            <div class="space-y-5 mt-6">
+              ${jungAxesRows.map((ax) => {
+                const leftWin = ax.data.leftPct >= 50;
+                return `
+                  <div class="avoid-break space-y-2">
+                    <div class="flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
+                      <span class="${leftWin ? 'font-bold text-[#261C15]' : 'text-[#5C4738]'}">${ax.left} <span class="font-mono">${ax.data.leftPct}%</span></span>
+                      <div class="flex items-center gap-2">
+                        <span class="text-[11px] text-[#8C735B] hidden sm:inline">${ax.desc}</span>
+                        ${ax.data.isFlexible ? '<span class="px-2 py-0.5 rounded-full bg-[#A6633C]/15 text-[#A6633C] text-[10px] font-bold">高度彈性雙棲</span>' : ''}
+                      </div>
+                      <span class="${!leftWin ? 'font-bold text-[#261C15]' : 'text-[#5C4738]'}"><span class="font-mono">${ax.data.rightPct}%</span> ${ax.right}</span>
+                    </div>
+                    <div class="relative w-full h-3 bg-[#E5E0D8] rounded-full overflow-hidden flex">
+                      <div class="h-full transition-all duration-500 ${leftWin ? 'bg-[#A6633C]' : 'bg-[#CFC5B8]'}" style="width:${ax.data.leftPct}%;"></div>
+                      <div class="h-full transition-all duration-500 ${!leftWin ? 'bg-[#33251B]' : 'bg-[#E5E0D8]'}" style="width:${ax.data.rightPct}%;"></div>
+                      <div class="absolute top-0 bottom-0 left-1/2 w-0.5 bg-[#F7F3EC]"></div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+
+            <div class="mt-6 rounded-xl bg-[#E5E0D8]/60 border border-[#CFC5B8] p-4 text-xs text-[#5C4738] leading-relaxed">
+              ※ 本模組採用<strong>雙極獨立平均法</strong>（克服各軸題數不對稱偏差），並納入正向思考 (T) 與正向感知 (P) 補強題。凡落於 45%–55% 之維度皆會標註「高度彈性雙棲」，代表你會依場合切換，請勿以單一字母自我設限。
+            </div>
+          </div>
+        </div>
+      `;
+
+      // --- Panel 4: HEXACO 六大人格 ---
+      const hexRadar = buildRadarSVG(
+        HEX_ORDER.map((k) => ({ label: `${HEX_META[k].name} ${HEX_META[k].code}`, score: r.hexaco[k], color: HEX_META[k].color })),
+        'HEXACO 六邊形雷達圖'
+      );
+      const hDeep = HEX_H_DEEP[getLevelKey(r.hexaco.H)];
+      const panelHexaco = `
+        <div class="report-panel space-y-5" data-panel="hexaco">
+          <div class="bg-[#F7F3EC] rounded-2xl p-5 sm:p-7 border border-[#CFC5B8]">
+            <div class="text-center mb-4">
+              <span class="font-editorial italic text-xs font-bold tracking-widest text-[#A6633C] uppercase">MODULE 03 • HEXACO-60 MODEL</span>
+              <h3 class="font-serif font-black text-2xl text-[#261C15] mt-1">HEXACO 六大人格分析</h3>
+              <p class="text-xs sm:text-sm text-[#5C4738] mt-1">在大五人格之外獨立納入第六維度「誠實與謙遜 (H)」，呈現更完整的價值底線。</p>
+            </div>
+            <div class="my-2">${hexRadar}</div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
+              ${HEX_ORDER.map((k) => {
+                const m = HEX_META[k];
+                const pct = r.hexaco[k];
+                return `
+                  <div class="avoid-break rounded-xl bg-[#E5E0D8]/55 border border-[#CFC5B8] p-3.5">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="font-serif font-bold text-sm text-[#261C15]">${m.name} (${m.code})</span>
+                      <span class="font-mono font-bold text-base text-[#A6633C]">${pct}%</span>
+                    </div>
+                    <div class="w-full h-2 bg-[#F7F3EC] rounded-full overflow-hidden mb-2">
+                      <div class="h-full rounded-full" style="width:${pct}%; background:${m.color};"></div>
+                    </div>
+                    <p class="text-xs text-[#5C4738] leading-relaxed">${m.desc}</p>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          <!-- 誠實與謙遜 (H) 深度解析專區 -->
+          <div class="avoid-break bg-[#F7F3EC] rounded-2xl p-5 sm:p-6 border-2 border-[#A6633C]/70 space-y-3.5">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[#CFC5B8]">
+              <div>
+                <span class="text-[11px] font-bold tracking-widest text-[#A6633C] uppercase">HONESTY-HUMILITY DEEP DIVE</span>
+                <h4 class="font-serif font-black text-lg sm:text-xl text-[#261C15]">誠實與謙遜 (H) 深度剖析：${r.hexaco.H}%</h4>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-[#A6633C] text-[#F7F3EC] text-xs font-bold">${hDeep.title}</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm leading-relaxed">
+              <div class="rounded-xl bg-[#E5E0D8]/60 p-3.5">
+                <div class="font-bold text-[#261C15] mb-1">價值觀與名利態度</div>
+                <p class="text-[#5C4738]">${hDeep.values}</p>
+              </div>
+              <div class="rounded-xl bg-[#E5E0D8]/60 p-3.5">
+                <div class="font-bold text-[#261C15] mb-1">職場誠信與互動</div>
+                <p class="text-[#5C4738]">${hDeep.integrity}</p>
+              </div>
+              <div class="rounded-xl bg-[#E5E0D8]/60 p-3.5">
+                <div class="font-bold text-[#261C15] mb-1">自我保護與界線</div>
+                <p class="text-[#5C4738]">${hDeep.boundaries}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // --- Panel 5: DISC 職場風格 ---
+      const pDisc = r.disc.primary.meta;
+      const sDisc = r.disc.secondary.meta;
+      const panelDisc = `
+        <div class="report-panel space-y-5" data-panel="disc">
+          <div class="bg-[#F7F3EC] rounded-2xl p-5 sm:p-7 border border-[#CFC5B8] space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#CFC5B8]">
+              <div>
+                <span class="font-editorial italic text-xs font-bold tracking-widest text-[#A6633C] uppercase">MODULE 04 • WORKPLACE BEHAVIOR</span>
+                <h3 class="font-serif font-black text-2xl text-[#261C15] mt-1">DISC 職場行為風格</h3>
+                <p class="text-xs sm:text-sm text-[#5C4738] mt-1">結合性格基底與 10 題職場情境補強，剖析你的團隊協作與壓力反應。</p>
+              </div>
+              <div class="px-4 py-2.5 rounded-2xl bg-[#33251B] text-[#F7F3EC] text-center shrink-0">
+                <div class="font-mono font-bold text-xl">${r.disc.primary.key}-${r.disc.secondary.key} 型</div>
+                <div class="text-[11px] text-[#CFC5B8]">${r.disc.comboLabel}</div>
+              </div>
+            </div>
+
+            <!-- 4 條百分比長條圖 -->
+            <div class="space-y-4">
+              ${DISC_ORDER.map((k) => {
+                const m = DISC_META[k];
+                const pct = r.disc.raw[k];
+                const isTop = k === r.disc.primary.key;
+                return `
+                  <div>
+                    <div class="flex items-center justify-between text-sm mb-1.5">
+                      <span class="font-bold text-[#261C15]">${m.name} (${m.code})・${m.short} ${isTop ? '<span class="ml-1.5 px-2 py-0.5 rounded bg-[#A6633C] text-[#F7F3EC] text-[10px]">主風格</span>' : ''}</span>
+                      <span class="font-mono font-bold text-[#33251B]">${pct}%</span>
+                    </div>
+                    <div class="w-full h-3 bg-[#E5E0D8] rounded-full overflow-hidden">
+                      <div class="h-full rounded-full" style="width:${pct}%; background:${m.color};"></div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+
+            <!-- 主輔風格實戰建議 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs sm:text-sm leading-relaxed">
+              <div class="avoid-break rounded-xl bg-[#E5E0D8]/60 border border-[#CFC5B8] p-4">
+                <div class="font-serif font-bold text-[#261C15] mb-1.5">溝通偏好（${pDisc.name}）</div>
+                <p class="text-[#5C4738]">${pDisc.comm}</p>
+              </div>
+              <div class="avoid-break rounded-xl bg-[#E5E0D8]/60 border border-[#CFC5B8] p-4">
+                <div class="font-serif font-bold text-[#261C15] mb-1.5">決策與協作（${pDisc.code} × ${sDisc.code}）</div>
+                <p class="text-[#5C4738]">${pDisc.decision} 同時搭配${sDisc.name}的「${sDisc.short}」特質，讓你在團隊中更具互補彈性。</p>
+              </div>
+              <div class="avoid-break rounded-xl bg-[#E5E0D8]/60 border border-[#CFC5B8] p-4">
+                <div class="font-serif font-bold text-[#A6633C] mb-1.5">壓力下的提醒</div>
+                <p class="text-[#5C4738]">${pDisc.stress}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // --- Panel 6: 親密關係依附 (ECR-12) ---
+      const panelAttach = r.attach.skipped ? `
+        <div class="report-panel" data-panel="attach">
+          <div class="bg-[#F7F3EC] rounded-2xl p-8 border border-[#CFC5B8] text-center space-y-4">
+            <span class="inline-block px-3 py-1 rounded-full bg-[#E5E0D8] text-[#5C4738] font-mono text-xs font-bold">ECR-12 選填模組</span>
+            <h3 class="font-serif font-black text-2xl text-[#261C15]">本次未作答親密關係依附題組</h3>
+            <p class="text-sm text-[#5C4738] max-w-md mx-auto leading-relaxed">
+              你選擇略過了這 12 道親密關係依附題目，這完全不影響其他五項測驗結果。如果現在想補充這塊拼圖，隨時可以點擊下方按鈕補測。
+            </p>
+            ${state.mode === 'normal' ? `
+              <button id="btn-supplement-attach" type="button" class="px-6 py-3 rounded-xl bg-[#A6633C] hover:bg-[#8B4F2D] text-[#F7F3EC] font-bold text-sm transition shadow-sm no-print">
+                立即補測親密依附（12 題）
+              </button>
+            ` : ''}
+          </div>
+        </div>
+      ` : `
+        <div class="report-panel space-y-5" data-panel="attach">
+          <div class="bg-[#F7F3EC] rounded-2xl p-5 sm:p-7 border border-[#CFC5B8] space-y-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#CFC5B8]">
+              <div>
+                <span class="font-editorial italic text-xs font-bold tracking-widest text-[#A6633C] uppercase">MODULE 05 • ECR-12 ATTACHMENT</span>
+                <h3 class="font-serif font-black text-2xl text-[#261C15] mt-1">${r.attach.info.name}</h3>
+                <p class="text-xs sm:text-sm text-[#5C4738] mt-1">以 50%（平均 3.0 分）為焦慮軸與逃避軸之高低切點。</p>
+              </div>
+              <div class="flex gap-2 shrink-0">
+                <div class="px-3.5 py-2 rounded-xl bg-[#E5E0D8] text-center">
+                  <div class="text-[10px] font-bold text-[#5C4738]">焦慮依附</div>
+                  <div class="font-mono font-bold text-lg text-[#A6633C]">${r.attach.anx}%</div>
+                </div>
+                <div class="px-3.5 py-2 rounded-xl bg-[#E5E0D8] text-center">
+                  <div class="text-[10px] font-bold text-[#5C4738]">逃避依附</div>
+                  <div class="font-mono font-bold text-lg text-[#33251B]">${r.attach.avo}%</div>
+                </div>
+              </div>
+            </div>
+
+            ${(r.attach.anxBorder || r.attach.avoBorder) ? `
+              <div class="rounded-xl bg-[#E5E0D8]/70 border border-[#A6633C]/50 px-4 py-2.5 text-xs text-[#261C15]">
+                <strong>邊界彈性提示：</strong>你的分數接近 50% 切點（45%–55%），代表依附狀態會隨不同伴侶的安全感與互動品質而呈現明顯彈性。
+              </div>
+            ` : ''}
+
+            <div class="my-2">${buildAttachmentScatterSVG(r.attach.anx, r.attach.avo)}</div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs sm:text-sm leading-relaxed">
+              <div class="avoid-break rounded-xl bg-[#E5E0D8]/60 border border-[#CFC5B8] p-4">
+                <div class="font-serif font-bold text-[#261C15] mb-1.5">關係互動輪廓</div>
+                <p class="text-[#5C4738]">${r.attach.info.summary}</p>
+              </div>
+              <div class="avoid-break rounded-xl bg-[#E5E0D8]/60 border border-[#CFC5B8] p-4">
+                <div class="font-serif font-bold text-[#261C15] mb-1.5">伴侶溝通建議</div>
+                <p class="text-[#5C4738]">${r.attach.info.comm}</p>
+              </div>
+              <div class="avoid-break rounded-xl bg-[#E5E0D8]/60 border border-[#CFC5B8] p-4">
+                <div class="font-serif font-bold text-[#4A6B5D] mb-1.5">安全感練習</div>
+                <p class="text-[#5C4738]">${r.attach.info.practice}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // --- Panel 7: 霍蘭德職涯興趣 (RIASEC) ---
+      const riaRadar = buildRadarSVG(
+        RIA_ORDER.map((k) => ({ label: `${RIA_META[k].name} ${k}`, score: r.riasec.raw[k], color: RIA_META[k].color })),
+        '霍蘭德職涯興趣六邊形雷達圖'
+      );
+      const top2Ria = r.riasec.sorted.slice(0, 2);
+      const panelRiasec = `
+        <div class="report-panel space-y-5" data-panel="riasec">
+          <div class="bg-[#F7F3EC] rounded-2xl p-5 sm:p-7 border border-[#CFC5B8] space-y-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#CFC5B8]">
+              <div>
+                <span class="font-editorial italic text-xs font-bold tracking-widest text-[#A6633C] uppercase">MODULE 06 • HOLLAND RIASEC</span>
+                <h3 class="font-serif font-black text-2xl text-[#261C15] mt-1">霍蘭德職涯興趣快篩</h3>
+                <p class="text-xs sm:text-sm text-[#5C4738] mt-1">每型精選 3 題正向興趣快篩，建議優先參考<strong>六型相對排序</strong>。</p>
+              </div>
+              <div class="px-4 py-2.5 rounded-2xl bg-[#33251B] text-[#F7F3EC] text-center shrink-0">
+                <div class="text-[10px] text-[#CFC5B8] tracking-widest uppercase">HOLLAND CODE</div>
+                <div class="font-mono font-bold text-xl mt-0.5">${r.riasec.top3Display}</div>
+              </div>
+            </div>
+
+            <div class="my-2">${riaRadar}</div>
+
+            <!-- 前兩碼深度環境與職業建議 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${top2Ria.map((item, idx) => `
+                <div class="avoid-break rounded-2xl bg-[#E5E0D8]/60 border border-[#CFC5B8] p-5 space-y-3">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                      <span class="px-2 py-0.5 rounded bg-[#A6633C] text-[#F7F3EC] font-mono text-xs font-bold">TOP ${idx + 1}</span>
+                      <h4 class="font-serif font-bold text-lg text-[#261C15]">${item.meta.name} (${item.key})</h4>
+                    </div>
+                    <span class="font-mono font-bold text-lg text-[#33251B]">${item.score}%</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-[#5C4738] leading-relaxed">${item.meta.env}</p>
+                  <div class="pt-2 border-t border-[#CFC5B8]">
+                    <div class="text-xs font-bold text-[#261C15] mb-2">常見延伸職涯方向：</div>
+                    <div class="flex flex-wrap gap-1.5">
+                      ${item.meta.careers.map((c) => `<span class="px-2.5 py-1 rounded-lg bg-[#F7F3EC] border border-[#CFC5B8] text-xs text-[#261C15]">${c}</span>`).join('')}
+                    </div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+
+      els.reportPanelsContainer.innerHTML = panelOverview + panelBig5 + panelJung16 + panelHexaco + panelDisc + panelAttach + panelRiasec;
+
+      // 綁定總覽卡跳轉分頁
+      els.reportPanelsContainer.querySelectorAll('.jump-card').forEach((card) => {
+        card.addEventListener('click', () => {
+          setActiveReportTab(card.dataset.jump);
+          window.scrollTo({ top: 140, behavior: 'smooth' });
+        });
+      });
+
+      // 綁定補測依附按鈕
+      const btnSupp = document.getElementById('btn-supplement-attach');
+      if (btnSupp) {
+        btnSupp.addEventListener('click', () => {
+          state.supplementingAttach = true;
+          state.currentPage = 12;
+          renderQuizPage();
+          switchView('quiz');
+        });
+      }
+
+      setActiveReportTab(state.activeTab || 'overview');
+    }
+
+    function finishAndShowReport(targetTab) {
+      state.activeTab = targetTab || 'overview';
+      const report = calculateFullReport(state.answers, state.skipAttachment);
+      renderResultDashboard(report);
+      switchView('result');
+    }
+
+    /**
+     * =========================================================================
+     * 9. 高解析度分享摘要圖卡 (1080 × 1480 PNG Canvas 繪製)
+     * =========================================================================
+     */
+    let latestShareCardDataUrl = '';
+
+    function drawRoundRectPath(ctx, x, y, w, h, r) {
+      const radius = Math.min(r, w / 2, h / 2);
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.arcTo(x + w, y, x + w, y + h, radius);
+      ctx.arcTo(x + w, y + h, x, y + h, radius);
+      ctx.arcTo(x, y + h, x, y, radius);
+      ctx.arcTo(x, y, x + w, y, radius);
+      ctx.closePath();
+    }
+
+    function drawWrappedTextCJK(ctx, text, x, y, maxWidth, lineHeight, maxLines = 3) {
+      const chars = Array.from(text);
+      let line = '';
+      let lineCount = 0;
+      let curY = y;
+
+      for (let i = 0; i < chars.length; i++) {
+        const testLine = line + chars[i];
+        if (ctx.measureText(testLine).width > maxWidth && line.length > 0) {
+          lineCount++;
+          if (lineCount >= maxLines) {
+            ctx.fillText(line.slice(0, -1) + '…', x, curY);
+            return curY + lineHeight;
+          }
+          ctx.fillText(line, x, curY);
+          line = chars[i];
+          curY += lineHeight;
+        } else {
+          line = testLine;
+        }
+      }
+      if (line) {
+        ctx.fillText(line, x, curY);
+        curY += lineHeight;
+      }
+      return curY;
+    }
+
+    async function renderSummaryCardPNG(r) {
+      if (document.fonts && document.fonts.ready) {
+        try { await document.fonts.ready; } catch (e) {}
+      }
+
+      const W = 1080;
+      const H = 1480;
+      const canvas = document.createElement('canvas');
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext('2d');
+
+      const serifFont = '"Noto Serif TC", Georgia, serif';
+      const sansFont = '"Noto Sans TC", system-ui, -apple-system, sans-serif';
+      const editorialFont = 'italic 600 32px "Cormorant Garamond", Georgia, serif';
+
+      // 1. 外層深焙咖啡棕票券底色
+      ctx.fillStyle = '#33251B';
+      ctx.fillRect(0, 0, W, H);
+
+      // 2. 頂部品牌標題
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = editorialFont;
+      ctx.fillStyle = '#E5E0D8';
+      ctx.fillText('Persona Archive', W / 2, 46);
+
+      // 3. 內層燕麥暖米色票券主體
+      const cardX = 42, cardY = 82, cardW = W - 84, cardH = H - 146;
+      drawRoundRectPath(ctx, cardX, cardY, cardW, cardH, 28);
+      ctx.fillStyle = '#E5E0D8';
+      ctx.fill();
+
+      // 4. 票券頭部區（編號、日期、主標題）
+      const today = new Date();
+      const dateStr = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(2, '0')}.${String(today.getDate()).padStart(2, '0')}`;
+
+      ctx.textAlign = 'left';
+      ctx.font = 'italic 700 22px "Cormorant Garamond", Georgia, serif';
+      ctx.fillStyle = '#A6633C';
+      ctx.fillText('NO.2026104  •  6 MODELS', cardX + 40, cardY + 42);
+
+      ctx.textAlign = 'right';
+      ctx.font = `600 18px ${sansFont}`;
+      ctx.fillStyle = '#5C4738';
+      ctx.fillText(`DATE ${dateStr}`, cardX + cardW - 40, cardY + 42);
+
+      ctx.textAlign = 'left';
+      ctx.font = `900 40px ${serifFont}`;
+      ctx.fillStyle = '#261C15';
+      ctx.fillText('六合一綜合人格與職涯摘要卡', cardX + 40, cardY + 96);
+
+      // 虛線分隔線與左右半圓撕裂缺口
+      const perfY = cardY + 136;
+      ctx.save();
+      ctx.setLineDash([8, 7]);
+      ctx.strokeStyle = '#8C735B';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(cardX + 26, perfY);
+      ctx.lineTo(cardX + cardW - 26, perfY);
+      ctx.stroke();
+      ctx.restore();
+
+      ctx.fillStyle = '#33251B';
+      ctx.beginPath();
+      ctx.arc(cardX, perfY, 18, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(cardX + cardW, perfY, 18, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 5. 核心亮點框（16型代碼 + 原創稱號 + 一句話立體畫像）
+      const hiX = cardX + 36, hiY = perfY + 26, hiW = cardW - 72, hiH = 166;
+      drawRoundRectPath(ctx, hiX, hiY, hiW, hiH, 18);
+      ctx.fillStyle = '#F7F3EC';
+      ctx.fill();
+      ctx.strokeStyle = '#CFC5B8';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // 左側深焙棕徽章
+      drawRoundRectPath(ctx, hiX + 22, hiY + 24, 210, 118, 14);
+      ctx.fillStyle = '#33251B';
+      ctx.fill();
+
+      ctx.textAlign = 'center';
+      ctx.font = `900 42px ${serifFont}`;
+      ctx.fillStyle = '#F7F3EC';
+      ctx.fillText(r.jung16.fullCode, hiX + 127, hiY + 68);
+      ctx.font = `700 20px ${serifFont}`;
+      ctx.fillStyle = '#E5E0D8';
+      ctx.fillText(r.jung16.info.title, hiX + 127, hiY + 112);
+
+      // 右側畫像文字
+      ctx.textAlign = 'left';
+      ctx.font = `700 16px ${sansFont}`;
+      ctx.fillStyle = '#A6633C';
+      ctx.fillText('PERSONAL PORTRAIT｜一句話立體畫像', hiX + 254, hiY + 38);
+
+      ctx.font = `500 20px ${sansFont}`;
+      ctx.fillStyle = '#261C15';
+      drawWrappedTextCJK(ctx, generateOneLinePersona(r), hiX + 254, hiY + 72, hiW - 278, 30, 3);
+
+      // 6. 六大測驗 2×3 網格（全部含精準百分比與大地色進度條）
+      const gridTop = hiY + hiH + 24;
+      const gapX = 22, gapY = 20;
+      const boxW = (hiW - gapX) / 2;
+      const boxH = 294;
+
+      const drawCardShell = (col, row, badgeNum, title, subtitle) => {
+        const bx = hiX + col * (boxW + gapX);
+        const by = gridTop + row * (boxH + gapY);
+        drawRoundRectPath(ctx, bx, by, boxW, boxH, 18);
+        ctx.fillStyle = '#F7F3EC';
+        ctx.fill();
+        ctx.strokeStyle = '#CFC5B8';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // 圓形赤陶色編號
+        ctx.beginPath();
+        ctx.arc(bx + 32, by + 34, 15, 0, Math.PI * 2);
+        ctx.fillStyle = '#A6633C';
+        ctx.fill();
+        ctx.textAlign = 'center';
+        ctx.font = '700 14px monospace';
+        ctx.fillStyle = '#F7F3EC';
+        ctx.fillText(badgeNum, bx + 32, by + 35);
+
+        ctx.textAlign = 'left';
+        ctx.font = `700 21px ${serifFont}`;
+        ctx.fillStyle = '#261C15';
+        ctx.fillText(title, bx + 56, by + 34);
+
+        if (subtitle) {
+          ctx.textAlign = 'right';
+          ctx.font = `700 15px ${sansFont}`;
+          ctx.fillStyle = '#A6633C';
+          ctx.fillText(subtitle, bx + boxW - 22, by + 35);
+        }
+
+        ctx.strokeStyle = '#CFC5B8';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(bx + 20, by + 58);
+        ctx.lineTo(bx + boxW - 20, by + 58);
+        ctx.stroke();
+
+        return { bx, by };
+      };
+
+      const drawMiniBar = (x, y, totalW, label, pct, barColor = '#A6633C', labelW = 104) => {
+        ctx.textAlign = 'left';
+        ctx.font = `600 17px ${sansFont}`;
+        ctx.fillStyle = '#261C15';
+        ctx.fillText(label, x, y);
+
+        const barX = x + labelW;
+        const barW = totalW - labelW - 60;
+        const barH = 12;
+        drawRoundRectPath(ctx, barX, y - barH / 2, barW, barH, 6);
+        ctx.fillStyle = '#E5E0D8';
+        ctx.fill();
+
+        const fillW = Math.max(10, (Math.max(0, Math.min(100, pct)) / 100) * barW);
+        drawRoundRectPath(ctx, barX, y - barH / 2, fillW, barH, 6);
+        ctx.fillStyle = barColor;
+        ctx.fill();
+
+        ctx.textAlign = 'right';
+        ctx.font = '700 17px monospace';
+        ctx.fillStyle = '#33251B';
+        ctx.fillText(`${pct}%`, x + totalW, y + 1);
+      };
+
+      // (0,0) 大五人格 Big Five
+      {
+        const { bx, by } = drawCardShell(0, 0, '01', '大五人格', 'Big Five');
+        const rows = [
+          { label: '外向性 E', pct: r.big5.E, color: '#A6633C' },
+          { label: '親和性 A', pct: r.big5.A, color: '#8C735B' },
+          { label: '盡責性 C', pct: r.big5.C, color: '#4A6B5D' },
+          { label: '神經質 N', pct: r.big5.N, color: '#5C4738' },
+          { label: '開放性 O', pct: r.big5.O, color: '#33251B' }
+        ];
+        rows.forEach((item, idx) => {
+          drawMiniBar(bx + 24, by + 90 + idx * 42, boxW - 48, item.label, item.pct, item.color, 98);
+        });
+      }
+
+      // (1,0) 16 型人格傾向（5 軸優勢端與百分比）
+      {
+        const { bx, by } = drawCardShell(1, 0, '02', '16 型人格傾向', r.jung16.fullCode);
+        const ax = r.jung16.axes;
+        const jRows = [
+          { label: ax.EI.leftPct >= 50 ? '外向 E' : '內向 I', pct: Math.max(ax.EI.leftPct, ax.EI.rightPct), color: '#33251B' },
+          { label: ax.NS.leftPct >= 50 ? '直覺 N' : '實感 S', pct: Math.max(ax.NS.leftPct, ax.NS.rightPct), color: '#A6633C' },
+          { label: ax.FT.leftPct >= 50 ? '情感 F' : '思考 T', pct: Math.max(ax.FT.leftPct, ax.FT.rightPct), color: '#4A6B5D' },
+          { label: ax.JP.leftPct >= 50 ? '判斷 J' : '感知 P', pct: Math.max(ax.JP.leftPct, ax.JP.rightPct), color: '#8C735B' },
+          { label: ax.AT.leftPct >= 50 ? '平穩 A' : '敏銳 T', pct: Math.max(ax.AT.leftPct, ax.AT.rightPct), color: '#5C4738' }
+        ];
+        jRows.forEach((item, idx) => {
+          drawMiniBar(bx + 24, by + 90 + idx * 42, boxW - 48, item.label, item.pct, item.color, 92);
+        });
+      }
+
+      // (0,1) HEXACO 六大人格
+      {
+        const { bx, by } = drawCardShell(0, 1, '03', 'HEXACO 六大', `誠實謙遜 H ${r.hexaco.H}%`);
+        const hRows = [
+          { label: '誠實謙遜 H', pct: r.hexaco.H, color: '#A6633C' },
+          { label: '情緒性 E',   pct: r.hexaco.E_hex, color: '#5C4738' },
+          { label: '外向性 X',   pct: r.hexaco.X, color: '#B8744B' },
+          { label: '親和性 A',   pct: r.hexaco.A, color: '#8C735B' },
+          { label: '盡責性 C',   pct: r.hexaco.C, color: '#4A6B5D' },
+          { label: '開放性 O',   pct: r.hexaco.O, color: '#33251B' }
+        ];
+        hRows.forEach((item, idx) => {
+          drawMiniBar(bx + 24, by + 84 + idx * 36, boxW - 48, item.label, item.pct, item.color, 110);
+        });
+      }
+
+      // (1,1) DISC 職場風格
+      {
+        const { bx, by } = drawCardShell(1, 1, '04', 'DISC 職場風格', `${r.disc.primary.key}-${r.disc.secondary.key}`);
+        drawRoundRectPath(ctx, bx + 24, by + 74, boxW - 48, 34, 8);
+        ctx.fillStyle = '#E5E0D8';
+        ctx.fill();
+        ctx.textAlign = 'center';
+        ctx.font = `700 17px ${sansFont}`;
+        ctx.fillStyle = '#261C15';
+        ctx.fillText(`主輔風格：${r.disc.comboLabel}`, bx + boxW / 2, by + 92);
+
+        const dRows = [
+          { label: '支配 D', pct: r.disc.raw.D, color: '#A6633C' },
+          { label: '影響 I', pct: r.disc.raw.I, color: '#B8744B' },
+          { label: '穩健 S', pct: r.disc.raw.S, color: '#8C735B' },
+          { label: '謹慎 C', pct: r.disc.raw.C, color: '#4A6B5D' }
+        ];
+        dRows.forEach((item, idx) => {
+          drawMiniBar(bx + 24, by + 136 + idx * 39, boxW - 48, item.label, item.pct, item.color, 88);
+        });
+      }
+
+      // (0,2) 親密關係依附 ECR-12
+      {
+        const sub = r.attach.skipped ? '未施測' : r.attach.info.name;
+        const { bx, by } = drawCardShell(0, 2, '05', '親密關係依附', sub);
+        if (r.attach.skipped) {
+          drawRoundRectPath(ctx, bx + 24, by + 96, boxW - 48, 126, 14);
+          ctx.fillStyle = '#E5E0D8';
+          ctx.fill();
+          ctx.textAlign = 'center';
+          ctx.font = `700 24px ${serifFont}`;
+          ctx.fillStyle = '#5C4738';
+          ctx.fillText('本次未作答（已略過）', bx + boxW / 2, by + 146);
+          ctx.font = `500 16px ${sansFont}`;
+          ctx.fillStyle = '#8C735B';
+          ctx.fillText('不影響其餘五項測驗結果', bx + boxW / 2, by + 184);
+        } else {
+          drawRoundRectPath(ctx, bx + 24, by + 76, boxW - 48, 42, 10);
+          ctx.fillStyle = '#33251B';
+          ctx.fill();
+          ctx.textAlign = 'center';
+          ctx.font = `700 20px ${serifFont}`;
+          ctx.fillStyle = '#F7F3EC';
+          ctx.fillText(`${r.attach.info.name}（${r.attach.info.badge}）`, bx + boxW / 2, by + 98);
+
+          drawMiniBar(bx + 24, by + 154, boxW - 48, '焦慮依附', r.attach.anx, '#A6633C', 98);
+          drawMiniBar(bx + 24, by + 202, boxW - 48, '逃避依附', r.attach.avo, '#33251B', 98);
+
+          ctx.textAlign = 'left';
+          ctx.font = `500 14px ${sansFont}`;
+          ctx.fillStyle = '#5C4738';
+          ctx.fillText('※ ECR-12 依 50% 為象限高低切點', bx + 24, by + 252);
+        }
+      }
+
+      // (1,2) 霍蘭德職涯興趣 RIASEC
+      {
+        const { bx, by } = drawCardShell(1, 2, '06', '霍蘭德職涯', r.riasec.top3Pure);
+        const rRows = [
+          { label: '實作 R', pct: r.riasec.raw.R, color: '#5C4738' },
+          { label: '研究 I', pct: r.riasec.raw.I, color: '#33251B' },
+          { label: '藝術 A', pct: r.riasec.raw.A, color: '#A6633C' },
+          { label: '社會 S', pct: r.riasec.raw.S, color: '#4A6B5D' },
+          { label: '企業 E', pct: r.riasec.raw.E, color: '#B8744B' },
+          { label: '常規 C', pct: r.riasec.raw.C, color: '#8C735B' }
+        ];
+        rRows.forEach((item, idx) => {
+          drawMiniBar(bx + 24, by + 84 + idx * 36, boxW - 48, item.label, item.pct, item.color, 86);
+        });
+      }
+
+      // 7. 底部深焙棕頁尾宣言
+      ctx.textAlign = 'center';
+      ctx.font = `500 17px ${sansFont}`;
+      ctx.fillStyle = '#CFC5B8';
+      ctx.fillText('純本機演算｜個人量表同意度光譜，非大眾常模比較  •  Persona Archive', W / 2, H - 32);
+
+      return canvas.toDataURL('image/png');
+    }
+
+    async function openShareCardModal() {
+      if (!state.report) return;
+      showToast('正在繪製高解析度分享圖卡…');
+      try {
+        latestShareCardDataUrl = await renderSummaryCardPNG(state.report);
+        els.shareCardPreviewImg.src = latestShareCardDataUrl;
+        els.shareCardModal.classList.remove('hidden');
+      } catch (err) {
+        showToast('圖卡繪製失敗，請稍後再試');
+      }
+    }
+
+    function downloadShareCardPNG() {
+      if (!latestShareCardDataUrl) return;
+      const a = document.createElement('a');
+      const code = state.report ? state.report.jung16.fullCode : 'summary';
+      a.href = latestShareCardDataUrl;
+      a.download = `PersonaArchive_${code}_摘要卡.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('已開始下載分享摘要圖卡 (PNG)！');
+    }
+
+    /**
+     * =========================================================================
+     * 10. 分享摘要、範例報告、事件綁定與初始化
+     * =========================================================================
+     */
+    function copyFullSummary() {
+      const r = state.report;
+      if (!r) return;
+      const lines = [
+        `【Persona Archive｜六合一綜合人格與職涯報告${state.mode === 'sample' ? '（範例）' : ''}】`,
+        `◆ 16 型人格傾向：${r.jung16.fullCode}（${r.jung16.info.title}）`,
+        `  E/I: E${r.jung16.axes.EI.leftPct}%・N/S: N${r.jung16.axes.NS.leftPct}%・F/T: F${r.jung16.axes.FT.leftPct}%・J/P: J${r.jung16.axes.JP.leftPct}%・A/T: A${r.jung16.axes.AT.leftPct}%`,
+        `◆ 大五人格：開放 O ${r.big5.O}%｜盡責 C ${r.big5.C}%｜外向 E ${r.big5.E}%｜親和 A ${r.big5.A}%｜神經質 N ${r.big5.N}%`,
+        `◆ HEXACO 誠實與謙遜 (H)：${r.hexaco.H}%`,
+        `◆ DISC 職場風格：${r.disc.primary.key}-${r.disc.secondary.key} 型（D:${r.disc.raw.D}% I:${r.disc.raw.I}% S:${r.disc.raw.S}% C:${r.disc.raw.C}%）`,
+        `◆ 親密關係依附：${r.attach.skipped ? '本次未作答' : `${r.attach.info.name}（焦慮 ${r.attach.anx}% / 逃避 ${r.attach.avo}%）`}`,
+        `◆ 霍蘭德職涯興趣：${r.riasec.top3Display}（R:${r.riasec.raw.R}% I:${r.riasec.raw.I}% A:${r.riasec.raw.A}% S:${r.riasec.raw.S}% E:${r.riasec.raw.E}% C:${r.riasec.raw.C}%）`,
+        '※ 分數代表個人量表同意度光譜，非大眾常模比較。'
+      ];
+      copyTextFallback(lines.join('\n'), '已複製完整文字摘要！');
+    }
+
+    function startFreshQuiz() {
+      clearStorage();
+      state.answers = {};
+      state.currentPage = 0;
+      state.skipAttachment = false;
+      state.supplementingAttach = false;
+      state.mode = 'normal';
+      state.completedStagesSeen = new Set();
+      if (window.location.hash) {
+        try { history.replaceState(null, '', window.location.pathname + window.location.search); } catch (e) {}
+      }
+      renderQuizPage();
+      switchView('quiz');
+    }
+
+    function resumeSavedQuiz() {
+      const saved = loadProgressFromStorage();
+      if (!saved) {
+        startFreshQuiz();
+        return;
+      }
+      state.answers = saved.answers || {};
+      state.skipAttachment = Boolean(saved.skipAttachment);
+      state.currentPage = Math.max(0, Math.min(TOTAL_PAGES - 1, Number(saved.currentPage || 0)));
+      state.supplementingAttach = false;
+      state.mode = 'normal';
+      state.completedStagesSeen = new Set();
+      renderQuizPage();
+      switchView('quiz');
+    }
+
+    function openSampleReport() {
+      const sampleAns = {};
+      // 模擬一位「溫和內斂、具創意與高度誠實、職場偏 S-C、安全型依附、A-S-I 職涯」的真實感作答分布
+      const pattern = [
+        2,4,3,4,2,4,2,4,2,4, // E (1-10)
+        2,4,1,5,2,4,2,4,5,4, // A (11-20)
+        4,3,4,2,3,3,4,2,3,4, // C (21-30)
+        3,4,3,4,2,3,2,2,2,2, // N (31-40)
+        4,2,5,2,4,2,4,3,5,4, // O (41-50)
+        5,1,4,1,2,5,2,2,5,1, // HEXACO-H (51-60)
+        3,3,3,3,4,4,4,4,3,3, // DISC (61-70)
+        4,3,4,4,             // T/P balance (71-74)
+        2,2,3,2,2,2,2,4,4,4,4,2, // ECR-12 (75-86)
+        2,2,3,4,4,4,5,4,5,4,4,4,3,3,3,3,3,3 // RIASEC (87-104)
+      ];
+      for (let i = 0; i < 104; i++) sampleAns[i + 1] = pattern[i];
+      state.answers = sampleAns;
+      state.skipAttachment = false;
+      state.mode = 'sample';
+      finishAndShowReport('overview');
+    }
+
+    // 事件綁定
+    els.navHomeBtn.addEventListener('click', () => switchView('home'));
+    els.btnStartQuiz.addEventListener('click', startFreshQuiz);
+    els.btnResumeQuiz.addEventListener('click', resumeSavedQuiz);
+    els.btnPreviewSample.addEventListener('click', openSampleReport);
+    els.btnStartFromSample.addEventListener('click', startFreshQuiz);
+    els.btnStartFromShared.addEventListener('click', startFreshQuiz);
+
+    els.btnPrevPage.addEventListener('click', handlePrevPage);
+    els.btnNextPage.addEventListener('click', handleNextPage);
+    els.btnSkipAttachment.addEventListener('click', handleSkipAttachment);
+    els.btnCancelSupplement.addEventListener('click', () => {
+      state.supplementingAttach = false;
+      switchView('result');
+    });
+
+    els.btnOpenShareCard.addEventListener('click', openShareCardModal);
+    els.btnCloseCardModal.addEventListener('click', () => els.shareCardModal.classList.add('hidden'));
+    els.btnDownloadCardPng.addEventListener('click', downloadShareCardPNG);
+    els.shareCardModal.addEventListener('click', (e) => {
+      if (e.target === els.shareCardModal) els.shareCardModal.classList.add('hidden');
+    });
+
+    els.btnCopyLink.addEventListener('click', () => {
+      copyTextFallback(getShareUrl(), '已複製專屬報告連結，可直接分享或存成書籤！');
+    });
+    els.btnCopySummary.addEventListener('click', copyFullSummary);
+    els.btnPrintPdf.addEventListener('click', () => {
+      showToast('請在列印視窗將目的地選為「另存為 PDF / Save as PDF」');
+      setTimeout(() => window.print(), 280);
+    });
+    els.btnRetakeToolbar.addEventListener('click', () => els.confirmModal.classList.remove('hidden'));
+    els.btnCancelRetake.addEventListener('click', () => els.confirmModal.classList.add('hidden'));
+    els.btnConfirmRetake.addEventListener('click', () => {
+      els.confirmModal.classList.add('hidden');
+      startFreshQuiz();
+    });
+    els.confirmModal.addEventListener('click', (e) => {
+      if (e.target === els.confirmModal) els.confirmModal.classList.add('hidden');
+    });
+
+    // 初始化：檢查 URL 是否有 #r= 分享連結
+    (function initApp() {
+      const hash = window.location.hash || '';
+      if (hash.startsWith('#r=')) {
+        const decoded = decodeHashToAnswers(hash.slice(3));
+        if (decoded) {
+          state.answers = decoded.answers;
+          state.skipAttachment = decoded.skipAttachment;
+          state.mode = 'shared';
+          finishAndShowReport('overview');
+          return;
+        }
+      }
+      refreshHomeResumeUI();
+      switchView('home');
+    })();
+  </script>
+</body>
+</html>
