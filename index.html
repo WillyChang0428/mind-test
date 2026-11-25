@@ -320,7 +320,7 @@
 
   <!-- ==================== 頂部導覽列 ==================== -->
   <header class="w-full bg-[#261C15] text-[#E5E0D8] border-b border-[#4A382B] sticky top-0 z-30 shadow-sm no-print">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
+    <div class="max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-3">
       <button id="nav-home-btn" type="button" class="flex items-center gap-3 text-left focus:outline-none group">
         <div class="w-8 h-8 rounded-lg bg-[#E5E0D8] text-[#33251B] flex items-center justify-center font-serif font-black text-xs tracking-wider group-hover:bg-[#A6633C] group-hover:text-[#F7F3EC] transition">
           六合
@@ -339,7 +339,7 @@
   </header>
 
   <!-- ==================== 主要內容區 ==================== -->
-  <main class="flex-1 w-full max-w-4xl mx-auto px-3 sm:px-6 py-6 sm:py-9 space-y-6">
+  <main class="flex-1 w-full max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-9 lg:py-10 space-y-6">
 
     <!-- ==================== 1. 首頁（日系復古票券封面） ==================== -->
     <section id="view-home" class="animate-fade-in space-y-6">
@@ -354,13 +354,13 @@
         <div class="relative bg-[#E5E0D8] rounded-2xl overflow-hidden text-[#261C15]">
           <div class="flex flex-col md:flex-row">
             <!-- 左側主票面 -->
-            <div class="flex-1 p-6 sm:p-8 md:pr-9">
+            <div class="flex-1 p-6 sm:p-8 md:pr-9 lg:p-12">
               <div class="flex items-center justify-between gap-2 mb-3">
                 <span class="text-xs font-bold tracking-widest text-[#5C4738]">六大評量模組・一題多用心理檔案</span>
                 <span class="font-editorial italic font-semibold text-sm text-[#A6633C] md:hidden">NO.2026104</span>
               </div>
 
-              <h1 class="font-serif font-black text-2xl sm:text-4xl text-[#261C15] tracking-tight leading-snug mb-2">
+              <h1 class="font-serif font-black text-2xl sm:text-4xl lg:text-5xl text-[#261C15] tracking-tight leading-snug mb-2">
                 六合一綜合人格與<br class="hidden sm:inline" />職涯探索測驗
               </h1>
               <p class="font-serif font-bold text-sm sm:text-base text-[#5C4738] mb-6">
@@ -413,7 +413,7 @@
             </div>
 
             <!-- 右側存根（含虛線裁切線與半圓撕裂缺口） -->
-            <div class="relative md:w-52 bg-[#DFD8CE]/75 p-6 md:p-7 flex flex-col justify-between ticket-perforation-h md:border-t-0 md:ticket-perforation-v">
+            <div class="relative md:w-52 lg:w-72 bg-[#DFD8CE]/75 p-6 md:p-7 lg:p-9 flex flex-col justify-between ticket-perforation-h md:border-t-0 md:ticket-perforation-v">
               <!-- 桌機上下半圓缺口 -->
               <div class="hidden md:block absolute -top-3.5 -left-3.5 w-7 h-7 rounded-full bg-[#33251B]"></div>
               <div class="hidden md:block absolute -bottom-3.5 -left-3.5 w-7 h-7 rounded-full bg-[#33251B]"></div>
@@ -423,7 +423,7 @@
 
               <div class="space-y-1.5">
                 <div class="font-editorial italic font-bold text-base text-[#A6633C] tracking-wider">NO.2026104</div>
-                <div class="font-serif font-black text-xl text-[#261C15] leading-tight">6 MODELS</div>
+                <div class="font-serif font-black text-xl lg:text-3xl text-[#261C15] leading-tight">6 MODELS</div>
                 <div class="font-mono text-xs font-bold tracking-widest text-[#5C4738]">104 ITEMS</div>
               </div>
 
@@ -568,7 +568,7 @@
           </div>
 
           <!-- 高對比暖紙白題目列表容器 -->
-          <div id="quiz-questions-container" class="space-y-4"></div>
+          <div id="quiz-questions-container" class="space-y-4 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-4"></div>
 
           <!-- 底部翻頁按鈕 -->
           <div class="flex items-center justify-between gap-3 pt-4 border-t border-[#8C735B]/40">
@@ -624,7 +624,7 @@
           </div>
 
           <!-- 6 張 3D 翻牌容器（寬敞雙欄精品禮卡比例） -->
-          <div id="reveal-cards-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6"></div>
+          <div id="reveal-cards-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6"></div>
 
           <!-- 全數翻開後解鎖的過場行動區 -->
           <div id="reveal-unlock-area" class="hidden pt-4 border-t border-[#CFC5B8] text-center space-y-3 animate-unlock">
@@ -742,7 +742,7 @@
 
   <!-- ==================== 頁尾（開源聲明與授權說明） ==================== -->
   <footer class="w-full bg-[#261C15] text-[#CFC5B8] border-t border-[#4A382B] mt-auto no-print">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-6 text-xs space-y-2 leading-relaxed">
+    <div class="max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-xs space-y-2 leading-relaxed">
       <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#4A382B]">
         <span class="font-editorial italic text-base text-[#E5E0D8]">Persona Archive</span>
         <span class="font-mono text-[11px] tracking-widest uppercase text-[#A6633C]">NO.2026104 • V3 FINAL EDITION</span>
@@ -4077,7 +4077,7 @@
 
               <div class="my-2">${hexRadar}</div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
                 ${HEX_ORDER.map((k, idx) => {
                   const m = HEX_META[k];
                   const pct = r.hexaco[k];
